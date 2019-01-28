@@ -1,9 +1,10 @@
-from core.private.router import app
+from kirby.core.private.router import app
 import inspect
 
 
 def get_calling_plugin_name(stack):
-    return inspect.getmodule(stack[1][0]).__name__.split('.')[1]
+    # TODO: Refactor (this '2' is annoying me)
+    return inspect.getmodule(stack[1][0]).__name__.split('.')[2]
 
 
 def route(path, **options):

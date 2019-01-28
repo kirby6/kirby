@@ -1,10 +1,9 @@
-from core.private import loader as loader
-from core.private import router as router
-
-PLUGINS_DIRECTORY = "./plugins"
+from kirby.core.private import loader as loader, router as router
+from kirby.core.config import BUILTINS_DIRECTORY, PLUGINS_DIRECTORY, SERVER_ADDRESS
 
 if __name__ == '__main__':
-    la = loader.Loader(PLUGINS_DIRECTORY)
-    la.test
-    la.test2
-    router.app.run('0.0.0.0', 5000)
+    builtins = loader.Loader(BUILTINS_DIRECTORY)
+    builtins.load_all()
+    plugins = loader.Loader(PLUGINS_DIRECTORY)
+    plugins.load_all()
+    router.app.run(**SERVER_ADDRESS)

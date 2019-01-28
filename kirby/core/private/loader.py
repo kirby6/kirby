@@ -18,3 +18,7 @@ class Loader:
             module = importlib.import_module(module_path, item)
             self.__dict__[item] = module
         return self.__dict__[item]
+
+    def load_all(self):
+        for plugin in os.listdir(self.plugins_dir):
+            getattr(self, plugin)
