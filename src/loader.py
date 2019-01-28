@@ -13,14 +13,17 @@ def get_module_from_path(path):
 
 
 class Loader:
+    def __init__(self, plugins_dir):
+        self.plugins_dir = plugins_dir
+
     def __getattr__(self, item):
         if item not in self.__dict__:
-            module = get_module_from_path(os.path.join(PLUGINS_DIRECTORY, item, "index"))
+            module = get_module_from_path(os.path.join(self.plugins_dir, item, "index"))
             self.__dict__[item] = importlib.import_module(module, item)
             # TODO: Dependencies
         return self.__dict__[item]
 
 
-la = Loader()
+la = Loader(PLUGINS_DIRECTORY)
 a = la.test.A()
 print(a.moshe)
