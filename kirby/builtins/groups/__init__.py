@@ -1,8 +1,1 @@
-import json
-
-from kirby.core import db, web_api
-
-
-@web_api.route('/<int:group_id>')
-def get_group_by_id(group_id):
-    return json.dumps(db.get_user_by_id(group_id))
+from .routes import get_group_children, get_group_by_name, get_all_groups, create_group

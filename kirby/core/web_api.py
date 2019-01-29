@@ -9,8 +9,8 @@ def get_calling_plugin_name(stack):
 
 
 def route(path, **options):
-    def decorator(func, *args, **kwargs):
+    def decorator(func):
         plugin_name = get_calling_plugin_name(inspect.stack())
-        return app.route('/' + plugin_name + path, **options)(func, *args, **kwargs)
+        return app.route('/' + plugin_name + path, **options)(func)
 
     return decorator

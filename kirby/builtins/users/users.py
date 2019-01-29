@@ -7,18 +7,22 @@ from kirby.core import db
 users = db.get_collection('users')
 
 
+def bson_to_json(data):
+    return json.loads(json_util.dumps(data))
+
+
 def get_all_users():
-    return json_util.dumps(users.find())
+    return bson_to_json(users.find())
 
 
 def get_user_by_id(user_id):
     if not isinstance(user_id, ObjectId):
         user_id = ObjectId(user_id)
-    return json.loads(json_util.dumps(users.find_one({'_id': user_id})))
+    return bson_to_json(users.find_one({'_id': user_id}))
 
 
 def get_user_by_name(username):
-    return json.loads(json_util.dumps(users.find_one({'username': username})))
+    return bson_to_json(users.find_one({'username': username}))
 
 
 def create_user(username, password, roles):
