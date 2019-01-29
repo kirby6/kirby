@@ -1,8 +1,8 @@
-from kirby.core import flask_app
+from kirby.core import web_api
 
 a = 4
 
 
-@flask_app.route('/<int:age>', methods=['POST'])
+@web_api.route('/<int:age>', methods=['POST'])
 def bla(age):
     return 'hello %d' % age
