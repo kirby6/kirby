@@ -1,5 +1,6 @@
-from kirby.core.private.router import app
 import inspect
+
+from kirby.core.private.router import app
 
 
 def get_calling_plugin_name(stack):

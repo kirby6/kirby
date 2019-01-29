@@ -1,5 +1,5 @@
-from kirby.core.private import loader as loader, router as router
 from kirby.core.config import BUILTINS_DIRECTORY, PLUGINS_DIRECTORY, SERVER_ADDRESS
+from kirby.core.private import loader as loader, router as router
 
 if __name__ == '__main__':
     builtins = loader.Loader(BUILTINS_DIRECTORY)

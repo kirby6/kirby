@@ -1,9 +1,9 @@
-from kirby.core import flask_app
-from kirby.core import db
-from bson.json_util import ObjectId
-from bson import json_util
-from flask import request
 import json
+from bson import json_util
+from bson.json_util import ObjectId
+from flask import request
+
+from kirby.core import db, flask_app
 
 users = db.get_collection('users')
 

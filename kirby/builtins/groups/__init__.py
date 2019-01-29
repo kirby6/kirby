@@ -1,6 +1,6 @@
-from kirby.core import flask_app
-from kirby.core import db
 import json
+
+from kirby.core import db, flask_app
 
 
 @flask_app.route('/<int:group_id>')

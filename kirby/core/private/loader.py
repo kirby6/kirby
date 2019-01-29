@@ -1,5 +1,5 @@
-import os
 import importlib
+import os
 
 
 def get_module_from_path(path):
