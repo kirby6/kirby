@@ -1,9 +1,7 @@
 import json
 from bson import json_util
 
-from kirby.core import db
-
-groups = db.get_collection('groups')
+from kirby.core.db import collection as groups
 
 
 def bson_to_json(data):

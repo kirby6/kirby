@@ -2,9 +2,7 @@ import json
 from bson import json_util
 from bson.json_util import ObjectId
 
-from kirby.core import db
-
-users = db.get_collection('users')
+from kirby.core.db import collection as users
 
 
 def bson_to_json(data):

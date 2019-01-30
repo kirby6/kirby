@@ -2,10 +2,9 @@ from flask import jsonify, request
 from flask_jwt_extended import JWTManager, create_access_token
 
 from kirby.builtins.users import get_user_by_id, get_user_by_name
-from kirby.core import db, web_api
+from kirby.core import web_api
+from kirby.core.db import collection as auth
 from kirby.core.private.router import app
-
-auth = db.get_collection('auth')
 
 app.config['JWT_SECRET_KEY'] = auth.find_one()['secret']
 jwt = JWTManager(app)
