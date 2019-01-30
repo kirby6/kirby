@@ -7,3 +7,10 @@ if __name__ == '__main__':
     plugins = loader.Loader(PLUGINS_DIRECTORY)
     plugins.load_all()
     router.app.run(**SERVER_ADDRESS)
+
+
+
+"""
+  <div *plugin="matrix"> asdasdasd </div>
+
+"""

@@ -3,7 +3,7 @@ from flask import request
 
 from kirby.builtins.auth import required_roles
 from kirby.core import web_api
-from .users import create_user, get_all_users, get_user_by_id
+from .controller import create_user, get_all_users, get_user_by_id
 
 
 @web_api.route('/')

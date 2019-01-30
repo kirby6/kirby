@@ -1,9 +1,15 @@
+import json
+from bson import json_util
 from pymongo import MongoClient
 
 import kirby.core.config as config
 from kirby.core.private.utils import get_calling_plugin_name
 
 _db = MongoClient(**config.DB_CONNECTION).get_database(config.DB_NAME)
+
+
+def bson_to_json(data):
+    return json.loads(json_util.dumps(data))
 
 
 class _Collection:

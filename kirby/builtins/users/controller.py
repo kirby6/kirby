@@ -1,12 +1,7 @@
-import json
 from bson import json_util
 from bson.json_util import ObjectId
 
-from kirby.core.db import collection as users
-
-
-def bson_to_json(data):
-    return json.loads(json_util.dumps(data))
+from kirby.core.db import bson_to_json, collection as users
 
 
 def get_all_users():

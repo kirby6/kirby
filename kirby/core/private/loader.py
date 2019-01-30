@@ -1,6 +1,8 @@
 import importlib
 import os
 
+_loaded_plugins = set()
+
 
 def get_module_from_path(path):
     path = path.replace('..' + os.sep, '..')
@@ -14,6 +16,7 @@ class Loader:
 
     def __getattr__(self, item):
         if item not in self.__dict__:
+            _loaded_plugins.add(item)
             module_path = get_module_from_path(os.path.join(self.plugins_dir, item))
             module = importlib.import_module(module_path, item)
             self.__dict__[item] = module

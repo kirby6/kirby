@@ -1,11 +1,6 @@
-import json
 from bson import json_util
 
-from kirby.core.db import collection as groups
-
-
-def bson_to_json(data):
-    return json.loads(json_util.dumps(data))
+from kirby.core.db import bson_to_json, collection as groups
 
 
 def get_all_groups():
