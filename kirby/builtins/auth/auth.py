@@ -1,5 +1,5 @@
 from flask import jsonify
-from flask_jwt_extended import get_jwt_claims, jwt_required
+from flask_jwt_extended import get_jwt_claims, get_jwt_identity, jwt_required
 from functools import wraps
 
 
@@ -17,3 +17,8 @@ def required_roles(*roles):
         return check_roles
 
     return decorator
+
+
+@jwt_required
+def get_current_user_id():
+    return get_jwt_identity()
