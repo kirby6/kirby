@@ -1,6 +1,6 @@
 import inspect
 
 
-def get_calling_plugin_name(stack):
+def get_calling_plugin_name():
     # TODO: Refactor (this '2' is annoying me)
-    return inspect.getmodule(stack[1][0]).__name__.split('.')[2]
+    return inspect.getmodule(inspect.stack()[2][0]).__name__.split('.')[2]
