@@ -1,6 +1,7 @@
 import json
 from bson import json_util
 from pymongo import MongoClient
+from pymongo.collection import Collection
 
 import kirby.core.config as config
 from kirby.core.private.utils import get_calling_plugin_name
@@ -20,3 +21,7 @@ class _Collection:
 
 
 collection = _Collection()
+try:
+    assert isinstance(collection, Collection)
+except:
+    pass
