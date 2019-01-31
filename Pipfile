@@ -9,6 +9,7 @@ verify_ssl = true
 flask = "*"
 pymongo = "*"
 flask-jwt-extended = "*"
+gevent = "*"
 
 [requires]
 python_version = "3.7"
