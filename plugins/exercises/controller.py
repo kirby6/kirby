@@ -1,6 +1,6 @@
 from bson import json_util
 
-import kirby.plugins.exercises.statuses as statuses
+import plugins.exercises.statuses as statuses
 from kirby.core.db import bson_to_json, collection as exercises
 
 
