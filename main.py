@@ -7,9 +7,5 @@ if __name__ == '__main__':
     for plugin_dir in PLUGIN_DIRECTORIES:
         loader.Loader(plugin_dir).load_all()
     print('Serving on: %s' % str(SERVER_ADDRESS))
-    WSGIServer((SERVER_ADDRESS['host'], SERVER_ADDRESS['port']), router.app).serve_forever()
-
-"""
-  <div *plugin="matrix"> asdasdasd </div>
-
-"""
+    WSGIServer(
+        (SERVER_ADDRESS['host'], SERVER_ADDRESS['port']), router.app).serve_forever()
