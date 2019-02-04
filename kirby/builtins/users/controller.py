@@ -2,6 +2,7 @@ from bson import json_util
 from bson.json_util import ObjectId
 
 from kirby.core.db import bson_to_json, collection as users
+from kirby.builtins.auth import get_token
 
 
 def get_all_users():
@@ -24,3 +25,12 @@ def create_user(username, password, roles):
         'password': password,
         'roles': roles
     }).inserted_id)
+
+
+def login(username, password):
+    user = get_user_by_name(username)
+    if user and user['password'] == password:
+        return get_token(user)
+    else:
+        return jsonify({"error": "Invalid username or password"}), 401
+
