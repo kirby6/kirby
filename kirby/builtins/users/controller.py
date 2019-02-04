@@ -1,5 +1,6 @@
 from bson import json_util
 from bson.json_util import ObjectId
+from flask import jsonify
 
 from kirby.core.db import bson_to_json, collection as users
 from kirby.builtins.auth import get_token
@@ -35,4 +36,3 @@ def login(username, password):
         return get_token(user)
     else:
         return jsonify({"error": "Invalid username or password"}), 401
-

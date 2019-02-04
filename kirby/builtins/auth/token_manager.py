@@ -1,4 +1,4 @@
-from flask import jsonify, request
+from flask import jsonify
 from flask_jwt_extended import JWTManager, create_access_token
 
 from kirby.core import web_api
