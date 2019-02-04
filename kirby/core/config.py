@@ -1,5 +1,7 @@
 import os
 
+JWT_ACCESS_TOKEN_EXPIRES = 30 * 24 * 60 * 60
+
 DB_CONNECTION = {
     'host': 'localhost',
     'port': 27017
