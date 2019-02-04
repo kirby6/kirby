@@ -14,12 +14,17 @@ def get_users_route():
 
 @web_api.route('/', methods=['POST'])
 def create_user_route():
-    return create_user(request.json['username'], request.json['password'], request.json['roles'])
+    return create_user(request.json['firstname'],
+                       request.json['lastname'],
+                       request.json['username'],
+                       request.json['password'],
+                       request.json['roles'])
 
 
 @web_api.route('/<string:user_id>')
 def get_user_by_id_route(user_id):
     return json.dumps(get_user_by_id(user_id))
+
 
 @web_api.route('/login', methods=['POST'])
 def login_route():

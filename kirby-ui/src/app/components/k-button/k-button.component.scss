@@ -1,84 +1,21 @@
-@import './../../../color-scheme';
-
+@import "./../../../color-scheme";
 
 .k-button {
-    border: 2px solid #fff;
-    background: $main-color;
-    opacity: 0.7;
-    display: inline-block;
-    color: white;
-    padding: 3px;
-    cursor: pointer;        
-    user-select: none; 
-    position: relative;
-    transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1) 0s;
-    
-    &:hover {
-        color: #000;
-        background-color: transparent;
-        text-shadow: ntwo;
-    }
-    
-    &:before {
-        top: 0%;
-        bottom: auto;
-        height: 100%;
-    }
-    &:before {
-        display: block;
-        position: absolute;
-        left: 0px;
-        bottom: 0px;
-        height: 0px;
-        width: 100%;
-        z-index: -1;
-        content: '';
-        color: #000;
-        background: $active-color;
-        transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1) 0s;
-    }
-  
+  border: 2px solid #fff;
+  @include background-opacity($main-color, 0.5);
+  display: inline-block;
+  color: white;
+  padding: 5px 12px;
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+  transition: all 0.2s;
 
-    &:link, &:visited {
-        position: relative;
-        display: block;
-        margin: 30px auto 0;
-        padding: 14px 15px;
-        color: #fff;
-        font-size:14px;
-        border-radius: 0;
-        font-weight: bold;
-        text-align: center;
-        text-decoration: none;
-        text-transform: uppercase;
-        overflow: hidden;
-        letter-spacing: .08em;
-        text-shadow: 0 0 1px rgba(0, 0, 0, 0.2), 0 1px 0 rgba(0, 0, 0, 0.2);
-        -webkit-transition: all 1s ease;
-        -moz-transition: all 1s ease;
-        -o-transition: all 1s ease;
-        transition: all 1s ease;
+  &:hover {
+    background: $active-color;
+  }
 
-        &:after {
-            content: "";
-            position: absolute;
-            height: 0%;
-            left: 50%;
-            top: 50%;
-            width: 150%;
-            z-index: -1;
-            -webkit-transition: all 0.75s ease 0s;
-            -moz-transition: all 0.75s ease 0s;
-            -o-transition: all 0.75s ease 0s;
-            transition: all 0.75s ease 0s;
-        }
-        
-        &:hover {
-            color: #FFF;
-            text-shadow: none;
-            &:after {
-                height: 450%;
-            }
-        }
-    }
+  &.disabled {
+    background: red;
+  }
 }

@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'k-button',
   templateUrl: './k-button.component.html',
   styleUrls: ['./k-button.component.scss']
 })
-export class KButtonComponent implements OnInit {
+export class KButtonComponent {
 
-  constructor() { }
+  @Input() disabled: boolean = false;
 
-  ngOnInit() {
+  getClass(): any {
+    return {
+      disabled: this.disabled
+    }
   }
-
 }
