@@ -7,17 +7,24 @@ from kirby.builtins.auth import get_token
 
 
 def get_all_users():
-    return bson_to_json(users.find())
+    return bson_to_json(users.find({}, {'password': 0}))
 
 
 def get_user_by_id(user_id):
     if not isinstance(user_id, ObjectId):
         user_id = ObjectId(user_id)
-    return bson_to_json(users.find_one({'_id': user_id}))
+    return bson_to_json(users.find_one({'_id': user_id}, {'password': 0}))
+
+
+def _get_user_password(user_id):
+    if not isinstance(user_id, ObjectId):
+        user_id = ObjectId(user_id)
+    result = bson_to_json(users.find_one({'_id': user_id}, {'password': 1, '_id': 0}))
+    return result and result['password']
 
 
 def get_user_by_name(username):
-    return bson_to_json(users.find_one({'username': username}))
+    return bson_to_json(users.find_one({'username': username}, {'password': 0}))
 
 
 def create_user(firstname, lastname, username, password, roles):
@@ -32,7 +39,8 @@ def create_user(firstname, lastname, username, password, roles):
 
 def login(username, password):
     user = get_user_by_name(username)
-    if user and user['password'] == password:
-        return get_token(user)
+    if user and _get_user_password(user['_id']['$oid']) == password:
+        user['token'] = get_token(user)
+        return jsonify(user), 201
     else:
         return jsonify({"error": "Invalid username or password"}), 401

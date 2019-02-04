@@ -20,7 +20,5 @@ def add_claims_to_access_token(user):
 
 def get_token(user=None):
     if(not user):
-        return jsonify({"error": "Corrupted user data"}), 401
-
-    access_token = create_access_token(identity=user)
-    return jsonify(access_token=access_token), 200
+        return {"error": "Corrupted user data"}
+    return create_access_token(identity=user)
