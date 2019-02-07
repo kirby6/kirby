@@ -8,7 +8,10 @@ import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtInterceptor } from './services/authentication/interceptors/jwt.interceptor';
+import { CredentialsInterceptor } from './services/authentication/interceptors/credentials.interceptor';
+import { TokenExpirationInterceptor } from './services/authentication/interceptors/token-expiration.interceptor';
 
 @NgModule({
   declarations: [
@@ -24,7 +27,11 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: CredentialsInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: TokenExpirationInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

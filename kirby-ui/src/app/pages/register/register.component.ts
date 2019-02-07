@@ -3,15 +3,20 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { AuthenticationService } from 'src/app/services/authentication';
-import { UserService } from 'src/app/services/user';
-import { AlertService } from 'src/app/services/alert';
+import { UserService } from 'src/app/services/users';
+import { AlertService } from 'src/app/services/alerts';
 
 
-@Component({templateUrl: 'register.component.html'})
+
+@Component({
+    templateUrl: 'register.component.html',
+    styleUrls: ['register.component.scss']
+})
 export class RegisterComponent implements OnInit {
     registerForm: FormGroup;
     loading = false;
     submitted = false;
+    public passwordMinLength: number = 6;
 
     constructor(
         private formBuilder: FormBuilder,
@@ -31,7 +36,7 @@ export class RegisterComponent implements OnInit {
             firstname: ['', Validators.required],
             lastname: ['', Validators.required],
             username: ['', Validators.required],
-            password: ['', [Validators.required, Validators.minLength(6)]]
+            password: ['', [Validators.required, Validators.minLength(this.passwordMinLength)]]
         });
     }
 

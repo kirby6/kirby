@@ -2,9 +2,9 @@
 import { Subscription } from 'rxjs';
 import { first } from 'rxjs/operators';
 
-import { User } from './../../services/user/interfaces';
-import { UserService } from './../../services/user';
 import { AuthenticationService } from './../../services/authentication';
+import { User } from 'src/app/services/users/interfaces';
+import { UserService } from 'src/app/services/users';
 
 
 @Component({
