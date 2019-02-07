@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { AuthenticationService } from 'src/app/services/authentication';
-import { AlertService } from 'src/app/services/alert';
+import { AlertService } from 'src/app/services/alerts';
 
 
 @Component({
