@@ -2,7 +2,7 @@ import json
 from flask import request
 
 from kirby.core import web_api
-from .controller import create_exercise, get_all_exercises
+from .controller import create_exercise, get_all_exercises, update_exercise
 
 
 @web_api.route('/')
@@ -16,5 +16,10 @@ def create_exercise_route():
         name=request.form['name'],
         groups=request.form['groups'],
         module=request.form['module'],
-        files=request.files.values()
-    )
+        files=request.files.values())
+
+
+@web_api.route('/<string:exercise_id>', methods=['PUT'])
+def update_exercise_route(exercise_id):
+    update_exercise(exercise_id, request.form, request.files.values())
+    return 'ok', 200

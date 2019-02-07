@@ -13,6 +13,10 @@ def bson_to_json(data):
     return json.loads(json_util.dumps(data))
 
 
+def json_to_bson(data):
+    return json_util.loads(json.dumps(data))
+
+
 class _Collection:
     def __getattr__(self, item):
         plugin_name = get_calling_plugin_name()
