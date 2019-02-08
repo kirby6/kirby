@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { AuthenticationService } from 'src/app/services/authentication';
 import { AlertService } from 'src/app/services/alerts';
+import { debug } from 'util';
 
 
 @Component({
@@ -15,6 +16,7 @@ export class LoginComponent implements OnInit {
     loading = false;
     submitted = false;
     returnUrl: string;
+    hide = true;
 
     constructor(
         private formBuilder: FormBuilder,

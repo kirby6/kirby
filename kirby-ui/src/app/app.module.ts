@@ -1,5 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,6 +14,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from './services/authentication/interceptors/jwt.interceptor';
 import { CredentialsInterceptor } from './services/authentication/interceptors/credentials.interceptor';
 import { TokenExpirationInterceptor } from './services/authentication/interceptors/token-expiration.interceptor';
+import { CustomMaterialModule } from './app.material.module';
 
 @NgModule({
   declarations: [
@@ -24,8 +27,10 @@ import { TokenExpirationInterceptor } from './services/authentication/intercepto
   imports: [
     BrowserModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    CustomMaterialModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
