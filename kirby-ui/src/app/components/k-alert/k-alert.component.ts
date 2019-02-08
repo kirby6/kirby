@@ -5,10 +5,10 @@ import { AlertService } from 'src/app/services/alerts';
 
 @Component({
     selector: 'k-alert', 
-    templateUrl: 'alert.component.html'
+    templateUrl: 'k-alert.component.html'
 })
 
-export class AlertComponent implements OnInit, OnDestroy {
+export class KAlertComponent implements OnInit, OnDestroy {
     private subscription: Subscription;
     message: any;
 

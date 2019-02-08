@@ -16,12 +16,14 @@ import { CredentialsInterceptor } from './services/authentication/interceptors/c
 import { TokenExpirationInterceptor } from './services/authentication/interceptors/token-expiration.interceptor';
 import { CustomMaterialModule } from './app.material.module';
 import { PluginsManagementDirective } from './directives/plugins.management.directive';
+import { KAlertComponent } from './components/k-alert/k-alert.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PluginsManagementDirective,
     KButtonComponent,
+    KAlertComponent,
     HomeComponent,
     LoginComponent,
     RegisterComponent
