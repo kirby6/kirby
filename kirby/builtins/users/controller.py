@@ -43,4 +43,4 @@ def login(username, password):
         user['token'] = get_token(user)
         return jsonify(user), 201
     else:
-        return jsonify({"error": "Invalid username or password"}), 401
+        return jsonify({"error": "Invalid username or password"}), 403
