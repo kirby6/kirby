@@ -2,8 +2,11 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'root',
-  template: `<router-outlet></router-outlet>`,
-  styles:[`
+  template: `
+    <k-alert></k-alert>
+    <router-outlet></router-outlet>
+  `,
+  styles: [`
     :host {
       display: block;
       width: 100%;
