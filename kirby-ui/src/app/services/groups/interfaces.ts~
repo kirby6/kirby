@@ -1,9 +1,0 @@
-export interface Group {
-    id?: string;
-    name: string;
-    parent?: Group;
-    username: string;
-    password: string;
-    roles?: Role[];
-    token?: string;
-}
