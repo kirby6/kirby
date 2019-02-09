@@ -17,6 +17,8 @@ import { TokenExpirationInterceptor } from './services/authentication/intercepto
 import { CustomMaterialModule } from './app.material.module';
 import { PluginsManagementDirective } from './directives/plugins.management.directive';
 import { KAlertComponent } from './components/k-alert/k-alert.component';
+import { AdminGroupComponent } from './pages/admin/groups/groups.component';
+import { AdminPageComponent } from './pages/admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { KAlertComponent } from './components/k-alert/k-alert.component';
     KAlertComponent,
     HomeComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    AdminPageComponent,
+    AdminGroupComponent
   ],
   imports: [
     BrowserModule,
