@@ -5,7 +5,6 @@ import { Group } from './interfaces';
 import { environment as config } from './../../../environments/environment';
 import { Observable } from 'rxjs';
 
-
 @Injectable({ providedIn: 'root' })
 export class GroupService {
     private _prefix: string = 'groups';
