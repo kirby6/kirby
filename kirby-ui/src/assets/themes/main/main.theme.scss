@@ -1,0 +1,10 @@
+$main-theme-primary: mat-palette($mat-indigo, 700, 300, 900);
+$main-theme-accent: mat-palette($mat-light-blue);
+$main-theme-warn: mat-palette($mat-deep-orange, A200);
+
+// create theme (use mat-dark-theme for themes with main backgrounds)
+$main-theme: mat-dark-theme(
+    $main-theme-primary,
+    $main-theme-accent,
+    $main-theme-warn
+);

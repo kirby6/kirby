@@ -3,7 +3,7 @@
 $container-opacity: 0.7;
 
 :host {
-  background: url(./../../../assets/login_background.jpg);
+  background: url(./../../../assets/images/bg.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   height: 100%;
@@ -12,3 +12,4 @@ $container-opacity: 0.7;
   justify-content: center;
   flex-direction: column;
 }
+ 

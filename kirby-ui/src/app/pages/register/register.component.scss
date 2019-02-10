@@ -3,7 +3,7 @@
 $container-opacity: 0.7;
 
 :host {
-  background: url(./../../../assets/login_background.jpg);
+  background: url(./../../../assets/images/bg.jpg);
   background-repeat:no-repeat;
   background-size:cover;
   height: 100%;
@@ -14,7 +14,7 @@ $container-opacity: 0.7;
 
   .container {
     width: 15em;
-    height: 15em;
+    height: 15em; 
     font-weight: 100;
     font-family: Heebo;
     background-image: linear-gradient(to top, rgba(48,207,208, $container-opacity) 0%, rgba(51,8,103, $container-opacity) 100%);

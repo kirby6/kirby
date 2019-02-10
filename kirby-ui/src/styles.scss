@@ -2,20 +2,19 @@
 // @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 // @import "./color-scheme.scss";
 
-@import '~@angular/material/theming';
+@import "~@angular/material/theming";
 
 // always include only once per project
 @include mat-core();
 
 // import our custom theme
-@import './assets/themes/dark/dark.theme.scss';
+@import "./assets/themes/main/main.theme.scss";
 
-// specify theme class eg: <body class="dark-theme"> ... </body>
-.dark-theme {
+// specify theme class eg: <body class="main-theme"> ... </body>
+.main-theme {
   // use our theme with angular-material-theme mixin
-  @include angular-material-theme($dark-theme);
+  @include angular-material-theme($main-theme);
 }
-
 
 $direction: rtl;
 
@@ -40,3 +39,9 @@ body {
 input {
   font-weight: 200;
 }
+
+/*
+  angular-tree-component styles
+*/
+@import "~angular-tree-component/dist/angular-tree-component.css";
+@import "./assets/themes/main/tree-component.theme.scss";
