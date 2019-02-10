@@ -1,0 +1,10 @@
+:host {
+  background: url(./../assets/images/bg.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
