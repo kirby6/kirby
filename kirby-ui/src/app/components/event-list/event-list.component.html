@@ -1,4 +1,4 @@
-<mat-card  class="event-list-card">
+<mat-card class="event-list-card">
     <mat-card-header>
         <mat-card-title>מטלות</mat-card-title>
         <div class='spacer'></div>
@@ -8,8 +8,8 @@
         <mat-list>
             <mat-list-item>
                 <div class='indicators'>
+                    <div [ngClass]="{'unread': true, unread: false}"></div>
                 </div>
-                <div class='read-indicator'></div>
                 <div class='content'>
                     <h3 class='title'>משימה קשה ראשונה</h3>
                     <p class='subtitle'>והוו</p>

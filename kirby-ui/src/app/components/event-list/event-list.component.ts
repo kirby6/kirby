@@ -12,7 +12,7 @@ export class EventListComponent implements OnInit {
     d;
 
     constructor() {
-        this.d = (Date.now()).toString();
+        this.d = "11/02/19 21:31";
     }
 
     ngOnInit() {
