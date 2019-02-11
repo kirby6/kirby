@@ -1,0 +1,30 @@
+@import './../../../color-scheme.scss';
+
+:host {
+    mat-card {
+        background: $background;
+
+        mat-card-content {
+            background: white;
+        }
+        .mat-list-base .mat-list-item {
+            color: black;
+        }
+
+        // .indicators {
+        //     display: flex;
+        // }
+
+        // .content {
+        //     display: flex;
+        //     flex-direction: column;
+        //     flex: 8;
+        // }
+
+        // .date {
+        //     display: flex;
+        //     flex: 1;
+        // }
+
+    }
+}

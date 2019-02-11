@@ -22,6 +22,7 @@ import { WebsitesPageComponent } from './pages/websites/websites.component';
 import { WebsiteCardComponent } from './components/website-card/website-card.component';
 import { MainComponent } from './pages/main/main.component';
 import { HomeComponent } from './pages/home/home.component';
+import { EventListComponent } from './components/event-list/event-list.component';
 
 @NgModule({
     declarations: [
@@ -33,9 +34,10 @@ import { HomeComponent } from './pages/home/home.component';
         LoginComponent,
         RegisterComponent,
         AdminPageComponent,
+        AdminGroupComponent,
         WebsitesPageComponent,
         WebsiteCardComponent,
-        AdminGroupComponent
+        EventListComponent
     ],
     imports: [
         BrowserModule,

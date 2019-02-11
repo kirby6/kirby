@@ -1,7 +1,7 @@
 @import "./../../../color-scheme.scss";
 
 $navHeight: 64px;
-$spaceBetweenNavAndTop: 26px;
+$spaceAroundNav: 35px;
 
 :host {
   display: block;
@@ -10,10 +10,10 @@ $spaceBetweenNavAndTop: 26px;
 
   .nav {
     user-select: none;
-    height: $navHeight + $spaceBetweenNavAndTop;
+    height: $navHeight + $spaceAroundNav;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    justify-content: center;;
 
     mat-toolbar {
       height: $navHeight;
@@ -31,6 +31,8 @@ $spaceBetweenNavAndTop: 26px;
     }
   }
   .container {
-    height: calc(100% - #{$navHeight + $spaceBetweenNavAndTop});
+    height: calc(100% - #{$navHeight + $spaceAroundNav});
+    width: 1170px;
+    margin: auto
   }
 }
