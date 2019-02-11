@@ -1,0 +1,11 @@
+@import './../../../color-scheme.scss';
+
+:host {
+    background: $background;
+    display: block;
+
+    h2 {
+	margin-right: 20px;
+	color: white;
+    }
+}

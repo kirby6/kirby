@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { TreeModule } from 'angular-tree-component';
 
@@ -18,35 +18,39 @@ import { PluginsManagementDirective } from './directives/plugins.management.dire
 import { KAlertComponent } from './components/k-alert/k-alert.component';
 import { AdminGroupComponent } from './pages/admin/groups/groups.component';
 import { AdminPageComponent } from './pages/admin/admin.component';
+import { WebsitesPageComponent } from './pages/websites/websites.component';
+import { WebsiteCardComponent } from './components/website-card/website-card.component';
 import { MainComponent } from './pages/main/main.component';
 import { HomeComponent } from './pages/home/home.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    PluginsManagementDirective,
-    KAlertComponent,
-    HomeComponent,
-    MainComponent,
-    LoginComponent,
-    RegisterComponent,
-    AdminPageComponent,
-    AdminGroupComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    CustomMaterialModule,
-    TreeModule.forRoot()
-  ],
-  providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: CredentialsInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: TokenExpirationInterceptor, multi: true}
-  ],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        PluginsManagementDirective,
+        KAlertComponent,
+        HomeComponent,
+        MainComponent,
+        LoginComponent,
+        RegisterComponent,
+        AdminPageComponent,
+        WebsitesPageComponent,
+        WebsiteCardComponent,
+        AdminGroupComponent
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        CustomMaterialModule,
+        TreeModule.forRoot()
+    ],
+    providers: [
+        { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: CredentialsInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: TokenExpirationInterceptor, multi: true }
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

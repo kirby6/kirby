@@ -1,0 +1,6 @@
+<h2>אתרים</h2>
+<mat-grid-list cols="3" rowHeight="2:1">
+  <mat-grid-tile *ngFor="let site of websites">
+    <website-card [website]="site"></website-card>
+  </mat-grid-tile>
+</mat-grid-list>
