@@ -9,6 +9,12 @@ import { Component, OnInit } from '@angular/core';
 
 export class EventListComponent implements OnInit {
 
+    d;
+
+    constructor() {
+        this.d = (Date.now()).toString();
+    }
+
     ngOnInit() {
     }
 }

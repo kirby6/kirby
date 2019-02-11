@@ -20,6 +20,7 @@ import { AdminGroupComponent } from './pages/admin/groups/groups.component';
 import { AdminPageComponent } from './pages/admin/admin.component';
 import { MainComponent } from './pages/main/main.component';
 import { HomeComponent } from './pages/home/home.component';
+import { EventListComponent } from './components/event-list/event-list.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { HomeComponent } from './pages/home/home.component';
     LoginComponent,
     RegisterComponent,
     AdminPageComponent,
-    AdminGroupComponent
+    AdminGroupComponent,
+    EventListComponent
   ],
   imports: [
     BrowserModule,
