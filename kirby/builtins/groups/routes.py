@@ -3,7 +3,8 @@ from flask import request
 
 from kirby.builtins.auth import required_roles
 from kirby.core import web_api
-from .controller import create_group, get_all_groups, get_group_by_name, get_group_children
+from .controller import create_group, get_all_groups, get_group_by_name, \
+    get_group_children
 
 
 @web_api.route('/')
