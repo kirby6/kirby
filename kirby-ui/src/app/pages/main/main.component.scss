@@ -1,0 +1,36 @@
+@import "./../../../color-scheme.scss";
+
+$navHeight: 64px;
+$spaceBetweenNavAndTop: 26px;
+
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
+
+  .nav {
+    user-select: none;
+    height: $navHeight + $spaceBetweenNavAndTop;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
+    mat-toolbar {
+      height: $navHeight;
+      background: $background;
+    }
+
+    .spacer {
+        flex: 1 1 auto;
+    }
+
+    .logo {
+      height: $navHeight;
+      cursor: pointer;
+      outline: none;
+    }
+  }
+  .container {
+    height: calc(100% - #{$navHeight + $spaceBetweenNavAndTop});
+  }
+}

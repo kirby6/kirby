@@ -6,7 +6,6 @@ import { TreeModule } from 'angular-tree-component';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -19,6 +18,8 @@ import { PluginsManagementDirective } from './directives/plugins.management.dire
 import { KAlertComponent } from './components/k-alert/k-alert.component';
 import { AdminGroupComponent } from './pages/admin/groups/groups.component';
 import { AdminPageComponent } from './pages/admin/admin.component';
+import { MainComponent } from './pages/main/main.component';
+import { HomeComponent } from './pages/home/home.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { AdminPageComponent } from './pages/admin/admin.component';
     PluginsManagementDirective,
     KAlertComponent,
     HomeComponent,
+    MainComponent,
     LoginComponent,
     RegisterComponent,
     AdminPageComponent,
