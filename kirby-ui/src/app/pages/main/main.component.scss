@@ -31,7 +31,7 @@ $spaceAroundNav: 35px;
     }
   }
   .container {
-    height: calc(100% - #{$navHeight + $spaceAroundNav});
+    height: calc(100% - #{$navHeight + ($spaceAroundNav * 2)});
     width: 1170px;
     margin: auto
   }
