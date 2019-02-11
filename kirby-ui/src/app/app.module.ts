@@ -6,7 +6,6 @@ import { TreeModule } from 'angular-tree-component';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { KButtonComponent } from './components/k-button/k-button.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
@@ -25,7 +24,6 @@ import { AdminPageComponent } from './pages/admin/admin.component';
   declarations: [
     AppComponent,
     PluginsManagementDirective,
-    KButtonComponent,
     KAlertComponent,
     HomeComponent,
     LoginComponent,

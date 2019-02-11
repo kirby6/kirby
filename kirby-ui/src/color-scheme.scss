@@ -1,9 +1,1 @@
-$main-color: #222831;
-$sub-color: #393e46;
-$active-color: #00adb5;
-$light-color: #eeeeee;
-
-@mixin background-opacity($color, $opacity: 0.3) {
-    background: $color; /* The Fallback */
-    background: rgba($color, $opacity);
-}
+$background: rgba(0,0,0,0.2);

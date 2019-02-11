@@ -1,8 +1,17 @@
 ﻿<k-alert></k-alert>
-<mat-toolbar class='nav' color="primary">
-    <img class='logo' [routerLink]="['/']" src='./../../../assets/images/logo.png' />
-    <button mat-button color="warm" [routerLink]="['/admin']">ניהול</button>
-</mat-toolbar>
+<div class='nav'>
+    <mat-toolbar>
+        <mat-toolbar-row>
+            <img class='logo' [routerLink]="['/']" src='./../../../assets/images/logo.png' />
+            <div class='spacer'></div>
+            <button mat-button color="warm" [routerLink]="['/admin']">ניהול</button>
+        </mat-toolbar-row>
+
+
+
+
+    </mat-toolbar>
+</div>
 <div class='container'>
     <router-outlet></router-outlet>
 </div>
