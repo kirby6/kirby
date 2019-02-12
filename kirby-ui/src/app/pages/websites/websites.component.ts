@@ -8,14 +8,20 @@ import { Website } from './../../services/websites/interfaces'
     styleUrls: ['./websites.component.scss']
 })
 export class WebsitesPageComponent implements OnInit {
-    public websites: Website[];
+    private allWebsites: Website[];
+    public displayedWebsites: Website[];
 
     constructor(private websiteService: WebsiteService) { }
+
+    private blaWebsites() {
+        this.displayedWebsites = this.allWebsites.slice(0, 9);
+    }
 
     ngOnInit() {
         this.websiteService.getAll()
             .subscribe((websites: Website[]) => {
-                this.websites = websites;
+                this.allWebsites = websites;
+                this.blaWebsites();
             });
     }
 }
