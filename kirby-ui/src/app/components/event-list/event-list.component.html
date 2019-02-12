@@ -3,12 +3,12 @@
         <mat-card-title>מטלות</mat-card-title>
         <div class='spacer'></div>
         <div class='unread-count'>
-            <span class='content'>{{unreadCount}}</span>
+            <span class='content' *ngIf="unreadCount > 0">{{unreadCount}}</span>
         </div>
     </mat-card-header>
     <mat-card-content>
         <mat-list>
-            <mat-list-item *ngFor="let assignment of assignments">
+            <mat-list-item *ngFor="let assignment of assignments" (click)="onAssignmentSelected(assignment)">
                 <div class='indicators'>
                     <div [ngClass]="getClass(assignment)"></div>
                 </div>

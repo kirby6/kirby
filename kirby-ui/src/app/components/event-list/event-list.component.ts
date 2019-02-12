@@ -31,6 +31,10 @@ export class EventListComponent implements OnInit {
     getClass(assignment: Assignment) {
         return { read: !!assignment.isRead, unread: !assignment.isRead  };
     }
+
+    onAssignmentSelected(assignment: Assignment): void {
+        window.location.href = `/assignments/${assignment.id}`;
+    }
 }
 
 interface Assignment {

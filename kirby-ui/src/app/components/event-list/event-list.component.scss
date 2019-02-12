@@ -33,6 +33,10 @@
       .mat-list {
         padding: 0;
       }
+
+      mat-list-item {
+          cursor: pointer;
+      }
     }
     .mat-list .mat-list-item {
       color: black;
