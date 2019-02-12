@@ -1,0 +1,12 @@
+:host {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+
+    event-list {
+        flex: 5;
+    }
+    .spacer {
+        flex: 0.1;
+    }
+}

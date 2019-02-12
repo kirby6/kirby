@@ -1,20 +1,22 @@
-<mat-card  class="event-list-card">
+<mat-card class="event-list-card">
     <mat-card-header>
         <mat-card-title>מטלות</mat-card-title>
         <div class='spacer'></div>
-        <div mat-card-avatar class="example-header-image"></div>
+        <div class='unread-count'>
+            <span class='content' *ngIf="unreadCount > 0">{{unreadCount}}</span>
+        </div>
     </mat-card-header>
     <mat-card-content>
         <mat-list>
-            <mat-list-item>
+            <mat-list-item *ngFor="let assignment of assignments" (click)="onAssignmentSelected(assignment)">
                 <div class='indicators'>
+                    <div [ngClass]="getClass(assignment)"></div>
                 </div>
-                <div class='read-indicator'></div>
                 <div class='content'>
-                    <h3 class='title'>משימה קשה ראשונה</h3>
-                    <p class='subtitle'>והוו</p>
+                    <h3 class='title'>{{assignment.name | words : 6 }}</h3>
+                    <p class='subtitle'>{{assignment.description | words : 6 }}</p>
                 </div>
-                <div class='date'>{{d}}</div>
+                <div class='date'>{{assignment.date}}</div>
                 <mat-divider></mat-divider>
             </mat-list-item>
         </mat-list>
