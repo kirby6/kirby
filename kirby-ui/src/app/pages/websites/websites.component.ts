@@ -9,13 +9,7 @@ import { Website } from './../../services/websites/interfaces'
 })
 export class WebsitesPageComponent implements OnInit {
     private allWebsites: Website[];
-    public displayedWebsites: Website[] = [
-        { name: 'moshe', url: 'http://moshe' },
-        { name: 'moshe', url: 'http://moshe' },
-        { name: 'moshe', url: 'http://moshe' },
-        { name: 'moshe', url: 'http://moshe' },
-        { name: 'moshe', url: 'http://moshe' },
-    ];
+    public displayedWebsites: Website[];
 
     constructor(private websiteService: WebsiteService) { }
 
@@ -24,10 +18,10 @@ export class WebsitesPageComponent implements OnInit {
     }
 
     ngOnInit() {
-        // this.websiteService.getAll()
-        //     .subscribe((websites: Website[]) => {
-        //         this.allWebsites = websites;
-        //         this.blaWebsites();
-        //     });
+        this.websiteService.getAll()
+            .subscribe((websites: Website[]) => {
+                this.allWebsites = websites;
+                this.blaWebsites();
+            });
     }
 }
