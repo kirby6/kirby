@@ -2,9 +2,11 @@
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    flex: 1;
 
     event-list {
-        flex: 4;
+        flex: 5;
+    }
+    .spacer {
+        flex: 0.1;
     }
 }

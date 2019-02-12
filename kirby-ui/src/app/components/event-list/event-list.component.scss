@@ -5,6 +5,29 @@
     background: $background;
     font-weight: 200;
 
+    mat-card-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 10px;
+
+        .mat-card-header-text, mat-card-title {
+            margin: 0;
+        }
+    }
+
+    .unread-count {
+      .content {
+        display: flex;
+        align-items: center;
+        align-self: center;
+        background: #e35087;
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+      }
+    }
+
     mat-card-content {
       background: white;
       .mat-list {
@@ -49,7 +72,8 @@
       }
 
       .subtitle {
-        font-size: 12px;
+        font-size: 11px;
+        color: #777;
       }
 
       .title,

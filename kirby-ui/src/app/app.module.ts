@@ -21,6 +21,7 @@ import { AdminPageComponent } from './pages/admin/admin.component';
 import { MainComponent } from './pages/main/main.component';
 import { HomeComponent } from './pages/home/home.component';
 import { EventListComponent } from './components/event-list/event-list.component';
+import { TruncateModule } from 'ng2-truncate';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { EventListComponent } from './components/event-list/event-list.component
     ReactiveFormsModule,
     HttpClientModule,
     CustomMaterialModule,
-    TreeModule.forRoot()
+    TreeModule.forRoot(),
+    TruncateModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

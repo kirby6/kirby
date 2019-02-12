@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 
 @Component({
@@ -9,12 +9,33 @@ import { Component, OnInit } from '@angular/core';
 
 export class EventListComponent implements OnInit {
 
-    d;
+
+    @Input() public assignments: Assignment[] = [
+    {
+        id: '0',
+        name: 'C# overview II',
+        description: 'תרגול בC#',
+    } 
+    ];
+
+    public get unreadCount(): number {
+        return this.assignments && this.assignments.length || 0;
+    }
 
     constructor() {
-        this.d = "11/02/19 21:31";
     }
 
     ngOnInit() {
     }
+
+    getClass(assignment: Assignment) {
+        return { read: !!assignment.isRead, unread: !assignment.isRead  };
+    }
+}
+
+interface Assignment {
+    id: string;
+    name: string;
+    description: string;
+    isRead?: boolean;
 }
