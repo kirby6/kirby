@@ -1,12 +1,22 @@
+@import "./../../../color-scheme.scss";
 :host {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+  .container {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
-
     event-list {
-        flex: 5;
+      flex: 5;
     }
     .spacer {
-        flex: 0.1;
+      flex: 0.1;
     }
+  }
+
+  .footer {
+    display: flex;
+    background: $background;
+  }
 }

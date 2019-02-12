@@ -1,19 +1,19 @@
-@import './../../../color-scheme.scss';
+@import "./../../../color-scheme.scss";
 
 :host {
-    // background: $background;
-    background: red;
-    display: block;
+  background: $background;
+  display: block;
+  height: 100%;
 
-    h2 {
-	padding: 20px 20px 20px 20px;
-	color: white;
-    }
+  h2 {
+    padding: 20px 20px 20px 20px;
+    color: white;
+  }
 
-    .card-list {
-	display: grid;
-	grid-template-columns: 25% 25% 25%;
-	justify-items: center;
-	grid-gap: 100px;
-    }
+  .card-list {
+    display: grid;
+    grid-template-columns: 25% 25% 25%;
+    justify-content: center;
+    grid-gap: 20px 10px;
+  }
 }
