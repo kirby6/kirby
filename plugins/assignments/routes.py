@@ -20,4 +20,4 @@ def update_status_route(assignment_id):
 
 @web_api.route('/')
 def get_user_assignments_route():
-    return jsonify(get_user_assignments(request.args['user_id'])), 200
+    return jsonify(get_user_assignments(request.args.get('user_id'))), 200
