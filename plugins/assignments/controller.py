@@ -50,7 +50,16 @@ def get_user_assignments(user_id=None):
         }
     }, {
         '$unwind': '$exercise'
-    }]
+    },
+                   {
+                       '$graphLookup': {
+                           'from': 'modules',
+                           'startWith': '$exercise.module',
+                           'connectFromField': 'parent',
+                           'connectToField': '_id',
+                           'as': 'modules'
+                       }
+                   }]
     if user_id:
         if not isinstance(user_id, ObjectId):
             user_id = ObjectId(user_id)
