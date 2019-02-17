@@ -48,6 +48,8 @@ def get_user_assignments(user_id=None):
             'foreignField': '_id',
             'as': 'exercise'
         }
+    }, {
+        '$unwind': '$exercise'
     }]
     if user_id:
         if not isinstance(user_id, ObjectId):
