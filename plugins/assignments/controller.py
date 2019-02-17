@@ -40,16 +40,17 @@ def update_status(assignment_id, status):
     }).modified_count
 
 
-def get_user_assignments(user_id):
-    if not isinstance(user_id, ObjectId):
-        user_id = ObjectId(user_id)
-    return bson_to_json(
-        list(
-            assignments.aggregate([{
-                '$lookup': {
-                    'from': 'exercises',
-                    'localField': 'exercise_id',
-                    'foreignField': '_id',
-                    'as': 'exercise'
-                }
-            }])))
+def get_user_assignments(user_id=None):
+    aggregation = [{
+        '$lookup': {
+            'from': 'exercises',
+            'localField': 'exercise_id',
+            'foreignField': '_id',
+            'as': 'exercise'
+        }
+    }]
+    if user_id:
+        if not isinstance(user_id, ObjectId):
+            user_id = ObjectId(user_id)
+        aggregation.append({'$match': {'user_id': user_id}})
+    return bson_to_json(list(assignments.aggregate(aggregation)))
