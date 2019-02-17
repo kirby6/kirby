@@ -12,10 +12,10 @@ def assign_to_user_route():
                                   exercise_id=exercise_id)), 201
 
 
-@web_api.route('/<string:assignment_id>', methods=['PUT'])
+@web_api.route('/<string:assignment_id>', methods=['PATCH'])
 def update_status_route(assignment_id):
     return jsonify(
-        update_status(assignment_id, status=request.args['status'])), 204
+        update_status(assignment_id, status=request.json['status'])), 204
 
 
 @web_api.route('/')
