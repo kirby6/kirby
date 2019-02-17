@@ -1,6 +1,5 @@
 from bson import json_util, ObjectId
 
-import plugins.exercises.statuses as statuses
 from kirby.core.db import bson_to_json
 from .service import get_all_exercises_from_db, add_files_to_filesystem, \
     get_metadata_by_id, insert_exercise_to_db, delete_exercise_from_db, \
@@ -11,12 +10,7 @@ def get_all_exercises():
     return bson_to_json(get_all_exercises_from_db())
 
 
-def create_exercise(name,
-                    groups,
-                    module,
-                    status=statuses.NOT_OPENED,
-                    files=None,
-                    _id=None):
+def create_exercise(name, groups, module, files=None, _id=None):
     files = [{
         'data':
         file,
@@ -34,7 +28,6 @@ def create_exercise(name,
         'name': name,
         'groups': groups,
         'module': module,
-        'status': status,
         'files': files
     }
     if _id:
