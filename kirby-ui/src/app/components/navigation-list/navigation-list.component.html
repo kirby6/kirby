@@ -6,7 +6,7 @@
         <mat-nav-list>
             <mat-list-item *ngFor="let link of links" [ngClass]="getClass(link)" [routerLink]="['/assignments', link.id]">
                 <mat-icon matListIcon>library_books</mat-icon>
-                <a matLine>{{ link.name }}</a>
+                <span matLine>{{ link.name }}</span>
             </mat-list-item>
         </mat-nav-list>
     </mat-card-content>

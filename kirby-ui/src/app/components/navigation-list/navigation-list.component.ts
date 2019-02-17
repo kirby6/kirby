@@ -1,10 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
 import { NavigationItem } from './interfaces';
 
 @Component({
     selector: 'navigation-list',
     templateUrl: './navigation-list.component.html',
-    styleUrls: ['./navigation-list.component.scss']
+    styleUrls: ['./navigation-list.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class NavigationListComponent {

@@ -4,6 +4,7 @@ import { of as ObservableOf } from 'rxjs';
 import { Observable } from 'rxjs';
 import { NavigationItem } from 'src/app/components/navigation-list/interfaces';
 import { map } from 'rxjs/operators';
+import { EventNotification } from 'src/app/components/event-list/interfaces';
 
 @Component({
     templateUrl: './assignments.component.html',
@@ -16,7 +17,6 @@ export class AssignmentsPageComponent {
 
     ngOnInit() {
         this.route.paramMap.subscribe(params => {
-            console.log(params.get('assignmentId'));
             this.assignmentId = params.get('assignmentId');
         });
     }
@@ -56,6 +56,10 @@ export class AssignmentsPageComponent {
                     return assignments;
                 })
             );
+    }
+
+    private getEventsForSelectedAssignment(): Observable<EventNotification[]> {
+        return ObservableOf([]);
     }
 
 } 
