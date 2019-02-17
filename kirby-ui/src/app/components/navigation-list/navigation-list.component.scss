@@ -1,0 +1,35 @@
+@import "./../../../color-scheme.scss";
+
+:host {
+  mat-card {
+    background: $background;
+    font-weight: 200;
+
+    mat-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+
+      .mat-card-header-text,
+      mat-card-title {
+        margin: 0;
+      }
+    }
+
+    mat-card-content {
+      .mat-list {
+        padding: 0;
+      }
+
+      mat-list-item {
+        cursor: pointer;
+        font-size: 12px;
+        font-weight: 200;
+      }
+    }
+    .mat-list .mat-list-item {
+      color: #ddd;
+    }
+  }
+}
