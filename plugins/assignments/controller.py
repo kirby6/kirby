@@ -1,6 +1,6 @@
 from . import statuses
-from kirby.core.db import collection as assignments
-from bson import json_util, ObjectId
+from kirby.core.db import collection as assignments, bson_to_json
+from bson import ObjectId
 import pymongo
 
 
@@ -10,17 +10,17 @@ def assign_to_user(user_id, exercise_id):
     if not isinstance(exercise_id, ObjectId):
         exercise_id = ObjectId(exercise_id)
     assignment = {
-        'user': user_id,
-        'exercise': exercise_id,
+        'user_id': user_id,
+        'exercise_id': exercise_id,
         'status': statuses.OPENED
     }
     index_name = 'user_exercise_index'
     if index_name not in assignments.index_information():
-        assignments.create_index([('user', pymongo.ASCENDING),
-                                  ('exercise', pymongo.ASCENDING)],
+        assignments.create_index([('user_id', pymongo.ASCENDING),
+                                  ('exercise_id', pymongo.ASCENDING)],
                                  unique=True,
                                  name=index_name)
-    return json_util.dumps(assignments.insert(assignment))
+    return bson_to_json(assignments.insert(assignment))
 
 
 def update_status(assignment_id, status):
@@ -38,3 +38,18 @@ def update_status(assignment_id, status):
             'status': status
         }
     }).modified_count
+
+
+def get_user_assignments(user_id):
+    if not isinstance(user_id, ObjectId):
+        user_id = ObjectId(user_id)
+    return bson_to_json(
+        list(
+            assignments.aggregate([{
+                '$lookup': {
+                    'from': 'exercises',
+                    'localField': 'exercise_id',
+                    'foreignField': '_id',
+                    'as': 'exercise'
+                }
+            }])))
