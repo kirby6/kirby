@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { EventNotification } from './interfaces';
 
 
 @Component({
@@ -9,17 +10,39 @@ import { Component, OnInit, Input } from '@angular/core';
 
 export class EventListComponent implements OnInit {
 
+    @Input() public title: string;
 
-    @Input() public assignments: Assignment[] = [
-    {
-        id: '0',
-        name: 'C# overview II',
-        description: 'תרגול בC#',
-    } 
+    @Input() public events: EventNotification[] = [
+        {
+            id: '0',
+            name: 'C# overview II',
+            description: 'תרגול בC#',
+        },
+        {
+            id: '1',
+            name: 'C# overview II',
+            description: 'תרגול בC#',
+        },
+        {
+            id: '2',
+            name: 'C# overview II',
+            description: 'תרגול בC#',
+        },
+        {
+            id: '3',
+            name: 'C# overview II',
+            description: 'תרגול בC#',
+        },
+        {
+            id: '4',
+            name: 'C# overview II',
+            description: 'תרגול בC#',
+        },
+
     ];
 
     public get unreadCount(): number {
-        return this.assignments && this.assignments.length || 0;
+        return this.events && this.events.length || 0;
     }
 
     constructor() {
@@ -28,18 +51,13 @@ export class EventListComponent implements OnInit {
     ngOnInit() {
     }
 
-    getClass(assignment: Assignment) {
-        return { read: !!assignment.isRead, unread: !assignment.isRead  };
+    getClass(EventNotification: EventNotification) {
+        return { read: !!EventNotification.isRead, unread: !EventNotification.isRead };
     }
 
-    onAssignmentSelected(assignment: Assignment): void {
-        window.location.href = `/assignments/${assignment.id}`;
+    onEventSelected(event: EventNotification): void {
+        if (event.id) {
+            window.location.href = `/EventNotifications/${event.id}`;
+        }
     }
-}
-
-interface Assignment {
-    id: string;
-    name: string;
-    description: string;
-    isRead?: boolean;
 }

@@ -36,6 +36,9 @@
 
       mat-list-item {
           cursor: pointer;
+          &:hover {
+            background: #eee;
+          }
       }
     }
     .mat-list .mat-list-item {
