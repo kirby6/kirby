@@ -4,9 +4,9 @@
     </mat-card-header>
     <mat-card-content>
         <mat-nav-list>
-            <mat-list-item *ngFor="let link of links" [ngClass]="getClass(link)">
+            <mat-list-item *ngFor="let link of links" [ngClass]="getClass(link)" [routerLink]="['/assignments', link.id]">
                 <mat-icon matListIcon>library_books</mat-icon>
-                <a matLine [routerLink]="['/assignments', link.id]">{{ link.name }}</a>
+                <a matLine>{{ link.name }}</a>
             </mat-list-item>
         </mat-nav-list>
     </mat-card-content>
