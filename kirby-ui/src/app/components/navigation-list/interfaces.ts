@@ -1,8 +1,8 @@
 
-export interface EventNotification {
+export interface NavigationItem {
     id: string;
     name: string;
     description: string;
-    isRead?: boolean;
+    isActive: boolean;
 }
 

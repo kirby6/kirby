@@ -26,6 +26,10 @@
         cursor: pointer;
         font-size: 12px;
         font-weight: 200;
+
+        &.active {
+          color: #538A08;
+        }
       }
     }
     .mat-list .mat-list-item {
