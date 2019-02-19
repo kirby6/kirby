@@ -1,8 +1,12 @@
+import { Excercise } from './../excersices/interfaces';
+import { Module } from '../modules/interfaces';
 export interface Assignment {
     id?: string;
     user_id: string;
-    excercise_id: string;
-    status: AssignmentStatuses
+    exercise_id: string;
+    status: AssignmentStatuses;
+    exercise: Excercise;
+    modules: Module[];
 }
 
 export enum AssignmentStatuses {
