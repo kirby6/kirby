@@ -4,7 +4,7 @@ export interface NavigationItem {
     name: string;
     description?: string;
     isActive: boolean;
-    parent?: string;
+    children?: NavigationItem[];
 }
 
 export interface NavigationTree {

@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
 import { NavigationItem } from './interfaces';
+import { MatTreeNestedDataSource } from '@angular/material';
+import { NestedTreeControl } from '@angular/cdk/tree';
 
 @Component({
     selector: 'navigation-list',
@@ -17,4 +19,16 @@ export class NavigationListComponent {
             'active': !!navigationItem.isActive
         };
     }
+
+    treeControl = new NestedTreeControl<NavigationItem>(node => node.children);
+    dataSource = new MatTreeNestedDataSource<NavigationItem>();
+  
+    ngOnInit() {
+      this.dataSource.data = this.links;
+    }
+  
+    hasChild = (_: number, node: NavigationItem) => !!node.children && node.children.length > 0;
+
+
+
 }
