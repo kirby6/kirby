@@ -1,5 +1,5 @@
 ﻿<div class='container'>
-    <navigation-list [links]="openedAssignments"></navigation-list>
+    <navigation-list *ngIf="openedAssignments" [links]="openedAssignments"></navigation-list>
     <div class='spacer'></div>
     <event-list title="מטלות"></event-list>
 </div>

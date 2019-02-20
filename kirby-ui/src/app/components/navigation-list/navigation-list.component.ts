@@ -7,7 +7,6 @@ import { NestedTreeControl } from '@angular/cdk/tree';
     selector: 'navigation-list',
     templateUrl: './navigation-list.component.html',
     styleUrls: ['./navigation-list.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class NavigationListComponent {
@@ -25,6 +24,10 @@ export class NavigationListComponent {
   
     ngOnInit() {
       this.dataSource.data = this.links;
+    }
+
+    ngOnChanges() {
+        console.log(this.links);
     }
   
     hasChild = (_: number, node: NavigationItem) => !!node.children && node.children.length > 0;

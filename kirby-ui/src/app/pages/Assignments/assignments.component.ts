@@ -45,7 +45,7 @@ export class AssignmentsPageComponent {
                 parent.children.push({
                     id: module._id.$oid,
                     name: module.name,
-                    isActive: module._id.$oid == this.assignmentId,
+                    isActive: module._id.$oid === this.assignmentId,
                     parent: parent.id,
                     children: []
                 });
@@ -62,7 +62,7 @@ export class AssignmentsPageComponent {
                 tree.push({
                     id: module._id.$oid,
                     name: module.name,
-                    isActive: module._id.$oid == this.assignmentId,
+                    isActive: module._id.$oid === this.assignmentId,
                     children: []
                 });
             }
@@ -79,10 +79,6 @@ export class AssignmentsPageComponent {
                     let allModules = assignments.map((assignment) => assignment.modules);
                     let flatAllModules = _.flatten(allModules);
                     return this.createTree(flatAllModules);
-                }),
-                map((x) => {
-                    console.log(x);
-                    return x;
                 })
             );
     }
