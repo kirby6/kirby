@@ -1,16 +1,13 @@
-﻿import { Excercise } from './../../services/excersices/interfaces';
-import { Module } from './../../services/modules/interfaces';
+﻿import { Module } from './../../services/modules/interfaces';
 import { Assignment } from './../../services/assignments/interfaces';
 import { AuthenticationService } from './../../services/authentication/index';
 import { AssignmentsService } from './../../services/assignments/index';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { of as ObservableOf } from 'rxjs';
 import { Observable } from 'rxjs';
-import { NavigationItem, NavigationTree } from 'src/app/components/navigation-list/interfaces';
 import { map } from 'rxjs/operators';
-import { EventNotification } from 'src/app/components/event-list/interfaces';
 import * as _ from 'lodash';
+import { NavigationTree } from './navigation-list/interfaces';
 
 @Component({
     templateUrl: './assignments.component.html',
@@ -28,7 +25,7 @@ export class AssignmentsPageComponent {
     ngOnInit() {
         this.route.paramMap.subscribe(params => {
             this.assignmentId = params.get('assignmentId');
-
+            console.log(params);
             this.getOpenedAssignments()
                 .subscribe((openedAssignments: any) => {
                     this.openedAssignments = openedAssignments;

@@ -1,4 +1,7 @@
-@import "./../../../color-scheme.scss";
+@import "./../../../../color-scheme.scss";
+
+$regularColor: #ddd;
+$activeColor: #538a08;
 
 :host {
   mat-card {
@@ -32,8 +35,13 @@
       font-weight: 200;
       outline: none;
       user-select: none;
+      color: $regularColor;
       .mat-icon {
         margin-left: 5px;
+      }
+      
+      &.active {
+        color: $activeColor;
       }
     }
 
@@ -46,11 +54,11 @@
         list-style-type: none;
         font-size: 12px;
         font-weight: 200;
-        color: #ddd;
+        color: $regularColor;
         cursor: pointer;
         
         &.active {
-          color: #538a08;
+          color: $activeColor;
         }
       }
     }
