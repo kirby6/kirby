@@ -7,7 +7,6 @@ DB_CONNECTION = {
     # 'host': '192.168.43.47',
     'port': 27017
 }
-
 DB_NAME = 'kirby'
 
 PLUGIN_DIRECTORIES = [

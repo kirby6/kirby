@@ -40,9 +40,15 @@ export class AssignmentsPageComponent {
         if (processed_modules == modules.length) return;
         for (let module of modules) {
             if (!module.parent) continue;
-            let parent = tree.find((m) => m._id.$oid == module.parent.$oid);
-            if (parent && !parent.children.find((m) => m._id.$oid == module._id.$oid)) {
-                parent.children.push({ ...module, children: [] });
+            let parent = tree.find((m) => m.id == module.parent.$oid);
+            if (parent && !parent.children.find((m) => m.id == module._id.$oid)) {
+                parent.children.push({
+                    id: module._id.$oid,
+                    name: module.name,
+                    isActive: module._id.$oid == this.assignmentId,
+                    parent: parent.id,
+                    children: []
+                });
                 processed_modules++;
                 this.createTreeChildren(modules, parent.children, processed_modules);
             }
@@ -52,25 +58,17 @@ export class AssignmentsPageComponent {
     private createTree(modules: Module[]): any[] {
         let tree = [];
         for (let module of modules) {
-            if (!module.parent && !tree.find((m) => m._id.$oid == module._id.$oid)) {
-                tree.push({ ...module, children: [] });
+            if (!module.parent && !tree.find((m) => m.id == module._id.$oid)) {
+                tree.push({
+                    id: module._id.$oid,
+                    name: module.name,
+                    isActive: module._id.$oid == this.assignmentId,
+                    children: []
+                });
             }
         }
         this.createTreeChildren(modules, tree, tree.length);
         return tree;
-    }
-
-    private convertChildren(assignment: any): any {
-        return assignment.children.map(child => {
-            return {
-                id: child._id.$oid,
-                name: child.name,
-                parent: child.parent.$oid,
-                isActive: child._id.$oid == this.assignmentId,
-                // TODO: Bug!!!!
-                children: (child.children && child.children.forEach(this.convertChildren)) || []
-            } as NavigationItem
-        })
     }
 
     private getOpenedAssignments(): Observable<any[]> {
@@ -81,19 +79,6 @@ export class AssignmentsPageComponent {
                     let allModules = assignments.map((assignment) => assignment.modules);
                     let flatAllModules = _.flatten(allModules);
                     return this.createTree(flatAllModules);
-                }),
-                map((assignments: Assignment[]) => {
-                    assignments.forEach((assignment: any) => {
-                        assignment.children = this.convertChildren(assignment);
-                    });
-                    return assignments.map((assignment: any) => {
-                        return {
-                            id: assignment._id.$oid,
-                            name: assignment.name,
-                            isActive: assignment._id.$oid == this.assignmentId,
-                            children: assignment.children
-                        } as NavigationItem
-                    });
                 }),
                 map((x) => {
                     console.log(x);
