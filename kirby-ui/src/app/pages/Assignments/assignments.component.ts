@@ -36,77 +36,69 @@ export class AssignmentsPageComponent {
         });
     }
 
-    private createTreeAcc(modules: Module[], tree: any[]): any[] {
-        if (modules.length == 0) {
-            return [];
-        }
-        let len = modules.length;
-        for (let i = 0; i < len; ++i) {
-            for (let t of tree) {
-                let m = modules[i];
-                if (m.parent && m.parent.$oid === t._id.$oid) {
-                    t.children = _.uniqBy([...(t.children || []), m], (module) => module._id.$oid);
-                    modules.splice(modules.indexOf(m), 1);
-                    i++;
-                    this.createTreeAcc(modules, t.children);
-                }
+    private createTreeChildren(modules: any[], tree: any[], processed_modules: number) {
+        if (processed_modules == modules.length) return;
+        for (let module of modules) {
+            if (!module.parent) continue;
+            let parent = tree.find((m) => m._id.$oid == module.parent.$oid);
+            if (parent && !parent.children.find((m) => m._id.$oid == module._id.$oid)) {
+                parent.children.push({ ...module, children: [] });
+                processed_modules++;
+                this.createTreeChildren(modules, parent.children, processed_modules);
             }
         }
-        this.createTreeAcc(modules, tree)
     }
 
     private createTree(modules: Module[]): any[] {
-        let tree = _.uniqBy(modules.filter(t => !t.parent), (module) => module._id.$oid);
-        return this.createTreeAcc(modules, tree);
+        let tree = [];
+        for (let module of modules) {
+            if (!module.parent && !tree.find((m) => m._id.$oid == module._id.$oid)) {
+                tree.push({ ...module, children: [] });
+            }
+        }
+        this.createTreeChildren(modules, tree, tree.length);
+        return tree;
+    }
+
+    private convertChildren(assignment: any): any {
+        return assignment.children.map(child => {
+            return {
+                id: child._id.$oid,
+                name: child.name,
+                parent: child.parent.$oid,
+                isActive: child._id.$oid == this.assignmentId,
+                // TODO: Bug!!!!
+                children: (child.children && child.children.forEach(this.convertChildren)) || []
+            } as NavigationItem
+        })
     }
 
     private getOpenedAssignments(): Observable<any[]> {
-
         return this.assignmentsService
             .get(this.auth.currentUserValue.id)
             .pipe(
                 map((assignments: Assignment[]) => {
                     let allModules = assignments.map((assignment) => assignment.modules);
                     let flatAllModules = _.flatten(allModules);
-                    console.log({flatAllModules});
-                    let x = this.createTree(flatAllModules);
-                    console.log({ list_to_tree: x });
-                    return x;
+                    return this.createTree(flatAllModules);
                 }),
-                // map((assignments: Assignment[]) => {
-
-                //    assignments.forEach((assignment: any) => {
-                //        assignment.children = assignment.children.map(child => {
-                //         return {
-                //             id: child.id,
-                //             name: child.name,
-                //             parent: child.module,
-                //             isActive: child.id == this.assignmentId,
-                //         } as NavigationItem   
-                //        });
-                //    });
-
-
-                //     let x = assignments.map((assignment: any) => {
-                //         return {
-                //             id: assignment.id,
-                //             name: assignment.name,
-                //             parent: assignment.parent,
-                //             isActive: assignment.id == this.assignmentId,
-                //             children: assignment.children
-                //         } as NavigationItem
-                //     });
-
-                //     console.log(x);
-                //     return x;
-
-                // }),
-
+                map((assignments: Assignment[]) => {
+                    assignments.forEach((assignment: any) => {
+                        assignment.children = this.convertChildren(assignment);
+                    });
+                    return assignments.map((assignment: any) => {
+                        return {
+                            id: assignment._id.$oid,
+                            name: assignment.name,
+                            isActive: assignment._id.$oid == this.assignmentId,
+                            children: assignment.children
+                        } as NavigationItem
+                    });
+                }),
+                map((x) => {
+                    console.log(x);
+                    return x;
+                })
             );
     }
-
-    private getEventsForSelectedAssignment(): Observable<EventNotification[]> {
-        return ObservableOf([]);
-    }
-
 } 
