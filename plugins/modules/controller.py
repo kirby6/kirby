@@ -11,12 +11,12 @@ def get_module_by_name(name):
     return bson_to_json(modules.find_one({'name': name}))
 
 
-def create_module(name, parent=None, group=None):
+def create_module(name, parent=None):
     module_to_add = {'name': name}
     if parent:
+        if not isinstance(parent, ObjectId):
+            parent = ObjectId(parent)
         module_to_add['parent'] = parent
-    if group:
-        module_to_add['group'] = group
     return json_util.dumps(modules.insert_one(module_to_add).inserted_id)
 
 
