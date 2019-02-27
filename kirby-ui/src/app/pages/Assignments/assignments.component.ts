@@ -25,7 +25,6 @@ export class AssignmentsPageComponent {
     ngOnInit() {
         this.route.paramMap.subscribe(params => {
             this.assignmentId = params.get('assignmentId');
-            console.log(params);
             this.getOpenedAssignments()
                 .subscribe((openedAssignments: any) => {
                     this.openedAssignments = openedAssignments;
