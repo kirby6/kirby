@@ -19,4 +19,5 @@ def get_module_by_name_route(module_name):
 @web_api.route('/', methods=['POST'])
 @required_roles('admin')
 def create_module_route():
-    return create_module(request.json['name'], request.json.get('parent'))
+    return create_module(request.json['name'], request.json.get('parent'),
+                         request.json.get('parent'))
