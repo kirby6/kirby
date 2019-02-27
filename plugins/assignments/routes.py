@@ -7,10 +7,10 @@ from .controller import assign_to_user, update_status, get_user_assignments
 
 @web_api.route('/', methods=['POST'])
 def assign_to_user_route():
-    exercise_id = request.json['exercise_id']
+    activity_id = request.json['activity_id']
     user_id = request.json['user_id']
     return json.dumps(
-        assign_to_user(user_id=user_id, exercise_id=exercise_id)), 201
+        assign_to_user(user_id=user_id, activity_id=activity_id)), 201
 
 
 @web_api.route('/<string:assignment_id>', methods=['PATCH'])
