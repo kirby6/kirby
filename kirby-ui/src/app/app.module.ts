@@ -20,6 +20,7 @@ import { AdminGroupComponent } from './pages/admin/groups/groups.component';
 import { AdminPageComponent } from './pages/admin/admin.component';
 import { WebsitesPageComponent } from './pages/websites/websites.component';
 import { WebsiteCardComponent } from './components/website-card/website-card.component';
+import { ActivityFileCardComponent } from './components/activity-file-card/activity-file-card.component';
 import { MainComponent } from './pages/main/main.component';
 import { HomeComponent } from './pages/home/home.component';
 import { EventListComponent } from './components/event-list/event-list.component';
@@ -41,6 +42,7 @@ import { NavigationListComponent } from './pages/Assignments/navigation-list/nav
         AdminGroupComponent,
         WebsitesPageComponent,
         WebsiteCardComponent,
+        ActivityFileCardComponent,
         EventListComponent,
         AssignmentsPageComponent,
         AssignmentPageComponent,
