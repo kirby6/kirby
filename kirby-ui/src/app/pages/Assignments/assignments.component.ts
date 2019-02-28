@@ -1,61 +1,81 @@
-﻿import { Component } from '@angular/core';
+﻿import { Module } from './../../services/modules/interfaces';
+import { Assignment } from './../../services/assignments/interfaces';
+import { AuthenticationService } from './../../services/authentication/index';
+import { AssignmentsService } from './../../services/assignments/index';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { of as ObservableOf } from 'rxjs';
 import { Observable } from 'rxjs';
-import { NavigationItem } from 'src/app/components/navigation-list/interfaces';
 import { map } from 'rxjs/operators';
+import * as _ from 'lodash';
+import { NavigationTree } from './navigation-list/interfaces';
 
 @Component({
     templateUrl: './assignments.component.html',
     styleUrls: ['./assignments.component.scss']
 })
 export class AssignmentsPageComponent {
-    private assignmentId: string;
+    private moduleId: string;
+    public openedAssignments: NavigationTree;
 
-    constructor(private route: ActivatedRoute) { }
+    constructor(private route: ActivatedRoute,
+        private assignmentsService: AssignmentsService,
+        private auth: AuthenticationService
+    ) { }
 
     ngOnInit() {
         this.route.paramMap.subscribe(params => {
-            console.log(params.get('assignmentId'));
-            this.assignmentId = params.get('assignmentId');
+            this.moduleId = params.get('moduleId');
+            this.getOpenedAssignments()
+                .subscribe((openedAssignments: any) => {
+                    this.openedAssignments = openedAssignments;
+                });
         });
     }
 
-    private getAssignmentsByCategoryId(): Observable<NavigationItem[]> {
-        return ObservableOf([
-            {
-                id: '0',
-                name: 'C#',
-                description: 'תרגול בC#',
-            },
-            {
-                id: '1',
-                name: 'Web',
-                description: 'תרגול בWeb',
-            },
-            {
-                id: '2',
-                name: 'Linux',
-                description: 'תרגול בLinux',
-            },
-            {
-                id: '3',
-                name: 'Python',
-                description: 'תרגול בPython',
-            },
-            {
-                id: '4',
-                name: 'Git',
-                description: 'תרגול בGit',
-            },
+    private createTreeChildren(modules: any[], tree: any[], processed_modules: number) {
+        if (processed_modules == modules.length) return;
+        for (let module of modules) {
+            if (!module.parent) continue;
+            let parent = tree.find((m) => m.id == module.parent.$oid);
+            if (parent && !parent.children.find((m) => m.id == module._id.$oid)) {
+                parent.children.push({
+                    id: module._id.$oid,
+                    name: module.name,
+                    isActive: module._id.$oid === this.moduleId,
+                    parent: parent.id,
+                    children: []
+                });
+                processed_modules++;
+                this.createTreeChildren(modules, parent.children, processed_modules);
+            }
+        }
+    }
 
-        ])
+    private createTree(modules: Module[]): any[] {
+        let tree = [];
+        for (let module of modules) {
+            if (!module.parent && !tree.find((m) => m.id == module._id.$oid)) {
+                tree.push({
+                    id: module._id.$oid,
+                    name: module.name,
+                    isActive: module._id.$oid === this.moduleId,
+                    children: []
+                });
+            }
+        }
+        this.createTreeChildren(modules, tree, tree.length);
+        return tree;
+    }
+
+    private getOpenedAssignments(): Observable<any[]> {
+        return this.assignmentsService
+            .get(this.auth.currentUserValue.id)
             .pipe(
-                map((assignments: NavigationItem[]) => {
-                    assignments.forEach(a => a.isActive = (a.id === this.assignmentId));
-                    return assignments;
+                map((assignments: Assignment[]) => {
+                    let allModules = assignments.map((assignment) => assignment.modules);
+                    let flatAllModules = _.flatten(allModules);
+                    return this.createTree(flatAllModules);
                 })
             );
     }
-
 } 

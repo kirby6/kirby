@@ -4,20 +4,20 @@ from bson import ObjectId
 import pymongo
 
 
-def assign_to_user(user_id, exercise_id):
+def assign_to_user(user_id, activity_id):
     if not isinstance(user_id, ObjectId):
         user_id = ObjectId(user_id)
-    if not isinstance(exercise_id, ObjectId):
-        exercise_id = ObjectId(exercise_id)
+    if not isinstance(activity_id, ObjectId):
+        activity_id = ObjectId(activity_id)
     assignment = {
         'user_id': user_id,
-        'exercise_id': exercise_id,
+        'activity_id': activity_id,
         'status': statuses.OPENED
     }
-    index_name = 'user_exercise_index'
+    index_name = 'user_activity_index'
     if index_name not in assignments.index_information():
         assignments.create_index([('user_id', pymongo.ASCENDING),
-                                  ('exercise_id', pymongo.ASCENDING)],
+                                  ('activity_id', pymongo.ASCENDING)],
                                  unique=True,
                                  name=index_name)
     return bson_to_json(assignments.insert(assignment))
@@ -43,18 +43,26 @@ def update_status(assignment_id, status):
 def get_user_assignments(user_id=None):
     aggregation = [{
         '$lookup': {
-            'from': 'exercises',
-            'localField': 'exercise_id',
+            'from': 'activities',
+            'localField': 'activity_id',
             'foreignField': '_id',
-            'as': 'exercise'
+            'as': 'activity'
         }
     }, {
-        '$unwind': '$exercise'
+        '$unwind': '$activity'
     },
+                   {
+                       '$lookup': {
+                           'from': 'modules',
+                           'localField': 'activity_id',
+                           'foreignField': 'activities',
+                           'as': 'modules'
+                       }
+                   },
                    {
                        '$graphLookup': {
                            'from': 'modules',
-                           'startWith': '$exercise.module',
+                           'startWith': '$modules._id',
                            'connectFromField': 'parent',
                            'connectToField': '_id',
                            'as': 'modules'

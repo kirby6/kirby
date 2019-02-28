@@ -3,10 +3,10 @@ import os
 JWT_ACCESS_TOKEN_EXPIRES = 30 * 24 * 60 * 60
 
 DB_CONNECTION = {
-    'host': 'localhost',
+    #'host': 'localhost',
+     'host': '192.168.43.47',
     'port': 27017
 }
-
 DB_NAME = 'kirby'
 
 PLUGIN_DIRECTORIES = [

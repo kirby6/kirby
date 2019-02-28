@@ -1,0 +1,70 @@
+@import "./../../../../color-scheme.scss";
+
+$regularColor: #ddd;
+$activeColor: #538a08;
+
+:host {
+  mat-card {
+    background: $background;
+    font-weight: 200;
+
+    mat-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+
+      .mat-card-header-text,
+      mat-card-title {
+        margin: 0;
+      }
+    }
+
+    mat-card-content {
+      .mat-list {
+        padding: 0;
+      }
+    }
+
+    .example-tree-invisible {
+      display: none;
+    }
+
+    .mat-tree-node {
+      font-size: 12px;
+      font-weight: 200;
+      outline: none;
+      user-select: none;
+      color: $regularColor;
+      .mat-icon {
+        margin-left: 5px;
+      }
+      
+      &.active {
+        color: $activeColor;
+      }
+    }
+
+    .navigation-tree {
+      background: none;
+      ul,
+      li {
+        margin-top: 0;
+        margin-bottom: 0;
+        list-style-type: none;
+        font-size: 12px;
+        font-weight: 200;
+        color: $regularColor;
+        cursor: pointer;
+        
+        &.active {
+          color: $activeColor;
+        }
+      }
+    }
+
+    .mat-list .mat-list-item {
+      color: #ddd;
+    }
+  }
+}
