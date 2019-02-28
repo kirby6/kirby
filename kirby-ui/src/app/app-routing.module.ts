@@ -24,7 +24,7 @@ const routes: Routes = [
             {
                 path: 'assignments', component: AssignmentsPageComponent, children: [
                     { path: ':moduleId', component: AssignmentsListComponent, outlet: 'moduleAssignments' },
-                    // { path: ':moduleId', component: AssignmentsMatrixComponent, outlet: 'moduleMatrix' },
+                    { path: ':moduleId', component: AssignmentsMatrixComponent, outlet: 'moduleMatrix' },
                 ]
             },
         ]

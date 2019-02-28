@@ -3,14 +3,6 @@
         <mat-card-title>ניווט</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-        <!-- <mat-nav-list>
-            <mat-list-item *ngFor="let link of links">
-                <mat-icon matListIcon>library_books</mat-icon>
-                <span matLine>{{ link.name }}</span>
-            </mat-list-item>
-        </mat-nav-list> -->
-
-
         <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" class="navigation-tree">
             <!-- This is the tree node template for leaf nodes -->
             <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>

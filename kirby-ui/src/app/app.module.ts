@@ -29,11 +29,13 @@ import { NavigationListComponent } from './pages/Assignments/navigation-list/nav
 import { AssignmentsListComponent } from './pages/Assignments/assignments-list/assignments-list.component';
 import { HelpsListComponent } from './pages/helps/helps-list/helps-list.component';
 import { AssignmentsMatrixComponent } from './pages/Assignments/assignments-matrix/assignments-matrix.component';
+import { RoleDirective } from './directives/role.directive';
 
 @NgModule({
     declarations: [
         AppComponent,
         PluginsManagementDirective,
+        RoleDirective,
         KAlertComponent,
         HomeComponent,
         MainComponent,

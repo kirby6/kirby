@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import * as _ from 'lodash';
 import { NavigationTree } from './navigation-list/interfaces';
+import { Role } from 'src/app/services/authentication/interfaces';
 
 @Component({
     templateUrl: './assignments.component.html',
@@ -16,6 +17,7 @@ import { NavigationTree } from './navigation-list/interfaces';
 export class AssignmentsPageComponent {
     private moduleId: string;
     public openedAssignments: NavigationTree;
+    public RoleEnum = Role;
 
     constructor(private route: ActivatedRoute,
         private assignmentsService: AssignmentsService,
