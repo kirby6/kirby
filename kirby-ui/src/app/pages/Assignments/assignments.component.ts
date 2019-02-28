@@ -69,7 +69,7 @@ export class AssignmentsPageComponent {
 
     private getOpenedAssignments(): Observable<any[]> {
         return this.assignmentsService
-            .get(this.auth.currentUserValue.id)
+            .getByUserId(this.auth.currentUserValue.id)
             .pipe(
                 map((assignments: Assignment[]) => {
                     let allModules = assignments.map((assignment) => assignment.modules);

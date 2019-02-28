@@ -24,15 +24,15 @@ export class AssignmentsListComponent implements OnInit {
         this.route.paramMap.subscribe(params => {
             let moduleId: string = params.get('moduleId');
 
-            this.assignmentsService.get(this.auth.currentUserValue.id)
+            this.assignmentsService.getByUserId(this.auth.currentUserValue.id)
                 .pipe(
                     map((assignments: Assignment[]) => assignments
                         .filter(a => a.modules.findIndex(module => module._id.$oid == moduleId))),
-                        map((assignments: Assignment[]) => assignments.map(this.assignmentToEventNotification)),
-                    )
-                        .subscribe((openedAssignments: EventNotification[]) => {
-                            this.assignments = openedAssignments;
-                        });
+                    map((assignments: Assignment[]) => assignments.map(this.assignmentToEventNotification)),
+                )
+                .subscribe((openedAssignments: EventNotification[]) => {
+                    this.assignments = openedAssignments;
+                });
         });
     }
 
@@ -43,6 +43,4 @@ export class AssignmentsListComponent implements OnInit {
             description: assignment.activity.module
         }) as EventNotification
     }
-
-
 } 
