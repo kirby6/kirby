@@ -19,7 +19,7 @@ const routes: Routes = [
             { path: '', component: HomeComponent },
             { path: 'websites', component: WebsitesPageComponent },
             { path: 'admin', component: AdminPageComponent },
-            { path: 'assignments/:assignmentId', component: AssignmentsPageComponent },
+            { path: 'assignments/:moduleId', component: AssignmentsPageComponent },
             { path: 'assignments', redirectTo: 'assignments/' }, //This line sets the /:assignmentId parameter as optional.
             { path: 'events', component: EventListComponent, outlet: 'events' },
         ]

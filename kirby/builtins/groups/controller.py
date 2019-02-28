@@ -16,9 +16,7 @@ def get_group_children(child_name):
 
 
 def create_group(name, parent=None):
-    group_to_add = {
-        'name': name
-    }
+    group_to_add = {'name': name}
     if parent:
         group_to_add['parent'] = parent
     return json_util.dumps(groups.insert_one(group_to_add).inserted_id)

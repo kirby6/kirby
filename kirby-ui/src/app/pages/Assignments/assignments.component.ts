@@ -14,7 +14,7 @@ import { NavigationTree } from './navigation-list/interfaces';
     styleUrls: ['./assignments.component.scss']
 })
 export class AssignmentsPageComponent {
-    private assignmentId: string;
+    private moduleId: string;
     public openedAssignments: NavigationTree;
 
     constructor(private route: ActivatedRoute,
@@ -24,8 +24,7 @@ export class AssignmentsPageComponent {
 
     ngOnInit() {
         this.route.paramMap.subscribe(params => {
-            this.assignmentId = params.get('assignmentId');
-            console.log(params);
+            this.moduleId = params.get('moduleId');
             this.getOpenedAssignments()
                 .subscribe((openedAssignments: any) => {
                     this.openedAssignments = openedAssignments;
@@ -42,7 +41,7 @@ export class AssignmentsPageComponent {
                 parent.children.push({
                     id: module._id.$oid,
                     name: module.name,
-                    isActive: module._id.$oid === this.assignmentId,
+                    isActive: module._id.$oid === this.moduleId,
                     parent: parent.id,
                     children: []
                 });
@@ -59,7 +58,7 @@ export class AssignmentsPageComponent {
                 tree.push({
                     id: module._id.$oid,
                     name: module.name,
-                    isActive: module._id.$oid === this.assignmentId,
+                    isActive: module._id.$oid === this.moduleId,
                     children: []
                 });
             }
