@@ -9,6 +9,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './services/authentication/gaurd';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { AssignmentsListComponent } from './pages/Assignments/assignments-list/assignments-list.component';
 
 const routes: Routes = [
     {
@@ -19,9 +20,11 @@ const routes: Routes = [
             { path: '', component: HomeComponent },
             { path: 'websites', component: WebsitesPageComponent },
             { path: 'admin', component: AdminPageComponent },
-            { path: 'assignments/:moduleId', component: AssignmentsPageComponent },
-            { path: 'assignments', redirectTo: 'assignments/' }, //This line sets the /:assignmentId parameter as optional.
-            { path: 'events', component: EventListComponent, outlet: 'events' },
+            {
+                path: 'assignments', component: AssignmentsPageComponent, children: [
+                    { path: ':moduleId', component: AssignmentsListComponent, outlet: 'module' },
+                ]
+            },
         ]
     },
     { path: 'login', component: LoginComponent },

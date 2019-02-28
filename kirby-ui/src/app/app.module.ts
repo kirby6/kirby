@@ -26,6 +26,8 @@ import { EventListComponent } from './components/event-list/event-list.component
 import { TruncateModule } from 'ng2-truncate';
 import { AssignmentsPageComponent } from './pages/Assignments/assignments.component';
 import { NavigationListComponent } from './pages/Assignments/navigation-list/navigation-list.component';
+import { AssignmentsListComponent } from './pages/Assignments/assignments-list/assignments-list.component';
+import { HelpsListComponent } from './pages/helps/helps-list/helps-list.component';
 
 @NgModule({
     declarations: [
@@ -42,7 +44,9 @@ import { NavigationListComponent } from './pages/Assignments/navigation-list/nav
         WebsiteCardComponent,
         EventListComponent,
         AssignmentsPageComponent,
-        NavigationListComponent
+        NavigationListComponent,
+        AssignmentsListComponent,
+        HelpsListComponent
     ],
     imports: [
         BrowserModule,
