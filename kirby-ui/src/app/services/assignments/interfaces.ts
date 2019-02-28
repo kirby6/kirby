@@ -1,11 +1,13 @@
-import { Excercise } from './../excersices/interfaces';
 import { Module } from '../modules/interfaces';
+import { Activity } from '../activities/interfaces';
 export interface Assignment {
-    id?: string;
+    _id?: {
+        $oid: string;
+    };
     user_id: string;
-    exercise_id: string;
+    activity_id: string;
     status: AssignmentStatuses;
-    exercise: Excercise;
+    activity: Activity;
     modules: Module[];
 }
 

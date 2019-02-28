@@ -8,49 +8,15 @@ import { EventNotification } from './interfaces';
     styleUrls: ['./event-list.component.scss']
 })
 
-export class EventListComponent implements OnInit {
+export class EventListComponent {
 
     @Input() public title: string;
 
-    @Input() public events: EventNotification[] = [
-        {
-            id: '0',
-            name: 'C# overview II',
-            description: 'תרגול בC#',
-        },
-        {
-            id: '1',
-            name: 'C# overview II',
-            description: 'תרגול בC#',
-        },
-        {
-            id: '2',
-            name: 'C# overview II',
-            description: 'תרגול בC#',
-        },
-        {
-            id: '3',
-            name: 'C# overview II',
-            description: 'תרגול בC#',
-        },
-        {
-            id: '4',
-            name: 'C# overview II',
-            description: 'תרגול בC#',
-        },
-
-    ];
+    @Input() public events: EventNotification[];
 
     public get unreadCount(): number {
         return this.events && this.events.length || 0;
     }
-
-    constructor() {
-    }
-
-    ngOnInit() {
-    }
-
     getClass(EventNotification: EventNotification) {
         return { read: !!EventNotification.isRead, unread: !EventNotification.isRead };
     }

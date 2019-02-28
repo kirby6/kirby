@@ -6,14 +6,15 @@
     font-weight: 200;
 
     mat-card-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
 
-        .mat-card-header-text, mat-card-title {
-            margin: 0;
-        }
+      .mat-card-header-text,
+      mat-card-title {
+        margin: 0;
+      }
     }
 
     .unread-count {
@@ -29,16 +30,21 @@
     }
 
     mat-card-content {
-      background: white;
       .mat-list {
         padding: 0;
       }
 
       mat-list-item {
-          cursor: pointer;
-          &:hover {
-            background: #eee;
-          }
+        cursor: pointer;
+        background: white;
+        &:hover {
+          background: #eee;
+        }
+      }
+      .empty-list {
+        color: white;
+        text-align: center;
+        background: none;
       }
     }
     .mat-list .mat-list-item {
