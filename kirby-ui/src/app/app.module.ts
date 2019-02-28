@@ -28,6 +28,8 @@ import { TruncateModule } from 'ng2-truncate';
 import { AssignmentsPageComponent } from './pages/Assignments/assignments.component';
 import { AssignmentPageComponent } from './pages/Assignment/assignment.component';
 import { NavigationListComponent } from './pages/Assignments/navigation-list/navigation-list.component';
+import { AssignmentsListComponent } from './pages/Assignments/assignments-list/assignments-list.component';
+import { HelpsListComponent } from './pages/helps/helps-list/helps-list.component';
 
 @NgModule({
     declarations: [
@@ -46,7 +48,9 @@ import { NavigationListComponent } from './pages/Assignments/navigation-list/nav
         EventListComponent,
         AssignmentsPageComponent,
         AssignmentPageComponent,
-        NavigationListComponent
+        NavigationListComponent,
+        AssignmentsListComponent,
+        HelpsListComponent
     ],
     imports: [
         BrowserModule,

@@ -7,7 +7,7 @@
         </div>
     </mat-card-header>
     <mat-card-content>
-        <mat-list>
+        <mat-list *ngIf="events.length > 0; else empty">
             <mat-list-item *ngFor="let event of events" (click)="onEventSelected(event)">
                 <div class='indicators'>
                     <div [ngClass]="getClass(event)"></div>
@@ -20,5 +20,11 @@
                 <mat-divider></mat-divider>
             </mat-list-item>
         </mat-list>
+        <ng-template #empty>
+            <div class='empty-list'>
+                📝 הרשימה ריקה
+            </div>
+        </ng-template>
     </mat-card-content>
+
 </mat-card>

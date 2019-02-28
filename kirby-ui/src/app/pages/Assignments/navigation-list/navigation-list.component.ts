@@ -10,19 +10,23 @@ import { NestedTreeControl } from '@angular/cdk/tree';
 })
 
 export class NavigationListComponent {
-
     @Input() public set items(items: NavigationItem[]) {
         this.dataSource.data = items;
     }
 
     getClass(navigationItem: NavigationItem) {
         return {
-            active: !!navigationItem.isActive
+            active: !!navigationItem.isActive || (this.selectedAssignmentId === navigationItem.id)
         };
     }
 
     treeControl = new NestedTreeControl<NavigationItem>(node => node.children);
     dataSource = new MatTreeNestedDataSource<NavigationItem>();
+    private selectedAssignmentId: string = null;
 
     hasChild = (_: number, node: NavigationItem) => !!node.children && node.children.length > 0;
+
+    selectAssignment(asssignmentId: string): void {
+        this.selectedAssignmentId = asssignmentId || null;
+    }
 }
