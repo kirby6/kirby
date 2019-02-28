@@ -26,6 +26,8 @@ def get_all_activities_from_db():
 
 
 def get_file_by_id(file_id):
+    if not isinstance(file_id, ObjectId):
+        file_id = ObjectId(file_id)
     return filesystem.get(file_id)
 
 

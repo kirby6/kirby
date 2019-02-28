@@ -1,7 +1,6 @@
-<mat-card (click)="onSiteClick()">
+<mat-card (click)="onFileClick()">
   <mat-card-header>
-    <!-- <div mat-card-avatar class="avatar"></div> -->
-    <mat-card-title>{{website.name}}</mat-card-title>
-    <mat-card-subtitle>{{website.url}}</mat-card-subtitle>
+    <mat-card-title>{{file.filename}}</mat-card-title>
   </mat-card-header>
 </mat-card>
+<a style="display: none" #downloadLink></a>

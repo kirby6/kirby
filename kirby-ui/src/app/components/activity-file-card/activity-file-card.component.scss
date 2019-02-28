@@ -4,18 +4,10 @@
     mat-card {
 	cursor: pointer;
 	background: white;
+	word-wrap: anywhere;
 
 	mat-card-title {
 	    color: rgba(0, 0, 0, 0.8);
-	}
-
-	mat-card-subtitle {
-	    color: rgba(0, 0, 0, 0.3);
-	}
-
-	.avatar {
-	    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
-	    background-size: cover;
 	}
     }
 }
