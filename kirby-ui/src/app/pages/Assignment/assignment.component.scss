@@ -1,0 +1,23 @@
+@import "./../../../color-scheme.scss";
+:host {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    
+    mat-card {
+	background: $background;
+	display: flex;
+	flex-direction: column;
+	font-weight: 200;
+	mat-card-header {
+	    // display: flex;
+	    align-items: center;
+	    justify-content: space-between;
+	    margin-bottom: 10px;
+	    
+	    mat-card-title {
+		margin: 0;
+	    }
+	}
+    }
+}

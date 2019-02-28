@@ -12,7 +12,11 @@ export class AssignmentsService {
     private _prefix: string = 'assignments';
     constructor(private http: HttpClient) { }
 
-    get(userId: string): Observable<Assignment[]> {
+    get(assignmentId: string): Observable<Assignment[]> {
+        return this.http.get<Assignment[]>(`${config.apiUrl}/${this._prefix}/${assignmentId}`);
+    }
+
+    getByUserId(userId: string): Observable<Assignment[]> {
         let params = new HttpParams();
         if (userId) {
             params = params.append('user_id', userId);
@@ -25,6 +29,6 @@ export class AssignmentsService {
     }
 
     update(assignmentId: string, status: AssignmentStatuses): Observable<void> {
-        return this.http.patch<void>(`${config.apiUrl}/${this._prefix}/${assignmentId}`, {status});
+        return this.http.patch<void>(`${config.apiUrl}/${this._prefix}/${assignmentId}`, { status });
     }
 }

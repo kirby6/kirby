@@ -1,5 +1,6 @@
 import { EventListComponent } from './components/event-list/event-list.component';
 import { AssignmentsPageComponent } from './pages/Assignments/assignments.component';
+import { AssignmentPageComponent } from './pages/Assignment/assignment.component';
 import { HomeComponent } from './pages/home/home.component';
 import { MainComponent } from './pages/main/main.component';
 import { AdminPageComponent } from './pages/admin/admin.component';
@@ -20,8 +21,9 @@ const routes: Routes = [
             { path: 'websites', component: WebsitesPageComponent },
             { path: 'admin', component: AdminPageComponent },
             { path: 'assignments/:moduleId', component: AssignmentsPageComponent },
-            { path: 'assignments', redirectTo: 'assignments/' }, //This line sets the /:assignmentId parameter as optional.
+            { path: 'assignments', redirectTo: 'assignments/' }, //This line sets the /:moduleId parameter as optional.
             { path: 'events', component: EventListComponent, outlet: 'events' },
+            { path: 'assignment/:assignmentId', component: AssignmentPageComponent },
         ]
     },
     { path: 'login', component: LoginComponent },

@@ -1,0 +1,11 @@
+<div class="container">
+  <mat-card *ngIf="assignment">
+    <mat-card-header>
+      <mat-card-title><h1>{{assignment.activity.name}}</h1></mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <h2>קבצים:</h2>
+      <a *ngFor="let file of assignment.activity.files" href="github.com">{{file.filename}}</a>
+    </mat-card-content>
+  </mat-card>
+</div>

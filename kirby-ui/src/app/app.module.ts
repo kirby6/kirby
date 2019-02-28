@@ -25,6 +25,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { EventListComponent } from './components/event-list/event-list.component';
 import { TruncateModule } from 'ng2-truncate';
 import { AssignmentsPageComponent } from './pages/Assignments/assignments.component';
+import { AssignmentPageComponent } from './pages/Assignment/assignment.component';
 import { NavigationListComponent } from './pages/Assignments/navigation-list/navigation-list.component';
 
 @NgModule({
@@ -42,6 +43,7 @@ import { NavigationListComponent } from './pages/Assignments/navigation-list/nav
         WebsiteCardComponent,
         EventListComponent,
         AssignmentsPageComponent,
+        AssignmentPageComponent,
         NavigationListComponent
     ],
     imports: [
