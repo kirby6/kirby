@@ -1,0 +1,13 @@
+:host {
+    direction: ltr;
+    
+    mat-card {
+	cursor: pointer;
+	background: white;
+	word-wrap: anywhere;
+
+	mat-card-title {
+	    color: rgba(0, 0, 0, 0.8);
+	}
+    }
+}

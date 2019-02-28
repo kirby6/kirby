@@ -1,0 +1,17 @@
+<mat-card *ngIf="assignment">
+  <mat-card-header>
+    <mat-card-title>{{assignment.activity.name}}</mat-card-title>
+  </mat-card-header>
+</mat-card>
+<mat-card *ngIf="assignment">
+  <mat-card-header>
+    <mat-card-title>קבצים:</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <activity-file-card *ngFor="let file of assignment.activity.files"
+			[file]="file"
+			[activityId]="assignment.activity_id.$oid"></activity-file-card>
+  </mat-card-content>
+</mat-card>
+
+<comment-list></comment-list>
