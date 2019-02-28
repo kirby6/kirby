@@ -28,6 +28,7 @@ import { AssignmentsPageComponent } from './pages/Assignments/assignments.compon
 import { NavigationListComponent } from './pages/Assignments/navigation-list/navigation-list.component';
 import { AssignmentsListComponent } from './pages/Assignments/assignments-list/assignments-list.component';
 import { HelpsListComponent } from './pages/helps/helps-list/helps-list.component';
+import { AssignmentsMatrixComponent } from './pages/Assignments/assignments-matrix/assignments-matrix.component';
 
 @NgModule({
     declarations: [
@@ -46,7 +47,8 @@ import { HelpsListComponent } from './pages/helps/helps-list/helps-list.componen
         AssignmentsPageComponent,
         NavigationListComponent,
         AssignmentsListComponent,
-        HelpsListComponent
+        HelpsListComponent,
+        AssignmentsMatrixComponent
     ],
     imports: [
         BrowserModule,

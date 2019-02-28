@@ -2,6 +2,7 @@
     <navigation-list *ngIf="openedAssignments" [items]="openedAssignments"></navigation-list>
     <div class='spacer'></div>
     <div class='assignments'>
-        <router-outlet title='מטלות' name="module"></router-outlet>
+        <router-outlet name="moduleAssignments"></router-outlet>
+        <router-outlet name="moduleMatrix"></router-outlet>
     </div>
-</div>
+</div> 
