@@ -26,6 +26,8 @@ const routes: Routes = [
                 path: 'assignments', component: AssignmentsPageComponent, children: [
                     { path: ':moduleId', component: AssignmentsListComponent, outlet: 'moduleAssignments' },
                     { path: ':moduleId', component: AssignmentsMatrixComponent, outlet: 'moduleMatrix' },
+                    { path: '', component: AssignmentsListComponent, outlet: 'moduleAssignments' },
+                    { path: '', component: AssignmentsMatrixComponent, outlet: 'moduleMatrix' },
                 ]
             },
             { path: 'assignment/:assignmentId', component: AssignmentPageComponent },

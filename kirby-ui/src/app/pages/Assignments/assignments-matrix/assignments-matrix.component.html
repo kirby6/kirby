@@ -1,17 +1,23 @@
 <mat-card class="assignments-matrix-card">
-    <mat-card-header>
-        <mat-card-title>{{title}}</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-            <table mat-table [dataSource]="data" class="mat-elevation-z8">
-                    <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns">
-                      <th mat-header-cell *matHeaderCellDef> {{column}} </th>
-                      <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
-                    </ng-container>
-                  
-                    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-                    <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
-                  </table>
-    </mat-card-content>
+  <mat-card-header>
+    <mat-card-title>{{title}}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <table mat-table [dataSource]="data" class="mat-elevation-z8">
+      <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns">
+        <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+        <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
+      </ng-container>
+
+      <!-- Header row second group - should be ngFor all the modules -->
+      <!-- <ng-container matColumnDef="header-row-second-group">
+        <th mat-header-cell *matHeaderCellDef [attr.colspan]="2"> Second group </th>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="['header-row-first-group', 'header-row-second-group']"></tr> -->
+      <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+      <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
+    </table>
+  </mat-card-content>
 
 </mat-card>
