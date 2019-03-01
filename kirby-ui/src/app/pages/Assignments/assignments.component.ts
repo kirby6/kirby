@@ -17,7 +17,7 @@ import { Role } from 'src/app/services/authentication/interfaces';
 export class AssignmentsPageComponent {
     private moduleId: string;
     public openedAssignments: NavigationTree;
-    public RoleEnum = Role;
+    public RoleEnum = Role; //To allow using enums in template
 
     constructor(private route: ActivatedRoute,
         private assignmentsService: AssignmentsService,

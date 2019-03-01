@@ -12,7 +12,8 @@ def assign_to_user(user_id, activity_id):
     assignment = {
         'user_id': user_id,
         'activity_id': activity_id,
-        'status': statuses.OPENED
+        'status': statuses.OPENED,
+        'redoCount': 0
     }
     index_name = 'user_activity_index'
     if index_name not in assignments.index_information():
@@ -40,34 +41,62 @@ def update_status(assignment_id, status):
     }).modified_count
 
 
-def get_user_assignments(user_id=None):
-    aggregation = [{
-        '$lookup': {
-            'from': 'activities',
-            'localField': 'activity_id',
-            'foreignField': '_id',
-            'as': 'activity'
-        }
+def update_redo_count(assignment_id, new_redo_count):
+    if new_redo_count < 0:
+        raise Exception('Invalid redo count, must be large than zero')
+    if not isinstance(assignment_id, ObjectId):
+        assignment_id = ObjectId(assignment_id)
+    return assignments.update_one({
+        '_id': assignment_id
     }, {
-        '$unwind': '$activity'
-    },
-                   {
-                       '$lookup': {
-                           'from': 'modules',
-                           'localField': 'activity_id',
-                           'foreignField': 'activities',
-                           'as': 'modules'
-                       }
-                   },
-                   {
-                       '$graphLookup': {
-                           'from': 'modules',
-                           'startWith': '$modules._id',
-                           'connectFromField': 'parent',
-                           'connectToField': '_id',
-                           'as': 'modules'
-                       }
-                   }]
+        '$set': {
+            'redo_count': new_redo_count
+        }
+    }).modified_count
+
+
+def get_user_assignments(user_id=None):
+    aggregation = [
+        {
+            '$lookup': {
+                'from': 'activities',
+                'localField': 'activity_id',
+                'foreignField': '_id',
+                'as': 'activity'
+            }
+        },
+        {
+            '$unwind': '$activity'
+        },
+        {
+            '$lookup': {
+                'from': 'modules',
+                'localField': 'activity_id',
+                'foreignField': 'activities',
+                'as': 'modules'
+            }
+        },
+        {
+            '$graphLookup': {
+                'from': 'modules',
+                'startWith': '$modules._id',
+                'connectFromField': 'parent',
+                'connectToField': '_id',
+                'as': 'modules'
+            }
+        },
+        {
+            '$lookup': {
+                'from': 'users',
+                'localField': 'user_id',
+                'foreignField': '_id',
+                'as': 'user'
+            }
+        },
+        {
+            '$unwind': '$user'
+        },
+    ]
     if user_id:
         if not isinstance(user_id, ObjectId):
             user_id = ObjectId(user_id)

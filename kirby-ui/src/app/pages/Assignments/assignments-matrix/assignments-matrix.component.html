@@ -1,30 +1,17 @@
-<mat-card class="event-list-card">
+<mat-card class="assignments-matrix-card">
     <mat-card-header>
         <mat-card-title>{{title}}</mat-card-title>
-        <div class='spacer'></div>
-        <div class='unread-count'>
-            <span class='content' *ngIf="unreadCount > 0">{{unreadCount}}</span>
-        </div>
     </mat-card-header>
     <mat-card-content>
-        <mat-list *ngIf="events.length > 0; else empty">
-            <mat-list-item *ngFor="let event of events" (click)="onEventSelected(event)">
-                <div class='indicators'>
-                    <div [ngClass]="getClass(event)"></div>
-                </div>
-                <div class='content'>
-                    <h3 class='title'>{{event.name | words : 6 }}</h3>
-                    <p class='subtitle'>{{event.description | words : 6 }}</p>
-                </div>
-                <div class='date'>{{event.date}}</div>
-                <mat-divider></mat-divider>
-            </mat-list-item>
-        </mat-list>
-        <ng-template #empty>
-            <div class='empty-list'>
-                📝 הרשימה ריקה
-            </div>
-        </ng-template>
+            <table mat-table [dataSource]="data" class="mat-elevation-z8">
+                    <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns">
+                      <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+                      <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
+                    </ng-container>
+                  
+                    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+                    <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
+                  </table>
     </mat-card-content>
 
 </mat-card>
