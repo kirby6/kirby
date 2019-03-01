@@ -17,5 +17,6 @@ export enum AssignmentStatuses {
     Opened='opened',
     Submitted='submitted',
     Redo='redo',
-    Done='done'
+    Done='done',
+    NotOpened='not-opened',
 }
