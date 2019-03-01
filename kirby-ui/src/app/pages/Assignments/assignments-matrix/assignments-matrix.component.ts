@@ -22,10 +22,13 @@ export class AssignmentsMatrixComponent implements OnInit {
     public rows: Cell[][] = [];
 
     //TODO: fill the empty cells with the activities..
-    public activitiesCells : Cell[];
+    public activitiesCells: Cell[];
 
     public get columns(): string[] {
-        return [undefined , ...this.activitiesCells.map((ac: Cell) => ac.activity.name)];
+
+        let x = ['username', ...this.activitiesCells.map((ac: Cell) => ac.activity.name)];
+        console.log({ columns: x })
+        return x;
     }
 
     constructor(
@@ -43,13 +46,21 @@ export class AssignmentsMatrixComponent implements OnInit {
                     this.headers = headersRow;
                     this.activitiesCells = this.getCellsFromActivities(headersRow);
 
-                    console.log({ acti: this.activitiesCells  })
-
                     this.assignmentsService.getAll()
                         .subscribe((assignments: Assignment[]) => {
                             let assignmentsByUsers = _.chain(assignments).map(this.assignmentToCell).groupBy('user').value();
-                            this.rows = Object.keys(assignmentsByUsers).map((userId: string) => assignmentsByUsers[userId]);
-                            console.log({ rows: this.rows });
+
+                            this.rows = Object.keys(assignmentsByUsers).map((userId: string) => {
+                                return [
+                                    {
+                                        user: userId,
+                                        activity: null,
+                                        redoCount: 0,
+                                        status: null
+                                    },
+                                    ...(_.unionWith(assignmentsByUsers[userId], this.activitiesCells, (a, b) => a.activity._id.$oid === b.activity._id.$oid))
+                                ]
+                            });
                         });
                 });
         });
@@ -83,8 +94,8 @@ export class AssignmentsMatrixComponent implements OnInit {
         return modules.map(m => m.name);
     }
 
-    private getCellClass(cell: Cell): object {
-        console.log({cell})
+    private getCellClass(cell: Cell, i): object {
+        console.log({ cell, i })
         return {
             'status-submitted': cell.status == AssignmentStatuses.Submitted,
             'status-opened': cell.status == AssignmentStatuses.Opened,

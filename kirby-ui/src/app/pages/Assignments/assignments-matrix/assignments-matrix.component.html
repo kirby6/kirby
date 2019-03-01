@@ -19,15 +19,15 @@
 
 
 
-      <ng-container *ngFor="let column of columns; let i = index; first as isFirst" [matColumnDef]="column">
+      <ng-container *ngFor="let column of columns; let i = index; let isFirst = first " [matColumnDef]="column">
 
         <div *ngIf="isFirst">
           <mat-header-cell *matHeaderCellDef>שם משתמש</mat-header-cell>
-          <mat-cell [ngClass]="getCellClass(row[i])" *matCellDef="let row">{{ row[i].user }}</mat-cell>
+          <mat-cell *matCellDef="let row">{{ row[0].user }}</mat-cell>
         </div>
         <div *ngIf="!isFirst">
           <mat-header-cell *matHeaderCellDef>{{ column }}</mat-header-cell>
-          <mat-cell [ngClass]="getCellClass(row[i])" *matCellDef="let row">{{ row[i].redoCount }}</mat-cell>
+          <mat-cell [ngClass]="getCellClass(row[i],i)" *matCellDef="let row">{{ row[i].redoCount }}</mat-cell>
         </div>
       </ng-container>
 
