@@ -102,3 +102,26 @@ def get_user_assignments(user_id=None):
             user_id = ObjectId(user_id)
         aggregation.append({'$match': {'user_id': user_id}})
     return bson_to_json(list(assignments.aggregate(aggregation)))
+
+
+def get_by_id(assignment_id):
+    if not isinstance(assignment_id, ObjectId):
+        assignment_id = ObjectId(assignment_id)
+    return next(
+        iter(
+            bson_to_json(
+                assignments.aggregate([{
+                    '$match': {
+                        '_id': assignment_id
+                    }
+                },
+                    {
+                    '$lookup': {
+                        'from': 'activities',
+                        'localField': 'activity_id',
+                        'foreignField': '_id',
+                        'as': 'activity'
+                    }
+                }, {
+                    '$unwind': '$activity'
+                }]))), None)

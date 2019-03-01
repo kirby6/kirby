@@ -4,7 +4,6 @@ import { Component, OnInit } from '@angular/core';
 import { EventNotification } from 'src/app/components/event-list/interfaces';
 import { AuthenticationService } from 'src/app/services/authentication';
 import { Assignment } from 'src/app/services/assignments/interfaces';
-import { map } from 'rxjs/operators';
 import * as _ from 'lodash';
 import { Module } from 'src/app/services/modules/interfaces';
 @Component({
@@ -25,7 +24,7 @@ export class AssignmentsMatrixComponent implements OnInit {
         this.route.paramMap.subscribe(params => {
             let moduleId: string = params.get('moduleId');
 
-            this.assignmentsService.get()
+            this.assignmentsService.getAll()
                 .subscribe((allAssignments: Assignment[]) => {
                     console.log({allAssignments})
                     this.columns = this.getColumns(allAssignments);
