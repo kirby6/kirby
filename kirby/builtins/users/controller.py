@@ -33,7 +33,8 @@ def create_user(firstname, lastname, username, password, roles):
         'lastname': lastname,
         'username': username,
         'password': password,
-        'roles': roles
+        'roles': roles,
+        'groups': []
     }).inserted_id)
 
 
@@ -44,3 +45,17 @@ def login(username, password):
         return jsonify(user), 201
     else:
         return jsonify({"error": "Invalid username or password"}), 403
+
+def add_user_to_group(user_id, group_id):
+    if not isinstance(user_id, ObjectId):
+        user_id = ObjectId(user_id)
+    if not isinstance(group_id, ObjectId):
+        group_id = ObjectId(group_id)
+            
+    return users.update_one({
+        '_id': user_id
+    }, {
+        '$addToSet': {
+            'groups': group_id
+        }
+    }).modified_count

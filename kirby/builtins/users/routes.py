@@ -3,7 +3,7 @@ from flask import request
 
 from kirby.builtins.auth import required_roles
 from kirby.core import web_api
-from .controller import create_user, get_all_users, get_user_by_id, login
+from .controller import create_user, get_all_users, get_user_by_id, login, add_user_to_group
 
 
 @web_api.route('/')
@@ -29,3 +29,8 @@ def get_user_by_id_route(user_id):
 @web_api.route('/login', methods=['POST'])
 def login_route():
     return login(request.json['username'], request.json['password'])
+
+
+@web_api.route('/group', methods=['POST'])
+def add_user_to_group_route():
+    return add_user_to_group(request.json['user_id'], request.json['group_id'])
