@@ -5,6 +5,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment as config } from './../../../environments/environment';
 import { Observable } from 'rxjs';
 import { ObjectId } from 'src/app/utils/interfaces';
+import { map } from 'rxjs/operators';
 
 
 @Injectable({ providedIn: 'root' })

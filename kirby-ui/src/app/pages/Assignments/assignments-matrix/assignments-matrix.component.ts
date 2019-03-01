@@ -1,4 +1,4 @@
-import { Assignment } from 'src/app/services/assignments/interfaces';
+import { Assignment, AssignmentStatuses } from 'src/app/services/assignments/interfaces';
 import { ModulesService } from './../../../services/modules/index';
 import { ActivatedRoute } from '@angular/router';
 import { AssignmentsService } from './../../../services/assignments/index';
@@ -9,8 +9,8 @@ import { Module } from 'src/app/services/modules/interfaces';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Activity } from 'src/app/services/activities/interfaces';
-import { MatTableDataSource } from '@angular/material';
-import { ObjectId } from 'src/app/utils/interfaces';
+import { Row, HeaderCell } from './interfaces';
+
 @Component({
     selector: 'assignments-matrix',
     templateUrl: './assignments-matrix.component.html',
@@ -20,49 +20,35 @@ export class AssignmentsMatrixComponent implements OnInit {
     public title: string = 'מטריצה';
     public modules: Module[] = [];
     public activities: Activity[];
-    public rows = [];
-    public data;
+    public rows: Row[][] = [];
 
+    public get columns(): string[] {
+        return this.activities.map((a: any) => a.name);
+    }
 
     constructor(
         private assignmentsService: AssignmentsService,
         private modulesService: ModulesService,
-        private auth: AuthenticationService,
         private route: ActivatedRoute) { }
 
     ngOnInit() {
         this.route.paramMap.subscribe(params => {
             let moduleId: string = params.get('moduleId');
-            this.getModules(moduleId).pipe(map(this.normalizeHeaders))
-                .subscribe((modules: Module[]) => {
-                    this.modules = modules;
-                    this.activities = this.getActivities(modules);
-                    this.data = new MatTableDataSource(this.activities);
+            this.getModules(moduleId).pipe(map((modules) => modules.map(this.moduleToHeaderCell)))
+                .subscribe((headers: HeaderCell[]) => {
+                    this.modules = headers;
+                    this.activities = this.getActivities(headers);
 
                     this.assignmentsService.getAll()
                         .subscribe((assignments: Assignment[]) => {
-                            let assignmentsByUsers = _.chain(assignments)
-                                .map(a => ({ redoCount: a.redo_count, status: a.status, user: a.user._id.$oid, activity: a.activity }))
-                                .groupBy('user')
-                                .value();
-
-                            this.rows = Object.keys(assignmentsByUsers).map((userId: string) => {
-                                return assignmentsByUsers[userId].map(assignment => {
-                                    return [userId, ...Object.values(assignment)];
-                                })
-                            });
-
-                            console.log({ rows: this.rows })
+                            let assignmentsByUsers = _.chain(assignments).map(this.assignmentToRow).groupBy('user').value();
+                            this.rows = Object.keys(assignmentsByUsers).map((userId: string) => assignmentsByUsers[userId]);
                         });
 
                 });
         });
     }
 
-
-    private normalizeHeaders(modules: Module[]) {
-        return modules.map(m => ({ ...m, colspan: m.activities.length }));
-    }
 
     private getModules(moduleId?: string): Observable<Module[]> {
         if (moduleId) {
@@ -79,16 +65,30 @@ export class AssignmentsMatrixComponent implements OnInit {
         }, []);
     }
 
-    private getColumnDef(module: Module): string {
-        return `header-row-${module.name}-group`;
+    getModulesNames(modules: Module[]): string[] {
+        return modules.map(m => m.name);
     }
 
-    private getAllColumnsDef(modules: Module[]): string[] {
-        return modules.map(this.getColumnDef);
+    private getCellClass(cell) {
+        return {
+            'status-submitted': cell.status == AssignmentStatuses.Submitted,
+            'status-opened': cell.status == AssignmentStatuses.Opened,
+            'status-redo': cell.status == AssignmentStatuses.Redo,
+            'status-done': cell.status == AssignmentStatuses.Done
+        };
     }
 
-}
+    private assignmentToRow(assignment: Assignment): Row {
+        return {
+            redoCount: assignment.redo_count,
+            status: assignment.status,
+            user: assignment.user._id.$oid,
+            activity: assignment.activity
+        } as Row
+    }
 
+    private moduleToHeaderCell(module: Module): HeaderCell {
+        return { ...module, colspan: module.activities.length };
+    }
 
-// columns: [all the modules, uniq]
-// rows: [ student name, module, status, redoCount ] => every student must have all the modules, even if didn't exist
+} 

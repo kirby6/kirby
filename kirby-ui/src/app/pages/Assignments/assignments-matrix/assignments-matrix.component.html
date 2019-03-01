@@ -3,21 +3,32 @@
     <mat-card-title>{{title}}</mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <!-- <table #table mat-table [dataSource]="data" class="mat-elevation-z8">
-      <ng-container [matColumnDef]="module.name" *ngFor="let module of modules">
+    <table *ngIf="rows && activities" mat-table [dataSource]="rows" class="mat-elevation-z8">
+      <!-- <ng-container [matColumnDef]="module.name" *ngFor="let module of modules">
         <th mat-header-cell *matHeaderCellDef> {{module.name}} </th>
         <td mat-cell *matCellDef="let element"> {{element[module.name]}} </td>
       </ng-container>
 
-      Header row second group - should be ngFor all the modules
-      <ng-container *ngFor="let module of modules" [matColumnDef]="getColumnDef(module)">
-        <th mat-header-cell *matHeaderCellDef [attr.colspan]="module.colspan"> {{module.name}} </th>
+      <ng-container *ngFor="let activity of activities" [matColumnDef]="activity.$oid">
+        <th mat-header-cell *matHeaderCellDef [attr.colspan]="1"> {{activity.$oid}} </th>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="getAllColumnsDef(modules)"></tr>
       <tr mat-header-row *matHeaderRowDef="modules"></tr>
-      <tr mat-row *matRowDef="let row; columns: modules;"></tr>
-    </table> -->
+      <tr mat-row *matRowDef="let row; columns: columns;"></tr> -->
+
+
+      <ng-container *ngFor="let column of columns; let i = index" [matColumnDef]="column">
+        <mat-header-cell *matHeaderCellDef>{{ column }}</mat-header-cell>
+        <mat-cell [ngClass]="getCellClass(row[i])" *matCellDef="let row">{{ row[i].redoCount }}</mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="columns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: columns;"></mat-row>
+
+
+
+    </table>
   </mat-card-content>
 
 </mat-card>

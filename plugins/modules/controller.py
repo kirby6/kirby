@@ -11,7 +11,7 @@ def get_all_modules():
                     'from': 'activities',
                     'localField': 'activities',
                     'foreignField': '_id',
-                    'as': 'activities2'
+                    'as': 'activities'
                 }
             },
         ]))
