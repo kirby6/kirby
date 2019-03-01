@@ -20,16 +20,19 @@ import { AdminGroupComponent } from './pages/admin/groups/groups.component';
 import { AdminPageComponent } from './pages/admin/admin.component';
 import { WebsitesPageComponent } from './pages/websites/websites.component';
 import { WebsiteCardComponent } from './components/website-card/website-card.component';
+import { ActivityFileCardComponent } from './components/activity-file-card/activity-file-card.component';
 import { MainComponent } from './pages/main/main.component';
 import { HomeComponent } from './pages/home/home.component';
 import { EventListComponent } from './components/event-list/event-list.component';
 import { TruncateModule } from 'ng2-truncate';
 import { AssignmentsPageComponent } from './pages/Assignments/assignments.component';
+import { AssignmentPageComponent } from './pages/Assignment/assignment.component';
 import { NavigationListComponent } from './pages/Assignments/navigation-list/navigation-list.component';
 import { AssignmentsListComponent } from './pages/Assignments/assignments-list/assignments-list.component';
 import { HelpsListComponent } from './pages/helps/helps-list/helps-list.component';
 import { AssignmentsMatrixComponent } from './pages/Assignments/assignments-matrix/assignments-matrix.component';
 import { RoleDirective } from './directives/role.directive';
+import { CommentListComponent } from './pages/Assignment/comment-list/comment-list.component';
 
 @NgModule({
     declarations: [
@@ -45,12 +48,15 @@ import { RoleDirective } from './directives/role.directive';
         AdminGroupComponent,
         WebsitesPageComponent,
         WebsiteCardComponent,
+        ActivityFileCardComponent,
         EventListComponent,
         AssignmentsPageComponent,
+        AssignmentPageComponent,
         NavigationListComponent,
         AssignmentsListComponent,
         HelpsListComponent,
-        AssignmentsMatrixComponent
+        AssignmentsMatrixComponent,
+        CommentListComponent,
     ],
     imports: [
         BrowserModule,

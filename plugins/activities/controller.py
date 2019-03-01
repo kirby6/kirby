@@ -3,7 +3,7 @@ from bson import json_util, ObjectId
 from kirby.core.db import bson_to_json
 from .service import get_all_activities_from_db, add_files_to_filesystem, \
     get_metadata_by_id, insert_activity_to_db, delete_activity_from_db, \
-    remove_files_from_filesystem, get_activity_by_id
+    remove_files_from_filesystem, get_activity_by_id, get_file_by_id
 
 
 def get_all_activities():
@@ -42,3 +42,12 @@ def update_activity(activity_id, activity, files=None):
         for k, v in activity.items() if k != 'files' and k != '_id'
     }
     create_activity(files=files, _id=ObjectId(activity_id), **activity)
+
+
+def get_activity_file_by_id(activity_id, file_id):
+    activity = get_activity_by_id(activity_id)
+    if not isinstance(file_id, ObjectId):
+        file_id = ObjectId(file_id)
+    if not filter(lambda f: f['_id'] == file_id, activity['files']):
+        return None
+    return get_file_by_id(file_id)

@@ -1,5 +1,6 @@
 import { EventListComponent } from './components/event-list/event-list.component';
 import { AssignmentsPageComponent } from './pages/Assignments/assignments.component';
+import { AssignmentPageComponent } from './pages/Assignment/assignment.component';
 import { HomeComponent } from './pages/home/home.component';
 import { MainComponent } from './pages/main/main.component';
 import { AdminPageComponent } from './pages/admin/admin.component';
@@ -27,6 +28,7 @@ const routes: Routes = [
                     { path: ':moduleId', component: AssignmentsMatrixComponent, outlet: 'moduleMatrix' },
                 ]
             },
+            { path: 'assignment/:assignmentId', component: AssignmentPageComponent },
         ]
     },
     { path: 'login', component: LoginComponent },
