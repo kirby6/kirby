@@ -8,7 +8,7 @@ import { Module } from 'src/app/services/modules/interfaces';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Cell, HeaderCell } from './interfaces';
-import { AssignmentCellRenderer } from './costum-cells/assignments-cell.component';
+import { AssignmentCellRenderer } from './custom-cells/assignments-cell.component';
 
 @Component({
     selector: 'assignments-matrix',

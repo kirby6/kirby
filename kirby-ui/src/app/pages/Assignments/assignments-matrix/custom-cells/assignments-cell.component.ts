@@ -27,7 +27,7 @@ export class AssignmentCellRenderer implements ICellRendererAngularComp {
         return false;
     }
 
-    private getCellClass(cell: Cell, i: number): object {
+    private getCellClass(cell): object {
         return {
             'status-submitted': cell.status == AssignmentStatuses.Submitted,
             'status-opened': cell.status == AssignmentStatuses.Opened,

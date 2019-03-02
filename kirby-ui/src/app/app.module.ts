@@ -34,7 +34,7 @@ import { AssignmentsMatrixComponent } from './pages/Assignments/assignments-matr
 import { RoleDirective } from './directives/role.directive';
 import { CommentListComponent } from './pages/Assignment/comment-list/comment-list.component';
 import { AgGridModule } from 'ag-grid-angular';
-import { AssignmentCellRenderer } from './pages/Assignments/assignments-matrix/costum-cells/assignments-cell.component';
+import { AssignmentCellRenderer } from './pages/Assignments/assignments-matrix/custom-cells/assignments-cell.component';
 
 @NgModule({
     declarations: [

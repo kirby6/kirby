@@ -258,5 +258,9 @@ $altTheme: mat-light-theme($theme-primary, $theme-accent, $theme-warn);
 }
 
 .mat-menu-panel {
-  background: #e35087;
+  background: #6d6d6d;
+}
+
+.mat-menu-content:not(:empty) {
+  padding: 0 !important;
 }
