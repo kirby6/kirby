@@ -1,4 +1,3 @@
-import { ActivitiesService } from './../../../services/activities/index';
 import { Assignment, AssignmentStatuses } from 'src/app/services/assignments/interfaces';
 import { ModulesService } from './../../../services/modules/index';
 import { ActivatedRoute } from '@angular/router';
@@ -8,9 +7,7 @@ import * as _ from 'lodash';
 import { Module } from 'src/app/services/modules/interfaces';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { Activity } from 'src/app/services/activities/interfaces';
 import { Cell, HeaderCell } from './interfaces';
-import { ColumnHoverService } from 'ag-grid-community/dist/lib/rendering/columnHoverService';
 import { AssignmentCellRenderer } from './costum-cells/assignments-cell.component';
 
 @Component({
@@ -88,7 +85,6 @@ export class AssignmentsMatrixComponent implements OnInit {
                                 ...this.basicColumn
                             }))
                         }))];
-                    console.log({ headers: this.headers })
 
                     this.activitiesCells = this.getCellsFromActivities(headersRow);
 

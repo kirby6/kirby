@@ -16,6 +16,12 @@
   .ag-root {
     border: none;
 
+
+    .ag-cell{ 
+      padding: 0;
+      margin: 0;
+    }
+
     .ag-header-cell-text, .ag-header-group-text {
       flex: 1;
     }
