@@ -4,6 +4,7 @@
   mat-card {
     background: $background;
     font-weight: 200;
+    user-select: none;
 
     mat-card-header {
       display: flex;

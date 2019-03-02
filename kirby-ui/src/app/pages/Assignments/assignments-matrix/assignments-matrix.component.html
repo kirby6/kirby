@@ -43,9 +43,14 @@
     <ag-grid-angular *ngIf="rows && headers"
                       style="height: 500px;" 
      class="ag-theme-dark"
+     #agGrid
       [rowData]="rows"
        [gridOptions]="gridOptions"
        (gridReady)="onGridReady($event)"
+       [allowContextMenuWithControlKey]="true"
+       [enableRangeSelection]="true"
+
+       [getContextMenuItems]="getContextMenu"
       [columnDefs]="headers">
     </ag-grid-angular>
 

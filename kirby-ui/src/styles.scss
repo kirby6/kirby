@@ -234,3 +234,7 @@ $altTheme: mat-light-theme($theme-primary, $theme-accent, $theme-warn);
   padding: 0.5em 0.85em;
   min-height: 2.5em;
 }
+
+.mat-menu-panel {
+  background: #e35087;
+}

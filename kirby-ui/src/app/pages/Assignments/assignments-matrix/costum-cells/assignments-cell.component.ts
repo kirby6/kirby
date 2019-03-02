@@ -1,34 +1,18 @@
+import { AssignmentStatuses } from './../../../../services/assignments/interfaces';
 import { Component, OnDestroy } from "@angular/core";
 
 import { ICellRendererAngularComp } from "ag-grid-angular";
 import { Cell } from '../interfaces';
-import { AssignmentStatuses } from 'src/app/services/assignments/interfaces';
 
 @Component({
     selector: 'assignment-cell',
-    template: `<div [ngClass]="getCellClass(value)">{{getRedoCount()}}</div>`,
-    styles: [`
-        .status-opened {
-            background: gray;
-        }
-    
-        .status-done {
-            background: green;
-        }
-        
-        .status-submitted {
-            background: red;
-        }
-    
-        .status-redo {
-            background: yellow;
-            color: black;
-        }
-    `]
+    templateUrl: './assignments-cell.component.html',
+    styleUrls: ['./assignments-cell.component.scss']
 })
 export class AssignmentCellRenderer implements ICellRendererAngularComp {
     public params: any;
     public value;
+    public assignmentStatuses = Object.keys(AssignmentStatuses);
 
     agInit(params: any): void {
         this.params = params;

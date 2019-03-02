@@ -28,7 +28,7 @@ export class AssignmentsMatrixComponent implements OnInit {
 
     public gridOptions = {
         columnDefs: this.headers,
-
+        suppressCellSelection: true,
         frameworkComponents: {
             'AssignmentCellRenderer': AssignmentCellRenderer
         },
@@ -168,5 +168,16 @@ export class AssignmentsMatrixComponent implements OnInit {
         console.log({ params });
         params.api.sizeColumnsToFit();
     }
+
+    public getContextMenu(params) {
+        return [
+            {
+                name: "Change " + params.value,
+                action: () => window.alert("Alerting about " + params.value),
+                cssClasses: ["redFont", "bold"]
+            },
+        ]
+    }
+
 
 } 

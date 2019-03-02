@@ -1,0 +1,13 @@
+<button class='context-menu-button' [ngClass]="getCellClass(value)" mat-button
+    [matMenuTriggerFor]="context">{{getRedoCount()}}</button>
+
+<mat-menu #context="matMenu">
+    <button mat-menu-item [matMenuTriggerFor]="changeStatusMenu">סטטוס משימה</button>
+</mat-menu>
+
+<mat-menu #changeStatusMenu="matMenu" yPosition="above">
+    <button mat-menu-item *ngFor="let status of assignmentStatuses">
+            🦓
+        {{status}}
+    </button>
+</mat-menu>
