@@ -8,11 +8,27 @@
   ag-grid styles
 */
 @import "~ag-grid-community/dist/styles/ag-grid.css";
-@import "~ag-grid-community/dist/styles/ag-theme-dark.css";
+@import "~ag-grid-community/dist/styles/ag-theme-fresh.css";
+.ag {
+  border: none;
+  background: none;
 
+  .ag-root {
+    border: none;
 
+    .ag-header-cell-text, .ag-header-group-text {
+      flex: 1;
+    }
 
-
+    .ag-header-cell,
+    .ag-header-group-cell {
+      text-align: center;
+    }
+    .ag-body-viewport {
+      background: none;
+    }
+  }
+}
 
 $direction: rtl;
 

@@ -78,7 +78,8 @@ export class AssignmentsMatrixComponent implements OnInit {
                     this.headers = [
                         {
                             headerName: 'username',
-                            valueGetter: (params) => params.data[0].user
+                            valueGetter: (params) => params.data[0].user,
+                            pinned: true
                         }
                         , ...headersRow.map(h => ({
                             headerName: h.name,
