@@ -10,6 +10,8 @@ import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Activity } from 'src/app/services/activities/interfaces';
 import { Cell, HeaderCell } from './interfaces';
+import { ColumnHoverService } from 'ag-grid-community/dist/lib/rendering/columnHoverService';
+import { AssignmentCellRenderer } from './costum-cells/assignments-cell.component';
 
 @Component({
     selector: 'assignments-matrix',
@@ -18,18 +20,25 @@ import { Cell, HeaderCell } from './interfaces';
 })
 export class AssignmentsMatrixComponent implements OnInit {
     public title: string = 'מטריצה';
-    public headers: HeaderCell[] = [];
+    public headers: any[] = [];
     public rows: Cell[][] = [];
+    public columns = [];
 
-    //TODO: fill the empty cells with the activities..
     public activitiesCells: Cell[];
 
-    public get columns(): string[] {
+    public gridOptions = {
+        columnDefs: this.headers,
 
-        let x = ['username', ...this.activitiesCells.map((ac: Cell) => ac.activity.name)];
-        console.log({ columns: x })
-        return x;
-    }
+        frameworkComponents: {
+            'AssignmentCellRenderer': AssignmentCellRenderer
+        },
+    };
+
+    private basicColumn = {
+        cellRenderer: 'AssignmentCellRenderer',
+        // valueGetter: (params) => params.data.find(d => d.activity && d.activity._id.$oid === params.colDef.activity._id.$oid)
+    };
+
 
     constructor(
         private assignmentsService: AssignmentsService,
@@ -41,9 +50,45 @@ export class AssignmentsMatrixComponent implements OnInit {
             let moduleId: string = params.get('moduleId');
 
             this.getModules(moduleId)
-                .pipe(map((modules) => modules.map(this.moduleToHeaderCell)))
+                .pipe(
+                    // map((modules: Module[]) => {
+                    //     let allActiv: any[] = [{
+                    //         headerName: 'username',
+                    //         valueGetter: (params) => params.data[0].user
+                    //     }];
+
+                    //     modules.forEach((module: Module) => {
+                    //         module.activities.forEach((ac: Activity) => {
+                    //             allActiv.push({
+                    //                 headerName: `${ac.name}-${module.name}`,
+                    //                 field: 'val',
+                    //                 module: module,
+                    //                 activity: ac,
+                    //                 ...this.basicColumn
+                    //             });
+                    //         });
+                    //     });
+
+                    //     this.columns = allActiv;
+                    //     return modules;
+                    // }),
+                    map((modules) => modules.map(this.moduleToHeaderCell))
+                )
                 .subscribe((headersRow: HeaderCell[]) => {
-                    this.headers = headersRow;
+                    this.headers = [
+                        {
+                            headerName: 'username',
+                            valueGetter: (params) => params.data[0].user
+                        }
+                        , ...headersRow.map(h => ({
+                            headerName: h.name,
+                            children: h.activities.map(a => ({
+                                headerName: a.name,
+                                ...this.basicColumn
+                            }))
+                        }))];
+                    console.log({ headers: this.headers })
+
                     this.activitiesCells = this.getCellsFromActivities(headersRow);
 
                     this.assignmentsService.getAll()
@@ -61,6 +106,8 @@ export class AssignmentsMatrixComponent implements OnInit {
                                     ...(_.unionWith(assignmentsByUsers[userId], this.activitiesCells, (a, b) => a.activity._id.$oid === b.activity._id.$oid))
                                 ]
                             });
+
+                            console.log({ rows: this.rows })
                         });
                 });
         });
@@ -94,15 +141,6 @@ export class AssignmentsMatrixComponent implements OnInit {
         return modules.map(m => m.name);
     }
 
-    private getCellClass(cell: Cell, i): object {
-        console.log({ cell, i })
-        return {
-            'status-submitted': cell.status == AssignmentStatuses.Submitted,
-            'status-opened': cell.status == AssignmentStatuses.Opened,
-            'status-redo': cell.status == AssignmentStatuses.Redo,
-            'status-done': cell.status == AssignmentStatuses.Done
-        };
-    }
 
     private assignmentToCell(assignment: Assignment): Cell {
         return {
@@ -115,6 +153,20 @@ export class AssignmentsMatrixComponent implements OnInit {
 
     private moduleToHeaderCell(module: Module): HeaderCell {
         return { ...module, colspan: module.activities.length };
+    }
+
+
+    public getModuleColDef(header: HeaderCell): string {
+        return `header-module-${header.name}`;
+    }
+
+    public getModulesColDef(headers: HeaderCell[]): string[] {
+        return headers.map(this.getModuleColDef);
+    }
+
+    public onGridReady(params) {
+        console.log({ params });
+        params.api.sizeColumnsToFit();
     }
 
 } 

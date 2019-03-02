@@ -3,7 +3,7 @@ import { AssignmentsService } from './../../../services/assignments/index';
 import { Component, OnInit } from '@angular/core';
 import { EventNotification } from 'src/app/components/event-list/interfaces';
 import { AuthenticationService } from 'src/app/services/authentication';
-import { Assignment } from 'src/app/services/assignments/interfaces';
+import { Assignment, AssignmentStatuses } from 'src/app/services/assignments/interfaces';
 import { map } from 'rxjs/operators';
 
 @Component({
@@ -41,7 +41,7 @@ export class AssignmentsListComponent implements OnInit {
         return ({
             id: assignment._id.$oid,
             name: assignment.activity.name,
-            description: assignment.activity.module
+            description: AssignmentStatuses[assignment.status]
         }) as EventNotification
     }
 
@@ -50,3 +50,4 @@ export class AssignmentsListComponent implements OnInit {
         this.router.navigate(['assignment', assignment.id]);
     }
 } 
+[]
