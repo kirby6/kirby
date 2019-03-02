@@ -24,7 +24,6 @@ export class EventListComponent {
 
     onEventSelected(event: EventNotification): void {
         if (event) {
-            console.log({event})
             this.clicked.emit(event);
         }
     }

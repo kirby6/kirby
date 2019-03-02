@@ -104,7 +104,6 @@ export class AssignmentsMatrixComponent implements OnInit {
                                 ]
                             });
 
-                            console.log({ rows: this.rows })
                         });
                 });
         });
@@ -152,17 +151,7 @@ export class AssignmentsMatrixComponent implements OnInit {
         return { ...module, colspan: module.activities.length };
     }
 
-
-    public getModuleColDef(header: HeaderCell): string {
-        return `header-module-${header.name}`;
-    }
-
-    public getModulesColDef(headers: HeaderCell[]): string[] {
-        return headers.map(this.getModuleColDef);
-    }
-
     public onGridReady(params) {
-        console.log({ params });
         params.api.sizeColumnsToFit();
     }
 

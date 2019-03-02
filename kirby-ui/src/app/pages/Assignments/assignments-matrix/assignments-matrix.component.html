@@ -3,57 +3,9 @@
     <mat-card-title>{{title}}</mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <!-- <table *ngIf="rows && activitiesCells" mat-table [dataSource]="rows" class="mat-elevation-z8">
-      <ng-container matColumnDef="header-row-first-group">
-        <th mat-header-cell *matHeaderCellDef [style.text-align]="center" [attr.colspan]="2">
-          First group
-        </th>
-      </ng-container>
-
-      <ng-container matColumnDef="header-row-second-group">
-          <th mat-header-cell *matHeaderCellDef [style.text-align]="center" [attr.colspan]="2">
-            second group
-          </th>
-        </ng-container>
-
-      <div>
-        <ng-container *ngFor="let header of headers" [matColumnDef]="getModuleColDef(header)">
-          <th mat-header-cell *matHeaderCellDef [attr.colspan]="header.colspan"> {{header.name}}</th>
-        </ng-container>
-      </div>
-      <ng-container *ngFor="let column of columns; let i = index; let isFirst = first " [matColumnDef]="column">
-        <div *ngIf="isFirst">
-          <mat-header-cell *matHeaderCellDef>שם משתמש</mat-header-cell>
-          <mat-cell *matCellDef="let row">{{ row[0].user }}</mat-cell>
-        </div>
-        <div *ngIf="!isFirst">
-          <mat-header-cell *matHeaderCellDef>{{ column }}</mat-header-cell>
-          <mat-cell [ngClass]="getCellClass(row[i], i)" *matCellDef="let row">{{ row[i].redoCount }}</mat-cell>
-        </div>
-      </ng-container>
-
-      <mat-header-row *matHeaderRowDef="['header-row-first-group', 'header-row-second-group']"></mat-header-row>
-      <mat-header-row *matHeaderRowDef="getModulesColDef(headers)"></mat-header-row>
-      <mat-header-row *matHeaderRowDef="columns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: columns;"></mat-row>
-
-
-
-    </table> -->
-    <ag-grid-angular *ngIf="rows && headers"
-                      style="height: 500px;" 
-     class="ag ag-theme-fresh"
-     #agGrid
-      [rowData]="rows"
-       [gridOptions]="gridOptions"
-       (gridReady)="onGridReady($event)"
-       [allowContextMenuWithControlKey]="true"
-       [enableRangeSelection]="true"
-
-       [getContextMenuItems]="getContextMenu"
-      [columnDefs]="headers">
+    <ag-grid-angular *ngIf="rows && headers" style="height: 500px;" class="ag ag-theme-fresh" #agGrid [rowData]="rows"
+      [gridOptions]="gridOptions" (gridReady)="onGridReady($event)" [allowContextMenuWithControlKey]="true"
+      [enableRangeSelection]="true" [getContextMenuItems]="getContextMenu" [columnDefs]="headers">
     </ag-grid-angular>
-
   </mat-card-content>
-
 </mat-card>

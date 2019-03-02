@@ -46,7 +46,6 @@ export class AssignmentsListComponent implements OnInit {
     }
 
     private onAssgignmentSelected(assignment: EventNotification): void {
-        console.log({assignment})
         this.router.navigate(['assignment', assignment.id]);
     }
 } 
