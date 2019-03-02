@@ -6,7 +6,7 @@
 </mat-menu>
 
 <mat-menu #changeStatusMenu="matMenu" yPosition="above">
-    <button mat-menu-item *ngFor="let status of assignmentStatuses">
+    <button mat-menu-item *ngFor="let status of assignmentStatuses" [ngClass]="getAssignmentMenuItemClass(status)">
             🦓
         {{status}}
     </button>

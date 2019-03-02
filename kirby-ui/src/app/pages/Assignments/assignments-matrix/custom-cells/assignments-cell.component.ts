@@ -2,7 +2,6 @@ import { AssignmentStatuses } from './../../../../services/assignments/interface
 import { Component, OnDestroy } from "@angular/core";
 
 import { ICellRendererAngularComp } from "ag-grid-angular";
-import { Cell } from '../interfaces';
 
 @Component({
     selector: 'assignment-cell',
@@ -34,5 +33,16 @@ export class AssignmentCellRenderer implements ICellRendererAngularComp {
             'status-redo': cell.status == AssignmentStatuses.Redo,
             'status-done': cell.status == AssignmentStatuses.Done
         };
+    }
+
+    getAssignmentMenuItemClass(assignmentStatus: AssignmentStatuses) {
+        let x = {
+            'status-submitted': assignmentStatus == AssignmentStatuses.Submitted,
+            'status-opened': assignmentStatus == AssignmentStatuses.Opened,
+            'status-redo': assignmentStatus == AssignmentStatuses.Redo,
+            'status-done': assignmentStatus == AssignmentStatuses.Done
+        };
+        console.log(x);
+        return x;
     }
 }
