@@ -10,7 +10,7 @@ def get_all_activities():
     return bson_to_json(get_all_activities_from_db())
 
 
-def create_activity(name, files=None, _id=None):
+def create_activity(name, files=None, id=None):
     files = [{
         'data':
         file,
@@ -24,9 +24,9 @@ def create_activity(name, files=None, _id=None):
     file_ids = add_files_to_filesystem(files)
     files = [get_metadata_by_id(file_id) for file_id in file_ids]
     activity = {'name': name, 'files': files}
-    if _id:
-        activity['_id'] = _id
-    return json_util.dumps(insert_activity_to_db(activity))
+    if id:
+        activity['_id'] = id
+    return bson_to_json(insert_activity_to_db(activity))
 
 
 def delete_activity(activity_id):
@@ -41,7 +41,7 @@ def update_activity(activity_id, activity, files=None):
         k: v
         for k, v in activity.items() if k != 'files' and k != '_id'
     }
-    create_activity(files=files, _id=ObjectId(activity_id), **activity)
+    create_activity(files=files, id=ObjectId(activity_id), **activity)
 
 
 def get_activity_file_by_id(activity_id, file_id):

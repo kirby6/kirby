@@ -38,12 +38,12 @@ export class AssignmentsPageComponent {
         if (processed_modules == modules.length) return;
         for (let module of modules) {
             if (!module.parent) continue;
-            let parent = tree.find((m) => m.id == module.parent.$oid);
-            if (parent && !parent.children.find((m) => m.id == module._id.$oid)) {
+            let parent = tree.find((m) => m.id == module.parent);
+            if (parent && !parent.children.find((m) => m.id == module.id)) {
                 parent.children.push({
-                    id: module._id.$oid,
+                    id: module.id,
                     name: module.name,
-                    isActive: module._id.$oid === this.moduleId,
+                    isActive: module.id === this.moduleId,
                     parent: parent.id,
                     children: []
                 });
@@ -56,11 +56,11 @@ export class AssignmentsPageComponent {
     private createTree(modules: Module[]): any[] {
         let tree = [];
         for (let module of modules) {
-            if (!module.parent && !tree.find((m) => m.id == module._id.$oid)) {
+            if (!module.parent && !tree.find((m) => m.id == module.id)) {
                 tree.push({
-                    id: module._id.$oid,
+                    id: module.id,
                     name: module.name,
-                    isActive: module._id.$oid === this.moduleId,
+                    isActive: module.id === this.moduleId,
                     children: []
                 });
             }

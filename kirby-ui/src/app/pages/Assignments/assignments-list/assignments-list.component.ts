@@ -28,7 +28,7 @@ export class AssignmentsListComponent implements OnInit {
             this.assignmentsService.getByUserId(this.auth.currentUserValue._id.$oid)
                 .pipe(
                     map((assignments: Assignment[]) => assignments
-                        .filter(a => a.modules.findIndex(module => module._id.$oid == moduleId))),
+                        .filter(a => a.modules.findIndex(module => module.id == moduleId))),
                     map((assignments: Assignment[]) => assignments.map(this.assignmentToEventNotification)),
                 )
                 .subscribe((openedAssignments: EventNotification[]) => {
@@ -39,7 +39,7 @@ export class AssignmentsListComponent implements OnInit {
 
     private assignmentToEventNotification(assignment: Assignment): EventNotification {
         return ({
-            id: assignment._id.$oid,
+            id: assignment.id,
             name: assignment.activity.name,
             description: AssignmentStatuses[assignment.status]
         }) as EventNotification

@@ -13,7 +13,7 @@ jwt = JWTManager(app)
 @jwt.user_claims_loader
 def add_claims_to_access_token(user):
     return {
-        'id': user['_id']['$oid'] if '_id' in user else '',
+        'id': user['id'] if 'id' in user else '',
         'roles': user.get('roles', [])
     }
 

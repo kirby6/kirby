@@ -4,9 +4,6 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { environment as config } from './../../../environments/environment';
 import { Observable } from 'rxjs';
-import { ObjectId } from 'src/app/utils/interfaces';
-import { map } from 'rxjs/operators';
-
 
 @Injectable({ providedIn: 'root' })
 export class AssignmentsService {
@@ -29,8 +26,8 @@ export class AssignmentsService {
         return this.http.get<Assignment[]>(`${config.apiUrl}/${this._prefix}/`, { params });
     }
 
-    assign(assignment: Assignment): Observable<ObjectId> {
-        return this.http.post<ObjectId>(`${config.apiUrl}/${this._prefix}/`, assignment);
+    assign(assignment: Assignment): Observable<string> {
+        return this.http.post<string>(`${config.apiUrl}/${this._prefix}/`, assignment);
     }
 
     update(assignmentId: string, status: AssignmentStatuses): Observable<void> {
