@@ -7,10 +7,11 @@ verify_ssl = true
 
 [packages]
 pymongo = "*"
-gevent = "*"
 Flask = "*"
 Flask-JWT-Extended = "*"
 flask-cors = "*"
+eventlet = "*"
+flask-socketio = "*"
 
 [requires]
 python_version = "3.7"
