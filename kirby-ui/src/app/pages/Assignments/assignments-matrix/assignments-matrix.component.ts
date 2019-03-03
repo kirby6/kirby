@@ -100,7 +100,7 @@ export class AssignmentsMatrixComponent implements OnInit {
                                         redoCount: 0,
                                         status: null
                                     },
-                                    ...(_.unionWith(assignmentsByUsers[userId], this.activitiesCells, (a, b) => a.activity._id.$oid === b.activity._id.$oid))
+                                    ...(_.unionWith(assignmentsByUsers[userId], this.activitiesCells, (a, b) => a.activity.id === b.activity.id))
                                 ]
                             });
 
@@ -142,7 +142,7 @@ export class AssignmentsMatrixComponent implements OnInit {
         return {
             redoCount: assignment.redo_count,
             status: assignment.status,
-            user: assignment.user._id.$oid,
+            user: assignment.user_id,
             activity: assignment.activity
         } as Cell
     }
@@ -164,6 +164,4 @@ export class AssignmentsMatrixComponent implements OnInit {
             },
         ]
     }
-
-
 } 

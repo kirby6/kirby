@@ -25,7 +25,7 @@ export class AssignmentsListComponent implements OnInit {
         this.route.paramMap.subscribe(params => {
             let moduleId: string = params.get('moduleId');
 
-            this.assignmentsService.getByUserId(this.auth.currentUserValue._id.$oid)
+            this.assignmentsService.getByUserId(this.auth.currentUserValue.id)
                 .pipe(
                     map((assignments: Assignment[]) => assignments
                         .filter(a => a.modules.findIndex(module => module.id == moduleId))),

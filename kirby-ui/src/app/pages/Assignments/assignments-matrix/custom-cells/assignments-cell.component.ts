@@ -36,13 +36,11 @@ export class AssignmentCellRenderer implements ICellRendererAngularComp {
     }
 
     getAssignmentMenuItemClass(assignmentStatus: AssignmentStatuses) {
-        let x = {
+        return {
             'status-submitted': assignmentStatus == AssignmentStatuses.Submitted,
             'status-opened': assignmentStatus == AssignmentStatuses.Opened,
             'status-redo': assignmentStatus == AssignmentStatuses.Redo,
             'status-done': assignmentStatus == AssignmentStatuses.Done
         };
-        console.log(x);
-        return x;
     }
 }
