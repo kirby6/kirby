@@ -1,14 +1,11 @@
 export interface Activity {
-    _id?: {
-        $oid: string;
-    };
+    id?: string;
     name: string;
     module: any;
+    files?: File[];
 }
 
 export interface File {
-    _id?: {
-        $oid: string;
-    };
+    id?: string;
     filename: string;
 }

@@ -10,7 +10,7 @@
   <mat-card-content>
     <activity-file-card *ngFor="let file of assignment.activity.files"
 			[file]="file"
-			[activityId]="assignment.activity_id.$oid"></activity-file-card>
+			[activityId]="assignment.activity.id"></activity-file-card>
   </mat-card-content>
 </mat-card>
 

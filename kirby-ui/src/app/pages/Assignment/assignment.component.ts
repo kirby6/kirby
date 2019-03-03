@@ -4,7 +4,6 @@ import { AuthenticationService } from './../../services/authentication/index';
 import { Assignment } from './../../services/assignments/interfaces';
 import { Observable } from 'rxjs';
 import { AssignmentsService } from './../../services/assignments/index';
-import { map } from 'rxjs/operators';
 
 @Component({
     templateUrl: './assignment.component.html',
@@ -25,6 +24,7 @@ export class AssignmentPageComponent {
             this.getAssignment()
                 .subscribe((assignment: any) => {
                     this.assignment = assignment;
+                    debugger;
                 });
         });
     }

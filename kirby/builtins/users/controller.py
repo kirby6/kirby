@@ -39,7 +39,7 @@ def create_user(firstname, lastname, username, password, roles):
 
 def login(username, password):
     user = get_user_by_name(username)
-    if user and _get_user_password(user['_id']['$oid']) == password:
+    if user and _get_user_password(user['id']) == password:
         user['token'] = get_token(user)
         return jsonify(user), 201
     else:

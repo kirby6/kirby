@@ -1,7 +1,5 @@
-import { ObjectId } from 'src/app/utils/interfaces';
-
 export interface Module {
-    _id: ObjectId;
+    id: string;
     name: string;
-    parent?: ObjectId;
+    parent?: string;
 }

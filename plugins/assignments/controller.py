@@ -43,24 +43,23 @@ def update_status(assignment_id, status):
 def get_by_id(assignment_id):
     if not isinstance(assignment_id, ObjectId):
         assignment_id = ObjectId(assignment_id)
-    return next(
+    return bson_to_json(next(
         iter(
-            bson_to_json(
-                assignments.aggregate([{
-                    '$match': {
+            assignments.aggregate([{
+                '$match': {
                         '_id': assignment_id
-                    }
-                },
-                                       {
-                                           '$lookup': {
-                                               'from': 'activities',
-                                               'localField': 'activity_id',
-                                               'foreignField': '_id',
-                                               'as': 'activity'
-                                           }
-                                       }, {
-                                           '$unwind': '$activity'
-                                       }]))), None)
+                        }
+            },
+                {
+                '$lookup': {
+                    'from': 'activities',
+                    'localField': 'activity_id',
+                    'foreignField': '_id',
+                    'as': 'activity'
+                }
+            }, {
+                '$unwind': '$activity'
+            }])), None))
 
 
 def get_user_assignments(user_id=None):
@@ -74,23 +73,23 @@ def get_user_assignments(user_id=None):
     }, {
         '$unwind': '$activity'
     },
-                   {
-                       '$lookup': {
-                           'from': 'modules',
-                           'localField': 'activity_id',
-                           'foreignField': 'activities',
-                           'as': 'modules'
-                       }
-                   },
-                   {
-                       '$graphLookup': {
-                           'from': 'modules',
-                           'startWith': '$modules._id',
-                           'connectFromField': 'parent',
-                           'connectToField': '_id',
-                           'as': 'modules'
-                       }
-                   }]
+        {
+        '$lookup': {
+            'from': 'modules',
+            'localField': 'activity_id',
+            'foreignField': 'activities',
+            'as': 'modules'
+        }
+    },
+        {
+        '$graphLookup': {
+            'from': 'modules',
+            'startWith': '$modules._id',
+            'connectFromField': 'parent',
+            'connectToField': '_id',
+            'as': 'modules'
+        }
+    }]
     if user_id:
         if not isinstance(user_id, ObjectId):
             user_id = ObjectId(user_id)

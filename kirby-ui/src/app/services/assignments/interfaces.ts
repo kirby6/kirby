@@ -1,9 +1,7 @@
 import { Module } from '../modules/interfaces';
 import { Activity } from '../activities/interfaces';
 export interface Assignment {
-    _id?: {
-        $oid: string;
-    };
+    id?: string;
     user_id: string;
     activity_id: string;
     status: AssignmentStatuses;
@@ -12,8 +10,8 @@ export interface Assignment {
 }
 
 export enum AssignmentStatuses {
-    Opened='opened',
-    Submitted='submitted',
-    Redo='redo',
-    Done='done'
+    Opened = 'opened',
+    Submitted = 'submitted',
+    Redo = 'redo',
+    Done = 'done'
 }

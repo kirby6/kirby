@@ -19,7 +19,8 @@ export class ActivityFileCardComponent {
     constructor(private activitiesService: ActivitiesService) { }
 
     public onFileClick() {
-        this.activitiesService.downloadFile(this.activityId, this.file._id.$oid)
+        debugger;
+        this.activitiesService.downloadFile(this.activityId, this.file.id)
             .subscribe(data => this.downloadFile(data));
     }
 
