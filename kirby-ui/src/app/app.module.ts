@@ -4,6 +4,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { TreeModule } from 'angular-tree-component';
 
+import { SocketIoModule } from 'ngx-socket-io';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/login/login.component';
@@ -35,6 +37,8 @@ import { RoleDirective } from './directives/role.directive';
 import { CommentListComponent } from './pages/Assignment/comment-list/comment-list.component';
 import { AgGridModule } from 'ag-grid-angular';
 import { AssignmentCellRenderer } from './pages/Assignments/assignments-matrix/custom-cells/assignments-cell.component';
+
+import { environment } from '../environments/environment'
 
 @NgModule({
     declarations: [
@@ -71,6 +75,7 @@ import { AssignmentCellRenderer } from './pages/Assignments/assignments-matrix/c
         TreeModule.forRoot(),
         TruncateModule,
         AgGridModule.withComponents([AssignmentCellRenderer])
+        SocketIoModule.forRoot(environment.socketio)
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
