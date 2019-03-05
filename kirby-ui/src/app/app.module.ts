@@ -4,6 +4,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { TreeModule } from 'angular-tree-component';
 
+import { SocketIoModule } from 'ngx-socket-io';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/login/login.component';
@@ -31,6 +33,8 @@ import { NavigationListComponent } from './pages/Assignments/navigation-list/nav
 import { AssignmentsListComponent } from './pages/Assignments/assignments-list/assignments-list.component';
 import { HelpsListComponent } from './pages/helps/helps-list/helps-list.component';
 import { CommentListComponent } from './pages/Assignment/comment-list/comment-list.component';
+
+import { environment } from '../environments/environment'
 
 @NgModule({
     declarations: [
@@ -62,7 +66,8 @@ import { CommentListComponent } from './pages/Assignment/comment-list/comment-li
         HttpClientModule,
         CustomMaterialModule,
         TreeModule.forRoot(),
-        TruncateModule
+        TruncateModule,
+        SocketIoModule.forRoot(environment.socketio)
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
