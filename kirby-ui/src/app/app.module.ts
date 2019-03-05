@@ -67,7 +67,7 @@ import { environment } from '../environments/environment'
         CustomMaterialModule,
         TreeModule.forRoot(),
         TruncateModule,
-        SocketIoModule.forRoot(environment.socketio)
+        SocketIoModule,
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
