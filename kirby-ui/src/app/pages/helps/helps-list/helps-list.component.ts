@@ -23,8 +23,6 @@ export class HelpsListComponent implements OnInit {
 
     ngOnInit() {
         this.notificationsService.getMessage<any>()
-            .subscribe((notification: any) => {
-                console.log(notification);
-            });
+            .subscribe(console.log, console.error);
     }
 } 
