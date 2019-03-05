@@ -1,5 +1,4 @@
 import datetime
-import json
 from bson import ObjectId
 
 from kirby.core.db import collection as helps, bson_to_json
