@@ -7,7 +7,7 @@ from kirby.builtins.auth import get_token
 
 
 def get_all_users():
-    return bson_to_json(users.find({}, {'password': 0}))
+    return bson_to_json(list(users.find({}, {'password': 0})))
 
 
 def get_user_by_id(user_id):

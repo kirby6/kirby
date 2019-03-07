@@ -5,7 +5,8 @@
   <mat-card-content>
     <ag-grid-angular *ngIf="rows && headers" style="height: 500px;" class="ag ag-theme-fresh" #agGrid [rowData]="rows"
       [gridOptions]="gridOptions" (gridReady)="onGridReady($event)" [allowContextMenuWithControlKey]="true"
-      [enableRangeSelection]="true" [getContextMenuItems]="getContextMenu" [columnDefs]="headers">
+      [enableRtl]="true"
+      [enableRangeSelection]="true" [columnDefs]="headers">
     </ag-grid-angular>
   </mat-card-content>
 </mat-card>

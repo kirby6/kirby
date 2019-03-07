@@ -1,14 +1,16 @@
 import { Assignment, AssignmentStatuses } from 'src/app/services/assignments/interfaces';
 import { ModulesService } from './../../../services/modules/index';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 import { AssignmentsService } from './../../../services/assignments/index';
 import { Component, OnInit } from '@angular/core';
 import * as _ from 'lodash';
 import { Module } from 'src/app/services/modules/interfaces';
-import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
+import { Observable, zip } from 'rxjs';
 import { Cell, HeaderCell } from './interfaces';
 import { AssignmentCellRenderer } from './custom-cells/assignments-cell.component';
+import { UserService } from 'src/app/services/users';
+import { User } from 'src/app/services/users/interfaces';
 
 @Component({
     selector: 'assignments-matrix',
@@ -19,7 +21,6 @@ export class AssignmentsMatrixComponent implements OnInit {
     public title: string = 'מטריצה';
     public headers: any[] = [];
     public rows: Cell[][] = [];
-    public columns = [];
 
     public activitiesCells: Cell[];
 
@@ -33,80 +34,58 @@ export class AssignmentsMatrixComponent implements OnInit {
 
     private basicColumn = {
         cellRenderer: 'AssignmentCellRenderer',
-        // valueGetter: (params) => params.data.find(d => d.activity && d.activity._id.$oid === params.colDef.activity._id.$oid)
+        valueGetter: (params) => {
+            return params.data.find(d => d.activity &&
+                d.activity.id === params.colDef.activity.id &&
+                d.module.id === params.colDef.module.id)
+        }
     };
 
 
     constructor(
         private assignmentsService: AssignmentsService,
         private modulesService: ModulesService,
+        private userService: UserService,
         private route: ActivatedRoute) { }
 
     ngOnInit() {
-        this.route.paramMap.subscribe(params => {
-            let moduleId: string = params.get('moduleId');
+        zip(
+            this.route.paramMap.pipe(
+                map((params: ParamMap) => params.get('moduleId')),
+                switchMap((moduleId: string) => this.getModules(moduleId)),
+            ),
+            this.userService.getAll(),
+            this.assignmentsService.getAll()
+        )
+            .subscribe(([modules, users, assignments]: [Module[], User[], Assignment[]]) => {
 
-            this.getModules(moduleId)
-                .pipe(
-                    // map((modules: Module[]) => {
-                    //     let allActiv: any[] = [{
-                    //         headerName: 'username',
-                    //         valueGetter: (params) => params.data[0].user
-                    //     }];
+                this.headers = [
+                    ...this.usernameHeaderCells(),
+                    ...this.getHeadersFromModules(modules)
+                ];
 
-                    //     modules.forEach((module: Module) => {
-                    //         module.activities.forEach((ac: Activity) => {
-                    //             allActiv.push({
-                    //                 headerName: `${ac.name}-${module.name}`,
-                    //                 field: 'val',
-                    //                 module: module,
-                    //                 activity: ac,
-                    //                 ...this.basicColumn
-                    //             });
-                    //         });
-                    //     });
+                this.activitiesCells = this.getActivitiesCellsFromModules(modules);
 
-                    //     this.columns = allActiv;
-                    //     return modules;
-                    // }),
-                    map((modules) => modules.map(this.moduleToHeaderCell))
-                )
-                .subscribe((headersRow: HeaderCell[]) => {
-                    this.headers = [
-                        {
-                            headerName: 'username',
-                            valueGetter: (params) => params.data[0].user,
-                            pinned: true
-                        }
-                        , ...headersRow.map(h => ({
-                            headerName: h.name,
-                            children: h.activities.map(a => ({
-                                headerName: a.name,
-                                ...this.basicColumn
-                            }))
-                        }))];
-
-                    this.activitiesCells = this.getCellsFromActivities(headersRow);
-
-                    this.assignmentsService.getAll()
-                        .subscribe((assignments: Assignment[]) => {
-                            let assignmentsByUsers = _.chain(assignments).map(this.assignmentToCell).groupBy('user').value();
-
-                            this.rows = Object.keys(assignmentsByUsers).map((userId: string) => {
-                                return [
-                                    {
-                                        user: userId,
-                                        activity: null,
-                                        redoCount: 0,
-                                        status: null
-                                    },
-                                    ...(_.unionWith(assignmentsByUsers[userId], this.activitiesCells, (a, b) => a.activity.id === b.activity.id))
-                                ]
-                            });
-
+                this.rows = users.map((user) => {
+                    return this.activitiesCells.map((activityCell: Cell) => {
+                        let currentAssignment: Assignment = assignments.find((assignment: Assignment) => {
+                            return assignment.user_id === user.id &&
+                                assignment.activity_id === activityCell.activity.id;
                         });
+
+                        if (currentAssignment) {
+                            return {
+                                ...activityCell,
+                                user,
+                                status: currentAssignment.status,
+                                redoCount: currentAssignment.redo_count,
+                            } as Cell
+                        }
+                        return { ...activityCell, user };
+                    });
                 });
-        });
+
+            });
     }
 
 
@@ -118,50 +97,55 @@ export class AssignmentsMatrixComponent implements OnInit {
         }
     }
 
-    private getCellsFromActivities(headerRows: HeaderCell[]): Cell[] {
-        return headerRows.reduce((allActivities: Cell[], currCell: HeaderCell) => {
-            allActivities.push(...currCell.activities
+    private getActivitiesCellsFromModules(modules: Module[]): Cell[] {
+        return modules.reduce((allActivities: Cell[], currModule: Module) => {
+            allActivities.push(...currModule.activities
                 .map(activity => {
                     return {
                         redoCount: 0,
                         status: AssignmentStatuses.NotOpened,
                         user: null,
                         activity,
+                        module: currModule
                     } as Cell;
                 }));
             return allActivities;
         }, []);
     }
 
-    getModulesNames(modules: Module[]): string[] {
-        return modules.map(m => m.name);
-    }
-
-
-    private assignmentToCell(assignment: Assignment): Cell {
-        return {
-            redoCount: assignment.redo_count,
-            status: assignment.status,
-            user: assignment.user_id,
-            activity: assignment.activity
-        } as Cell
-    }
-
-    private moduleToHeaderCell(module: Module): HeaderCell {
-        return { ...module, colspan: module.activities.length };
-    }
-
     public onGridReady(params) {
         params.api.sizeColumnsToFit();
     }
 
-    public getContextMenu(params) {
+    private getHeadersFromModules(modules: Module[]): HeaderCell[] {
+        return modules.map(module => ({
+            headerName: module.name,
+            module,
+            children: module.activities.map(activity => ({
+                headerName: activity.name,
+                activity,
+                module,
+                ...this.basicColumn
+            }))
+        }));
+    }
+
+    private usernameHeaderCells(): HeaderCell[] {
         return [
             {
-                name: "Change " + params.value,
-                action: () => window.alert("Alerting about " + params.value),
-                cssClasses: ["redFont", "bold"]
+                headerName: 'משתמש',
+                valueGetter: (params) => `${params.data[0].user.username}`,
+                pinned: 'right',
+                width: 150
             },
-        ]
+            {
+                headerName: 'שם',
+                valueGetter: (params) => `${params.data[0].user.firstname || ""} ${params.data[0].user.lastname || ""}`,
+                pinned: 'right',
+                width: 150
+            }
+        ];
     }
-} 
+}
+
+

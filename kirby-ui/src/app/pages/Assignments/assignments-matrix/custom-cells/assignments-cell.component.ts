@@ -1,7 +1,8 @@
 import { AssignmentStatuses } from './../../../../services/assignments/interfaces';
-import { Component, OnDestroy } from "@angular/core";
+import { Component, OnDestroy, ViewChild } from "@angular/core";
 
 import { ICellRendererAngularComp } from "ag-grid-angular";
+import { MatMenuTrigger } from '@angular/material';
 
 @Component({
     selector: 'assignment-cell',
@@ -12,6 +13,8 @@ export class AssignmentCellRenderer implements ICellRendererAngularComp {
     public params: any;
     public value;
     public assignmentStatuses = Object.keys(AssignmentStatuses);
+    @ViewChild(MatMenuTrigger) public menuTrigger: MatMenuTrigger;
+
 
     agInit(params: any): void {
         this.params = params;
