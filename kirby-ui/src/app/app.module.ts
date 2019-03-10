@@ -74,8 +74,8 @@ import { environment } from '../environments/environment'
         CustomMaterialModule,
         TreeModule.forRoot(),
         TruncateModule,
+        SocketIoModule,
         AgGridModule.withComponents([AssignmentCellRenderer]),
-        SocketIoModule.forRoot(environment.socketio),
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
