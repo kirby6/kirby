@@ -1,4 +1,4 @@
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AssignmentsService } from './../../../services/assignments/index';
 import { Component, OnInit } from '@angular/core';
 import { EventNotification } from 'src/app/components/event-list/interfaces';
@@ -10,7 +10,7 @@ import { Help } from 'src/app/services/helps/interfaces';
 @Component({
     selector: 'helps-list',
     template: `
-        <event-list title='בקשות לעזרה' [events]="helps"></event-list>
+        <event-list title='בקשות לעזרה' [events]="helps" (clicked)="onHelpSelected($event)"></event-list>
     `,
 })
 export class HelpsListComponent implements OnInit {
@@ -22,6 +22,7 @@ export class HelpsListComponent implements OnInit {
         private route: ActivatedRoute,
         private notificationsService: NotificationsService,
         private helpsService: HelpsService,
+        private router: Router,
     ) { }
 
     ngOnInit() {
@@ -47,5 +48,9 @@ export class HelpsListComponent implements OnInit {
             description: help.message,
             isRead: help.is_read,
         }
+    }
+
+    private onHelpSelected(help: EventNotification): void {
+        this.router.navigate(['help', help.id]);
     }
 } 

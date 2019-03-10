@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { NavigationItem } from './interfaces';
 import { MatTreeNestedDataSource } from '@angular/material';
 import { NestedTreeControl } from '@angular/cdk/tree';
@@ -14,19 +14,14 @@ export class NavigationListComponent {
         this.dataSource.data = items;
     }
 
-    getClass(navigationItem: NavigationItem) {
-        return {
-            active: !!navigationItem.isActive || (this.selectedAssignmentId === navigationItem.id)
-        };
-    }
+    @Output() public onNavigate: EventEmitter<NavigationItem> = new EventEmitter<NavigationItem>();
 
     treeControl = new NestedTreeControl<NavigationItem>(node => node.children);
     dataSource = new MatTreeNestedDataSource<NavigationItem>();
-    private selectedAssignmentId: string = null;
 
     hasChild = (_: number, node: NavigationItem) => !!node.children && node.children.length > 0;
 
-    selectAssignment(asssignmentId: string): void {
-        this.selectedAssignmentId = asssignmentId || null;
+    selectItem(navigationItem: NavigationItem): void {
+        this.onNavigate.emit(navigationItem);
     }
 }

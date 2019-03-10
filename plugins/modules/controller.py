@@ -4,11 +4,37 @@ from kirby.core.db import bson_to_json, collection as modules
 
 
 def get_all_modules():
-    return bson_to_json(modules.find())
+    return bson_to_json(
+        list(modules.aggregate([
+            {
+                '$lookup': {
+                    'from': 'activities',
+                    'localField': 'activities',
+                    'foreignField': '_id',
+                    'as': 'activities'
+                }
+            },
+        ])))
 
 
-def get_module_by_name(name):
-    return bson_to_json(modules.find_one({'name': name}))
+def get_module_by_id(id):
+    if not isinstance(id, ObjectId):
+        id = ObjectId(id)
+    return bson_to_json(list(modules.aggregate([
+        {
+            '$match': {
+                '_id': id
+            }
+        },
+        {
+            '$lookup': {
+                'from': 'activities',
+                'localField': 'activities',
+                'foreignField': '_id',
+                'as': 'activities'
+            }
+        },
+    ])))[0]
 
 
 def create_module(name, parent=None):

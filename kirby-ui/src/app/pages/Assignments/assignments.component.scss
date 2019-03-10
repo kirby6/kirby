@@ -3,11 +3,12 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-
+  
   .container {
     display: flex;
     flex-direction: row;
     .assignments {
+      overflow: auto;
       flex: 5;
     }
     .spacer {

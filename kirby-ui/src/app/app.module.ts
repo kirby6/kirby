@@ -32,7 +32,11 @@ import { AssignmentPageComponent } from './pages/Assignment/assignment.component
 import { NavigationListComponent } from './pages/Assignments/navigation-list/navigation-list.component';
 import { AssignmentsListComponent } from './pages/Assignments/assignments-list/assignments-list.component';
 import { HelpsListComponent } from './pages/helps/helps-list/helps-list.component';
+import { AssignmentsMatrixComponent } from './pages/Assignments/assignments-matrix/assignments-matrix.component';
+import { RoleDirective } from './directives/role.directive';
 import { CommentListComponent } from './pages/Assignment/comment-list/comment-list.component';
+import { AgGridModule } from 'ag-grid-angular';
+import { AssignmentCellRenderer } from './pages/Assignments/assignments-matrix/custom-cells/assignments-cell.component';
 
 import { environment } from '../environments/environment'
 
@@ -40,6 +44,7 @@ import { environment } from '../environments/environment'
     declarations: [
         AppComponent,
         PluginsManagementDirective,
+        RoleDirective,
         KAlertComponent,
         HomeComponent,
         MainComponent,
@@ -56,7 +61,9 @@ import { environment } from '../environments/environment'
         NavigationListComponent,
         AssignmentsListComponent,
         HelpsListComponent,
-        CommentListComponent
+        AssignmentsMatrixComponent,
+        CommentListComponent,
+        AssignmentCellRenderer,
     ],
     imports: [
         BrowserModule,
@@ -68,6 +75,7 @@ import { environment } from '../environments/environment'
         TreeModule.forRoot(),
         TruncateModule,
         SocketIoModule,
+        AgGridModule.withComponents([AssignmentCellRenderer]),
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

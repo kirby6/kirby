@@ -1,15 +1,15 @@
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AssignmentsService } from './../../../services/assignments/index';
 import { Component, OnInit } from '@angular/core';
 import { EventNotification } from 'src/app/components/event-list/interfaces';
 import { AuthenticationService } from 'src/app/services/authentication';
-import { Assignment } from 'src/app/services/assignments/interfaces';
+import { Assignment, AssignmentStatuses } from 'src/app/services/assignments/interfaces';
 import { map } from 'rxjs/operators';
 
 @Component({
     selector: 'assignments-list',
     template: `
-        <event-list title='מטלות' [events]="assignments"></event-list>
+        <event-list title='מטלות' [events]="assignments" (clicked)="onAssgignmentSelected($event)"></event-list>
     `,
 })
 export class AssignmentsListComponent implements OnInit {
@@ -18,6 +18,7 @@ export class AssignmentsListComponent implements OnInit {
     constructor(
         private assignmentsService: AssignmentsService,
         private auth: AuthenticationService,
+        private router: Router,
         private route: ActivatedRoute) { }
 
     ngOnInit() {
@@ -40,7 +41,12 @@ export class AssignmentsListComponent implements OnInit {
         return ({
             id: assignment.id,
             name: assignment.activity.name,
-            description: assignment.activity.module
+            description: AssignmentStatuses[assignment.status]
         }) as EventNotification
     }
+
+    private onAssgignmentSelected(assignment: EventNotification): void {
+        this.router.navigate(['assignment', assignment.id]);
+    }
 } 
+[]
