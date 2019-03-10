@@ -3,34 +3,35 @@ import { Assignment } from './../../services/assignments/interfaces';
 import { AuthenticationService } from './../../services/authentication/index';
 import { AssignmentsService } from './../../services/assignments/index';
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 import * as _ from 'lodash';
-import { NavigationTree } from './navigation-list/interfaces';
+import { NavigationItem } from './navigation-list/interfaces';
+import { Role } from 'src/app/services/authentication/interfaces';
 
 @Component({
     templateUrl: './assignments.component.html',
     styleUrls: ['./assignments.component.scss']
 })
 export class AssignmentsPageComponent {
-    private moduleId: string;
-    public openedAssignments: NavigationTree;
+    public openedAssignments: NavigationItem[];
+    public RoleEnum = Role; //To allow using enums in template
+    private getAssignments$: Subject<NavigationItem> = new Subject();
 
-    constructor(private route: ActivatedRoute,
+    constructor(
         private assignmentsService: AssignmentsService,
         private auth: AuthenticationService
     ) { }
 
     ngOnInit() {
-        this.route.paramMap.subscribe(params => {
-            this.moduleId = params.get('moduleId');
-            this.getOpenedAssignments()
-                .subscribe((openedAssignments: any) => {
-                    this.openedAssignments = openedAssignments;
-                });
-        });
+        this.getAssignments$
+            .pipe(switchMap(() => this.getOpenedAssignments()))
+            .subscribe((openedAssignments: NavigationItem[]) => {
+                this.openedAssignments = openedAssignments;
+            });
+        this.getAssignments$.next();
     }
+
 
     private createTreeChildren(modules: any[], tree: any[], processed_modules: number) {
         if (processed_modules == modules.length) return;
@@ -41,7 +42,6 @@ export class AssignmentsPageComponent {
                 parent.children.push({
                     id: module.id,
                     name: module.name,
-                    isActive: module.id === this.moduleId,
                     parent: parent.id,
                     children: []
                 });
@@ -58,7 +58,6 @@ export class AssignmentsPageComponent {
                 tree.push({
                     id: module.id,
                     name: module.name,
-                    isActive: module.id === this.moduleId,
                     children: []
                 });
             }
@@ -78,4 +77,4 @@ export class AssignmentsPageComponent {
                 })
             );
     }
-} 
+}

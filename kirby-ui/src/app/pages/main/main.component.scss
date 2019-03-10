@@ -2,6 +2,7 @@
 
 $navHeight: 64px;
 $spaceAroundNav: 35px;
+$pageWidth: 1170px;
 
 :host {
   display: block;
@@ -18,6 +19,10 @@ $spaceAroundNav: 35px;
     mat-toolbar {
       height: $navHeight;
       background: $background;
+      mat-toolbar-row {
+        width: $pageWidth;
+        margin: auto;
+      }
     }
 
     .spacer {
@@ -32,7 +37,7 @@ $spaceAroundNav: 35px;
   }
   .container {
     height: calc(100% - #{$navHeight + ($spaceAroundNav * 2)});
-    width: 1170px;
+    width: $pageWidth;
     margin: auto
   }
 }

@@ -7,7 +7,7 @@ from .service import get_all_activities_from_db, add_files_to_filesystem, \
 
 
 def get_all_activities():
-    return bson_to_json(get_all_activities_from_db())
+    return bson_to_json(list(get_all_activities_from_db()))
 
 
 def create_activity(name, files=None, id=None):

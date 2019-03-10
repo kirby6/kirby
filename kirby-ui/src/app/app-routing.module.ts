@@ -11,6 +11,7 @@ import { AuthGuard } from './services/authentication/gaurd';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { AssignmentsListComponent } from './pages/Assignments/assignments-list/assignments-list.component';
+import { AssignmentsMatrixComponent } from './pages/Assignments/assignments-matrix/assignments-matrix.component';
 
 const routes: Routes = [
     {
@@ -23,7 +24,10 @@ const routes: Routes = [
             { path: 'admin', component: AdminPageComponent },
             {
                 path: 'assignments', component: AssignmentsPageComponent, children: [
-                    { path: ':moduleId', component: AssignmentsListComponent, outlet: 'module' },
+                    { path: ':moduleId', component: AssignmentsListComponent, outlet: 'moduleAssignments' },
+                    { path: ':moduleId', component: AssignmentsMatrixComponent, outlet: 'moduleMatrix' },
+                    { path: '', component: AssignmentsListComponent, outlet: 'moduleAssignments' },
+                    { path: '', component: AssignmentsMatrixComponent, outlet: 'moduleMatrix' },
                 ]
             },
             { path: 'assignment/:assignmentId', component: AssignmentPageComponent },

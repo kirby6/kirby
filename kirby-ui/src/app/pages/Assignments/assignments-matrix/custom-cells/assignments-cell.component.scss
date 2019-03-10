@@ -1,0 +1,24 @@
+.context-menu-button {
+  width: 100%;
+  line-height: 100%;
+  height: 100%;
+}
+
+.status-opened {
+  background: gray;
+}
+
+.status-done {
+  background: green;
+}
+
+.status-submitted {
+  background: red;
+}
+
+.status-redo {
+  background: yellow;
+  color: black;
+}
+
+

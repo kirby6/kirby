@@ -52,7 +52,7 @@ export class RegisterComponent implements OnInit {
         }
 
         this.loading = true;
-        this.userService.register({...this.registerForm.value, roles: ['admin']})
+        this.userService.register({...this.registerForm.value, roles: ['ADMIN']})
             .pipe(first())
             .subscribe(
                 data => {

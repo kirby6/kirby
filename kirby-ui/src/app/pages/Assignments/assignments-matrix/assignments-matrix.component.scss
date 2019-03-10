@@ -1,0 +1,21 @@
+@import "./../../../../color-scheme.scss";
+
+:host {
+  mat-card {
+    background: $background;
+    font-weight: 200;
+    user-select: none;
+
+    mat-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+
+      .mat-card-header-text,
+      mat-card-title {
+        margin: 0;
+      }
+    }
+  }
+}

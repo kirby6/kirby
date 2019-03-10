@@ -1,10 +1,10 @@
+import { Group } from './../groups/interfaces';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { User } from './interfaces';
 import { environment as config } from './../../../environments/environment';
 import { Observable } from 'rxjs';
-
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
@@ -21,5 +21,9 @@ export class UserService {
 
     register(user: User): Observable<User> {
         return this.http.post<User>(`${config.apiUrl}/${this._prefix}/`, user);
+    }
+
+    addUserToGroup(user: User, groupId: string) {
+        return this.http.post<User>(`${config.apiUrl}/${this._prefix}/`, {user_id: user.id, group_id: groupId});
     }
 }

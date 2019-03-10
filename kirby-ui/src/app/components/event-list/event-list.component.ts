@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { EventNotification } from './interfaces';
 
 
@@ -13,6 +13,7 @@ export class EventListComponent {
     @Input() public title: string;
 
     @Input() public events: EventNotification[];
+    @Output() public clicked: EventEmitter<EventNotification> = new EventEmitter();
 
     public get unreadCount(): number {
         return this.events && this.events.length || 0;
@@ -22,8 +23,8 @@ export class EventListComponent {
     }
 
     onEventSelected(event: EventNotification): void {
-        if (event.id) {
-            window.location.href = `/EventNotifications/${event.id}`;
+        if (event) {
+            this.clicked.emit(event);
         }
     }
 }

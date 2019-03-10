@@ -5,11 +5,14 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment as config } from './../../../environments/environment';
 import { Observable } from 'rxjs';
 
-
 @Injectable({ providedIn: 'root' })
 export class AssignmentsService {
     private _prefix: string = 'assignments';
     constructor(private http: HttpClient) { }
+
+    getAll(): Observable<Assignment[]> {
+        return this.http.get<Assignment[]>(`${config.apiUrl}/${this._prefix}`);
+    }
 
     get(assignmentId: string): Observable<Assignment[]> {
         return this.http.get<Assignment[]>(`${config.apiUrl}/${this._prefix}/${assignmentId}`);
