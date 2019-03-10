@@ -37,7 +37,7 @@ export class NotificationsService {
         return this.socket.emit(this.defaultEventName, message);
     }
 
-    getMessage<T>(): Observable<T> {
-        return this.socket.fromEvent<T>(this.defaultEventName);
+    getMessage<T>(eventName?: string): Observable<T> {
+        return this.socket.fromEvent<T>(eventName || this.defaultEventName);
     }
 }

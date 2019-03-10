@@ -25,10 +25,11 @@ def create_help(sender_id, receiving_group_id, message, context=None):
     if context:
         help_object['context'] = context
     result = bson_to_json(helps.insert_one(help_object).inserted_id)
-    websocket.send({
-        'msg': 'help created',
-        'id': result,
-        'sender_id': bson_to_json(sender_id),
-        'receiving_group_id': bson_to_json(receiving_group_id)
-    })
+    websocket.emit(
+        'help', {
+            'msg': 'help created',
+            'id': result,
+            'sender_id': bson_to_json(sender_id),
+            'receiving_group_id': bson_to_json(receiving_group_id)
+        })
     return result

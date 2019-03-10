@@ -22,7 +22,7 @@ export class HelpsListComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.notificationsService.getMessage<any>()
+        this.notificationsService.getMessage<any>('help')
             .subscribe(console.log, console.error);
     }
 } 
