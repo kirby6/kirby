@@ -15,9 +15,9 @@ export class RadioService {
 
     getByStationName(name: string): Observable<RadioStation> {
         return this.http.get<RadioStation>(`${config.apiUrl}/${this._prefix}/${name}`);
-    }
+    } 
 
     create(station: RadioStation): Observable<string> {
-        return this.http.post<string>(`${config.apiUrl}/${this._prefix}/`, {...station});
+        return this.http.post<string>(`${config.apiUrl}/${this._prefix}/`, station);
     }
 }
