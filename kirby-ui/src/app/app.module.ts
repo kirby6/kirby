@@ -39,6 +39,10 @@ import { AgGridModule } from 'ag-grid-angular';
 import { AssignmentCellRenderer } from './pages/Assignments/assignments-matrix/custom-cells/assignments-cell.component';
 
 import { environment } from '../environments/environment'
+import { RadioPageComponent } from './pages/radio/radio.component';
+import { BackgroundComponent } from './components/run-in-background/background.component';
+import { RadioPlayerComponent } from './pages/radio/radio-player/radio-player.component';
+import { AudioPlayerComponent } from './components/audio-player/audio-player.component';
 
 @NgModule({
     declarations: [
@@ -64,6 +68,10 @@ import { environment } from '../environments/environment'
         AssignmentsMatrixComponent,
         CommentListComponent,
         AssignmentCellRenderer,
+        RadioPageComponent,
+        BackgroundComponent,
+        RadioPlayerComponent,
+        AudioPlayerComponent,
     ],
     imports: [
         BrowserModule,

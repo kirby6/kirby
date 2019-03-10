@@ -12,6 +12,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { AssignmentsListComponent } from './pages/Assignments/assignments-list/assignments-list.component';
 import { AssignmentsMatrixComponent } from './pages/Assignments/assignments-matrix/assignments-matrix.component';
+import { RadioPageComponent } from './pages/radio/radio.component';
 
 const routes: Routes = [
     {
@@ -31,6 +32,7 @@ const routes: Routes = [
                 ]
             },
             { path: 'assignment/:assignmentId', component: AssignmentPageComponent },
+            { path: 'radio/:stationId', component: RadioPageComponent },
         ]
     },
     { path: 'login', component: LoginComponent },
