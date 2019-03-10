@@ -1,9 +1,9 @@
 from kirby.core.db import bson_to_json, collection as radio
-from bson import json_util, ObjectId
+from bson import json_util
 
 
 def get_all_stations():
-    return bson_to_json(radio.find())
+    return bson_to_json(list(radio.find()))
 
 
 def get_station_by_name(station_name):
