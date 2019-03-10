@@ -17,6 +17,10 @@ def get_all():
                 }
             }, {
                 '$unwind': '$sender'
+            }, {
+                '$project': {
+                    'sender.password': 0
+                }
             },
                              {
                                  '$lookup': {
