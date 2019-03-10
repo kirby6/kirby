@@ -39,7 +39,7 @@ export class HelpsListComponent implements OnInit {
     private helpToEventNotification(help: Help): EventNotification {
         return {
             id: help.id,
-            name: `from ${help.sender.username} to ${help.receiving_group.name}`,
+            name: `מ${help.sender.firstname} ${help.sender.lastname} ל${help.receiving_group.name}`,
             description: help.message,
             isRead: help.is_read,
         }
