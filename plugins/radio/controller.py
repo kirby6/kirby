@@ -7,9 +7,22 @@ def get_all_stations():
 
 
 def get_station_by_name(station_name):
-    if not isinstance(station_name, ObjectId):
-        station_name = ObjectId(station_name)
-    return bson_to_json(radio.find({'_id': station_name}))
+    # if not isinstance(station_name, ObjectId):
+    #     station_name = ObjectId(station_name)
+    return bson_to_json(radio.aggregate([
+        {
+            '$match': {
+                '_id': station_name
+            }
+        },
+        {
+            '$project': {
+                '_id': 0,
+                'name': "$_id",
+                'playlist': 1
+            }
+        }
+    ]))
 
 
 def create_station(name, playlist):
