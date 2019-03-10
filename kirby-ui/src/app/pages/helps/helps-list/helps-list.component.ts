@@ -1,8 +1,6 @@
-import { ActivatedRoute, Router } from '@angular/router';
-import { AssignmentsService } from './../../../services/assignments/index';
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { EventNotification } from 'src/app/components/event-list/interfaces';
-import { AuthenticationService } from 'src/app/services/authentication';
 import { NotificationsService } from 'src/app/services/notifications';
 import { HelpsService } from 'src/app/services/helps';
 import { Help } from 'src/app/services/helps/interfaces';
@@ -17,9 +15,6 @@ export class HelpsListComponent implements OnInit {
     public helps: EventNotification[] = [];
 
     constructor(
-        private assignmentsService: AssignmentsService,
-        private auth: AuthenticationService,
-        private route: ActivatedRoute,
         private notificationsService: NotificationsService,
         private helpsService: HelpsService,
         private router: Router,

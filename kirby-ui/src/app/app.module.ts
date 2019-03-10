@@ -32,6 +32,7 @@ import { AssignmentPageComponent } from './pages/Assignment/assignment.component
 import { NavigationListComponent } from './pages/Assignments/navigation-list/navigation-list.component';
 import { AssignmentsListComponent } from './pages/Assignments/assignments-list/assignments-list.component';
 import { HelpsListComponent } from './pages/helps/helps-list/helps-list.component';
+import { HelpPageComponent } from './pages/help/help.component';
 import { AssignmentsMatrixComponent } from './pages/Assignments/assignments-matrix/assignments-matrix.component';
 import { RoleDirective } from './directives/role.directive';
 import { CommentListComponent } from './pages/Assignment/comment-list/comment-list.component';
@@ -64,6 +65,7 @@ import { environment } from '../environments/environment'
         AssignmentsMatrixComponent,
         CommentListComponent,
         AssignmentCellRenderer,
+        HelpPageComponent,
     ],
     imports: [
         BrowserModule,
