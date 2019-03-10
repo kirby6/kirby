@@ -6,7 +6,28 @@ from kirby.core import websocket
 
 
 def get_all():
-    return bson_to_json(helps.find({}))
+    return bson_to_json(
+        list(
+            helps.aggregate([{
+                '$lookup': {
+                    'from': 'users',
+                    'localField': 'sender_id',
+                    'foreignField': '_id',
+                    'as': 'sender'
+                }
+            }, {
+                '$unwind': '$sender'
+            },
+                             {
+                                 '$lookup': {
+                                     'from': 'groups',
+                                     'localField': 'receiving_group_id',
+                                     'foreignField': '_id',
+                                     'as': 'receiving_group'
+                                 }
+                             }, {
+                                 '$unwind': '$receiving_group'
+                             }])))
 
 
 def create_help(sender_id, receiving_group_id, message, context=None):
