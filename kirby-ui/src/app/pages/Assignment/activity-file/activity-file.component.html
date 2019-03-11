@@ -1,0 +1,6 @@
+<mat-nav-list *ngIf="data">
+  <a *ngFor="let file of data.files" mat-list-item (click)="openLink(data.activity, file)">
+    <span mat-line>{{file.filename}}</span>
+  </a>
+</mat-nav-list>
+<a style="display: none" #downloadLink></a>
