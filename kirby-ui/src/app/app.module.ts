@@ -22,7 +22,6 @@ import { AdminGroupComponent } from './pages/admin/groups/groups.component';
 import { AdminPageComponent } from './pages/admin/admin.component';
 import { WebsitesPageComponent } from './pages/websites/websites.component';
 import { WebsiteCardComponent } from './components/website-card/website-card.component';
-import { ActivityFileCardComponent } from './components/activity-file-card/activity-file-card.component';
 import { MainComponent } from './pages/main/main.component';
 import { HomeComponent } from './pages/home/home.component';
 import { EventListComponent } from './components/event-list/event-list.component';
@@ -34,11 +33,10 @@ import { AssignmentsListComponent } from './pages/Assignments/assignments-list/a
 import { HelpsListComponent } from './pages/helps/helps-list/helps-list.component';
 import { AssignmentsMatrixComponent } from './pages/Assignments/assignments-matrix/assignments-matrix.component';
 import { RoleDirective } from './directives/role.directive';
-import { CommentListComponent } from './pages/Assignment/comment-list/comment-list.component';
 import { AgGridModule } from 'ag-grid-angular';
 import { AssignmentCellRenderer } from './pages/Assignments/assignments-matrix/custom-cells/assignments-cell.component';
-
-import { environment } from '../environments/environment'
+import { ActivityFileComponent } from './pages/Assignment/activity-file/activity-file.component';
+import { CommentListComponent } from './components/comment-list/comment-list.component';
 
 @NgModule({
     declarations: [
@@ -54,7 +52,7 @@ import { environment } from '../environments/environment'
         AdminGroupComponent,
         WebsitesPageComponent,
         WebsiteCardComponent,
-        ActivityFileCardComponent,
+        ActivityFileComponent,
         EventListComponent,
         AssignmentsPageComponent,
         AssignmentPageComponent,
