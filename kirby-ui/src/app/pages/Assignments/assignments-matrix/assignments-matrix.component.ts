@@ -79,6 +79,7 @@ export class AssignmentsMatrixComponent implements OnInit {
                                 user,
                                 status: currentAssignment.status,
                                 redoCount: currentAssignment.redo_count,
+                                assignment: currentAssignment,
                             } as Cell
                         }
                         return { ...activityCell, user };

@@ -17,9 +17,6 @@ export class HelpsListComponent implements OnInit {
     public helps: EventNotification[] = [];
 
     constructor(
-        private assignmentsService: AssignmentsService,
-        private auth: AuthenticationService,
-        private route: ActivatedRoute,
         private notificationsService: NotificationsService,
         private helpsService: HelpsService,
         private router: Router,
@@ -27,13 +24,13 @@ export class HelpsListComponent implements OnInit {
 
     ngOnInit() {
         this.updateHelps();
-        this.notificationsService.getMessage<any>('help')
+        this.notificationsService.getMessage<{ msg: string }>('help')
             .subscribe((notification) => {
                 if (notification.msg === 'help created') {
                     this.updateHelps();
                 }
             });
-    }
+    } 
 
     private updateHelps() {
         this.helpsService.getAll().subscribe((helps) => {

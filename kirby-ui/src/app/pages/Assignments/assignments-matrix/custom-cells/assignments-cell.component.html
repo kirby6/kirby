@@ -2,12 +2,12 @@
     [matMenuTriggerFor]="context">{{getRedoCount()}}</button>
 
 <mat-menu #context="matMenu">
+    <button *ngIf="value.assignment" mat-menu-item [routerLink]="['/assignment', value.assignment.id]"> נווט</button>
     <button mat-menu-item [matMenuTriggerFor]="changeStatusMenu">סטטוס משימה</button>
 </mat-menu>
 
 <mat-menu #changeStatusMenu="matMenu" yPosition="above">
     <button mat-menu-item *ngFor="let status of assignmentStatuses" [ngClass]="getAssignmentMenuItemClass(status)">
-            🦓
         {{status}}
     </button>
 </mat-menu>

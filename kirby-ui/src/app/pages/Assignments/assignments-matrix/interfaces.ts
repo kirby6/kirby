@@ -1,4 +1,4 @@
-import { AssignmentStatuses } from 'src/app/services/assignments/interfaces';
+import { AssignmentStatuses, Assignment } from 'src/app/services/assignments/interfaces';
 import { Activity } from 'src/app/services/activities/interfaces';
 import { Module } from 'src/app/services/modules/interfaces';
 import { User } from 'src/app/services/users/interfaces';
@@ -9,6 +9,7 @@ export interface Cell {
     user: User;
     activity: Activity;
     module: Module;
+    assignment?: Assignment;
 }
 
 export interface HeaderCell {
