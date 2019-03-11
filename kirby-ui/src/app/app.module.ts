@@ -31,6 +31,7 @@ import { AssignmentPageComponent } from './pages/Assignment/assignment.component
 import { NavigationListComponent } from './pages/Assignments/navigation-list/navigation-list.component';
 import { AssignmentsListComponent } from './pages/Assignments/assignments-list/assignments-list.component';
 import { HelpsListComponent } from './pages/helps/helps-list/helps-list.component';
+import { HelpPageComponent } from './pages/help/help.component';
 import { AssignmentsMatrixComponent } from './pages/Assignments/assignments-matrix/assignments-matrix.component';
 import { RoleDirective } from './directives/role.directive';
 import { AgGridModule } from 'ag-grid-angular';
@@ -62,6 +63,7 @@ import { CommentListComponent } from './components/comment-list/comment-list.com
         AssignmentsMatrixComponent,
         CommentListComponent,
         AssignmentCellRenderer,
+        HelpPageComponent,
     ],
     imports: [
         BrowserModule,

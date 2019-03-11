@@ -4,34 +4,45 @@ from bson import ObjectId
 from kirby.core.db import collection as helps, bson_to_json
 from kirby.core import websocket
 
+aggregation = [{
+    '$lookup': {
+        'from': 'users',
+        'localField': 'sender_id',
+        'foreignField': '_id',
+        'as': 'sender'
+    }
+}, {
+    '$unwind': '$sender'
+}, {
+    '$project': {
+        'sender.password': 0
+    }
+},
+               {
+                   '$lookup': {
+                       'from': 'groups',
+                       'localField': 'receiving_group_id',
+                       'foreignField': '_id',
+                       'as': 'receiving_group'
+                   }
+               }, {
+                   '$unwind': '$receiving_group'
+               }]
+
 
 def get_all():
+    return bson_to_json(list(helps.aggregate(aggregation)))
+
+
+def get_by_id(help_id):
+    if not isinstance(help_id, ObjectId):
+        help_id = ObjectId(help_id)
     return bson_to_json(
-        list(
-            helps.aggregate([{
-                '$lookup': {
-                    'from': 'users',
-                    'localField': 'sender_id',
-                    'foreignField': '_id',
-                    'as': 'sender'
-                }
-            }, {
-                '$unwind': '$sender'
-            }, {
-                '$project': {
-                    'sender.password': 0
-                }
-            },
-                             {
-                                 '$lookup': {
-                                     'from': 'groups',
-                                     'localField': 'receiving_group_id',
-                                     'foreignField': '_id',
-                                     'as': 'receiving_group'
-                                 }
-                             }, {
-                                 '$unwind': '$receiving_group'
-                             }])))
+        list(helps.aggregate([{
+            '$match': {
+                '_id': help_id
+            }
+        }] + aggregation))[0])
 
 
 def create_help(sender_id, receiving_group_id, message, context=None):

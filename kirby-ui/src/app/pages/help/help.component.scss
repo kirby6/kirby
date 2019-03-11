@@ -1,0 +1,34 @@
+@import "./../../../color-scheme.scss";
+:host {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+    mat-card {
+	background: $background;
+	display: flex;
+	flex-direction: column;
+	font-weight: 200;
+	margin-bottom: 40px;
+	
+	mat-card-header {
+	    display: flex;
+	    flex-direction: column;
+	    justify-content: space-between;
+	    margin-bottom: 10px;
+	    
+	    mat-card-title {
+		margin: 0;
+	    }
+	}
+
+	mat-card-content {
+	    font-size: 30px;
+	}
+
+	mat-card-footer {
+	    margin: 1px;
+	    font-size: 14px;
+	}
+    }
+}

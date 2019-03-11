@@ -1,0 +1,14 @@
+<mat-card *ngIf="help">
+  <mat-card-header>
+    <mat-card-title>בקשה לעזרה</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    {{help.message}}
+  </mat-card-content>
+  <mat-card-footer>
+    מ{{help.sender.firstname}} {{help.sender.lastname}}
+    ל{{help.receiving_group.name}}
+  </mat-card-footer>
+</mat-card>
+
+<comment-list></comment-list>

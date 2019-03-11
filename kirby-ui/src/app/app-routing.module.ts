@@ -12,6 +12,8 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { AssignmentsListComponent } from './pages/Assignments/assignments-list/assignments-list.component';
 import { AssignmentsMatrixComponent } from './pages/Assignments/assignments-matrix/assignments-matrix.component';
+import { HelpsListComponent } from './pages/helps/helps-list/helps-list.component';
+import { HelpPageComponent } from './pages/help/help.component';
 
 const routes: Routes = [
     {
@@ -31,6 +33,8 @@ const routes: Routes = [
                 ]
             },
             { path: 'assignment/:assignmentId', component: AssignmentPageComponent },
+            { path: 'helps', component: HelpsListComponent },
+            { path: 'help/:helpId', component: HelpPageComponent },
         ]
     },
     { path: 'login', component: LoginComponent },
