@@ -1,12 +1,61 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { EventNotification } from 'src/app/components/event-list/interfaces';
+import { NotificationsService } from 'src/app/services/notifications';
+import { CommentsService } from 'src/app/services/comments';
+import { Comment } from 'src/app/services/comments/interfaces';
+import { AuthenticationService } from './../../services/authentication';
+import { map } from 'rxjs/operators';
 
 @Component({
     selector: 'comment-list',
-    template: `
-        <event-list title='תגובות' [events]="comments"></event-list>
-    `,
+    templateUrl: './comment-list.component.html',
+    styleUrls: ['./comment-list.component.scss']
 })
-export class CommentListComponent {
-    public comments: EventNotification[] = [];
+export class CommentListComponent implements OnInit {
+    public comments: Comment[] = [];
+    @Input()
+    public context: object;
+
+    constructor(
+        private notificationsService: NotificationsService,
+        private commentsService: CommentsService,
+        private auth: AuthenticationService,
+    ) { }
+
+    ngOnInit() {
+        this.updateComments();
+        this.notificationsService.getMessage<any>('comment')
+            .subscribe((notification) => {
+                if (notification.msg === 'comment posted') {
+                    this.updateComments();
+                }
+            });
+    }
+
+    public getCommentClass(comment: Comment) {
+        return {
+            "current-user-comment": comment.author.id == this.auth.currentUserValue.id,
+        };
+    }
+
+    public postComment(message: string) {
+        this.commentsService.post({
+            context: this.context,
+            message: message,
+            author_id: this.auth.currentUserValue.id,
+        }).subscribe();
+    }
+
+    private sortByDateAsc(comments) {
+        return comments.sort((a, b) => a.post_date.$date > b.post_date.$date ? 1 : -1);
+    }
+
+    private updateComments() {
+        this.commentsService.getByContext(this.context).pipe(
+            map(this.sortByDateAsc)
+        ).subscribe((comments) => {
+            console.log(comments);
+            this.comments = comments;
+        });
+    }
 } 

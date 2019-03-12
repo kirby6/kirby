@@ -11,4 +11,4 @@
   </mat-card-footer>
 </mat-card>
 
-<comment-list></comment-list>
+<comment-list *ngIf="help" [context]="getCommentContext()"></comment-list>

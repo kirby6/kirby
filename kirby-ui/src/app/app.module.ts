@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -25,6 +26,7 @@ import { WebsiteCardComponent } from './components/website-card/website-card.com
 import { MainComponent } from './pages/main/main.component';
 import { HomeComponent } from './pages/home/home.component';
 import { EventListComponent } from './components/event-list/event-list.component';
+import { TextareaFormCardComponent } from './components/textarea-form-card/textarea-form-card.component';
 import { TruncateModule } from 'ng2-truncate';
 import { AssignmentsPageComponent } from './pages/Assignments/assignments.component';
 import { AssignmentPageComponent } from './pages/Assignment/assignment.component';
@@ -64,9 +66,11 @@ import { CommentListComponent } from './components/comment-list/comment-list.com
         CommentListComponent,
         AssignmentCellRenderer,
         HelpPageComponent,
+        TextareaFormCardComponent,
     ],
     imports: [
         BrowserModule,
+        FormsModule,
         AppRoutingModule,
         BrowserAnimationsModule,
         ReactiveFormsModule,
