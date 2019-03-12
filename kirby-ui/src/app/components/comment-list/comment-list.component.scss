@@ -1,0 +1,73 @@
+@import "./../../../color-scheme.scss";
+
+:host {
+    mat-card {
+	background: $background;
+	font-weight: 200;
+	
+	mat-card-header {
+	    display: flex;
+	    align-items: center;
+	    justify-content: space-between;
+	    margin-bottom: 10px;
+	    
+	    .mat-card-header-text,
+	    mat-card-title {
+		margin: 0;
+	    }
+	}
+	
+	mat-card-content {
+	    .mat-list {
+		padding: 0;
+	    }
+	    
+	    mat-list-item {
+		background: white;
+		&:hover {
+		    background: #eee;
+		}
+		display: flex;
+		flex-direction: row;
+		height: 100%;
+		margin-bottom: 10px;
+		color: black;
+
+		&.current-user-comment {
+		    border-bottom: 7px solid $active;
+		}
+	    }
+	    .empty-list {
+		color: white;
+		text-align: center;
+		background: none;
+	    }
+	}
+	
+	.content {
+	    display: flex;
+	    flex-direction: column;
+	    
+	    .message {
+		font-size: 16px;
+		font-weight: 300;
+		white-space: pre-wrap;
+		word-wrap: anywhere;
+	    }
+	    
+	    .author {
+		font-size: 14px;
+		color: #777;
+	    }
+	    
+	    .title,
+	    .subtitle {
+		margin: 0;
+	    }
+	}
+	
+	.date {
+	    font-size: 14px;
+	}
+    }
+}

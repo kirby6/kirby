@@ -1,0 +1,31 @@
+:host {
+    background: white;
+    color: black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    mat-label {
+	font-weight: 300;
+	font-size: 16px;
+	color: black;
+    }
+    mat-form-field {
+	flex-grow: 1;
+	margin: 10px;
+	textarea {
+	    font-weight: 300;
+	    font-size: 16px;
+	    max-width: 100%;
+	}
+	/deep/ .mat-form-field-underline {
+	    background: black;
+	}
+	/deep/ .mat-form-field-ripple {
+	    background: black;
+	}
+    }
+    button {
+	font-size: 16px;
+	margin: 10px;
+    }
+}

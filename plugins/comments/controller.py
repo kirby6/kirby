@@ -2,6 +2,7 @@ import datetime
 from bson import ObjectId
 
 from kirby.core.db import collection as comments, bson_to_json
+from kirby.core import websocket
 
 aggregation = [{
     '$lookup': {
@@ -39,4 +40,11 @@ def post_comment(context, message, author_id):
         'is_read': False,
         'post_date': datetime.datetime.utcnow()
     }
-    return bson_to_json(comments.insert_one(comment).inserted_id)
+    result = bson_to_json(comments.insert_one(comment).inserted_id)
+    websocket.emit(
+        'comment', {
+            'msg': 'comment posted',
+            'id': result,
+            'author_id': bson_to_json(author_id),
+        })
+    return result

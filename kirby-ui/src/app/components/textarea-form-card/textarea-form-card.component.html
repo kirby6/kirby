@@ -1,0 +1,8 @@
+<mat-form-field>
+  <mat-label>{{inputLabel}}</mat-label>
+  <textarea matInput
+	    [(ngModel)]="input"
+	    cdkTextareaAutosize
+	    #autosize="cdkTextareaAutosize"></textarea>
+</mat-form-field>
+<button mat-stroked-button color="accent" (click)="submit()">{{buttonLabel}}</button>
