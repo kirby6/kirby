@@ -33,4 +33,8 @@ export class HelpPageComponent implements OnInit {
     private getHelp(): Observable<Help> {
         return this.helpsService.get(this.helpId);
     }
+
+    public getCommentContext() {
+        return { id: this.help.id, type: 'help' };
+    }
 } 
