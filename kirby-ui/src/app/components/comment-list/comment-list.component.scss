@@ -4,6 +4,9 @@
     mat-card {
 	background: $background;
 	font-weight: 200;
+	display: flex;
+	flex-direction: column;
+	height: inherit;
 	
 	mat-card-header {
 	    display: flex;
@@ -17,30 +20,32 @@
 	    }
 	}
 	
+	mat-card-footer {
+	    margin: 0;
+	    margin-top: auto;
+	    opacity: 0.95;
+	}
+	
 	mat-card-content {
-	    .mat-list {
+	    overflow: auto;
+	    mat-list {
 		padding: 0;
-	    }
-	    
-	    mat-list-item {
-		background: white;
-		&:hover {
-		    background: #eee;
+		mat-list-item {
+		    background: white;
+		    opacity: 0.95;
+		    &:hover {
+			background: #eee;
+		    }
+		    display: flex;
+		    flex-direction: row;
+		    height: 100%;
+		    margin-bottom: 10px;
+		    color: black;
+		    
+		    &.current-user-comment {
+			border-bottom: 7px solid $active;
+		    }
 		}
-		display: flex;
-		flex-direction: row;
-		height: 100%;
-		margin-bottom: 10px;
-		color: black;
-
-		&.current-user-comment {
-		    border-bottom: 7px solid $active;
-		}
-	    }
-	    .empty-list {
-		color: white;
-		text-align: center;
-		background: none;
 	    }
 	}
 	

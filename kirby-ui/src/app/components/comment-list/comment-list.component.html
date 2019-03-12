@@ -14,9 +14,11 @@
                 <div class="date">{{comment.post_date.date}}</div>
             </mat-list-item>
         </mat-list>
+    </mat-card-content>
+    <mat-card-footer>
 	<textarea-form-card (onSubmit)="postComment($event)"
 			    [inputLabel]="'תגובה:'"
 			    [buttonLabel]="'הגב'">
 	</textarea-form-card>
-    </mat-card-content>
+    </mat-card-footer>
 </mat-card>

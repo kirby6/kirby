@@ -15,6 +15,7 @@
 	textarea {
 	    font-weight: 300;
 	    font-size: 16px;
+	    caret-color: black;
 	    max-width: 100%;
 	}
 	/deep/ .mat-form-field-underline {
@@ -27,5 +28,11 @@
     button {
 	font-size: 16px;
 	margin: 10px;
+    }
+    
+    button:disabled,
+    button[disabled] {
+	color: gray;
+	border: none;
     }
 }
