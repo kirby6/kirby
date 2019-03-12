@@ -5,4 +5,4 @@
     <mat-card-title><button mat-flat-button color="accent" (click)="openFilesMenu()">צפה בקבצים</button></mat-card-title>
   </mat-card-header>
 </mat-card>
-<comment-list></comment-list>
+<comment-list [context]="getCommentContext()"></comment-list>

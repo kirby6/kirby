@@ -36,4 +36,8 @@ export class AssignmentPageComponent {
     openFilesMenu() {
         this.bottomSheet.open(ActivityFileComponent, { data: { files: this.assignment.activity.files, activity: this.assignment.activity } });
     }
+
+    public getCommentContext() {
+        return { id: this.assignment.id, type: 'assignment' };
+    }
 }
