@@ -72,7 +72,6 @@ import { CommentListComponent } from './components/comment-list/comment-list.com
         CustomMaterialModule,
         TreeModule.forRoot(),
         TruncateModule,
-        SocketIoModule,
         AgGridModule.withComponents([AssignmentCellRenderer]),
     ],
     providers: [

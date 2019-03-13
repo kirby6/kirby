@@ -135,13 +135,13 @@ export class AssignmentsMatrixComponent implements OnInit {
         return [
             {
                 headerName: 'משתמש',
-                valueGetter: (params) => `${params.data[0].user.username}`,
+                valueGetter: (params) => params.data[0] && `${((params.data[0] || {}).user || {}).username || 'לא ידוע'}`,
                 pinned: 'right',
                 width: 150
-            },
+            },      
             {
                 headerName: 'שם',
-                valueGetter: (params) => `${params.data[0].user.firstname || ""} ${params.data[0].user.lastname || ""}`,
+                valueGetter: (params) => params.data[0] && `${(params.data[0].user || {}).firstname || ""} ${(params.data[0].user || {}).lastname || ""}`,
                 pinned: 'right',
                 width: 150
             }

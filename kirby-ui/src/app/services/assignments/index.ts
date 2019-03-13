@@ -26,11 +26,16 @@ export class AssignmentsService {
         return this.http.get<Assignment[]>(`${config.apiUrl}/${this._prefix}/`, { params });
     }
 
-    assign(assignment: Assignment): Observable<string> {
-        return this.http.post<string>(`${config.apiUrl}/${this._prefix}/`, assignment);
+    assign(activityId: string, userId: string): Observable<string> {
+        return this.http.post<string>(`${config.apiUrl}/${this._prefix}/`, {'activity_id': activityId, 'user_id': userId});
     }
 
     update(assignmentId: string, status: AssignmentStatuses): Observable<void> {
         return this.http.patch<void>(`${config.apiUrl}/${this._prefix}/${assignmentId}`, { status });
+    }
+
+    //@web_api.route('/<string:assignment_id>/redo', methods=['PATCH'])
+    updateRedoCount(assignmentId: string, newRedoCount: number) {
+        return this.http.patch<void>(`${config.apiUrl}/${this._prefix}/${assignmentId}/redo`, {});
     }
 }
