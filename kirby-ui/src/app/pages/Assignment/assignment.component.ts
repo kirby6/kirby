@@ -40,4 +40,8 @@ export class AssignmentPageComponent {
     public getCommentContext() {
         return { id: this.assignment.id, type: 'assignment' };
     }
+
+    public getHelpContext() {
+        return { id: this.assignment.id, type: 'assignment' };
+    }
 }

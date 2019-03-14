@@ -2,7 +2,10 @@
   <mat-card-header>
     <mat-card-title>{{assignment.activity.name}}</mat-card-title>
     <br />
-    <mat-card-title><button mat-flat-button color="accent" (click)="openFilesMenu()">צפה בקבצים</button></mat-card-title>
+    <mat-card-title>
+      <button mat-flat-button color="accent" (click)="openFilesMenu()">צפה בקבצים</button>
+      <request-help [context]="getHelpContext()"></request-help>
+    </mat-card-title>
   </mat-card-header>
 </mat-card>
-<comment-list [context]="getCommentContext()"></comment-list>
+<comment-list *ngIf="assignment" [context]="getCommentContext()"></comment-list>
