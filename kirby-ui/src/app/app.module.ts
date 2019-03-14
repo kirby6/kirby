@@ -42,6 +42,7 @@ import { AgGridModule } from 'ag-grid-angular';
 import { AssignmentCellRenderer } from './pages/Assignments/assignments-matrix/custom-cells/assignments-cell.component';
 import { ActivityFileComponent } from './pages/Assignment/activity-file/activity-file.component';
 import { CommentListComponent } from './components/comment-list/comment-list.component';
+import { GitSubmissionComponent } from './pages/Assignment/submissions/git-submission.component';
 
 @NgModule({
     declarations: [
@@ -71,6 +72,7 @@ import { CommentListComponent } from './components/comment-list/comment-list.com
         TextareaFormCardComponent,
         RequestHelpComponent,
         RequestHelpDialogComponent,
+        GitSubmissionComponent,
     ],
     entryComponents: [
         RequestHelpDialogComponent,

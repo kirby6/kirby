@@ -6,31 +6,12 @@
 
     mat-card {
 	background: $background;
-	display: flex;
-	flex-direction: column;
-	font-weight: 200;
 	margin-bottom: 40px;
-	
-	mat-card-header {
-	    display: flex;
-	    flex-direction: column;
-	    justify-content: space-between;
-	    margin-bottom: 10px;
-	    
-	    mat-card-title {
-		margin: 0;
 
-		request-help {
-		    margin-right: 5px;
-		}
-	    }
-	}
-	
 	mat-card-content {
-	    display: grid;
-	    grid-template-columns: 25% 25% 25%;
-	    justify-content: center;
-	    grid-gap: 60px 50px;
+	    request-help {
+		margin-right: 10px;
+	    }
 	}
     }
 }

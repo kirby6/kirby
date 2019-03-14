@@ -54,7 +54,6 @@ export class CommentListComponent implements OnInit {
         this.commentsService.getByContext(this.context).pipe(
             map(this.sortByDateAsc)
         ).subscribe((comments) => {
-            console.log(comments);
             this.comments = comments;
         });
     }

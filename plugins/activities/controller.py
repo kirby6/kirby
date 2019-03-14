@@ -1,4 +1,4 @@
-from bson import json_util, ObjectId
+from bson import ObjectId
 
 from kirby.core.db import bson_to_json
 from .service import get_all_activities_from_db, add_files_to_filesystem, \
@@ -10,7 +10,7 @@ def get_all_activities():
     return bson_to_json(list(get_all_activities_from_db()))
 
 
-def create_activity(name, files=None, id=None):
+def create_activity(name, activity_type, files=None, id=None):
     files = [{
         'data':
         file,
@@ -23,7 +23,7 @@ def create_activity(name, files=None, id=None):
     } for file in files]
     file_ids = add_files_to_filesystem(files)
     files = [get_metadata_by_id(file_id) for file_id in file_ids]
-    activity = {'name': name, 'files': files}
+    activity = {'name': name, 'type': activity_type, 'files': files}
     if id:
         activity['_id'] = id
     return bson_to_json(insert_activity_to_db(activity))

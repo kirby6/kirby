@@ -15,8 +15,8 @@ export class ActivitiesService {
         return this.http.get<Activity[]>(`${config.apiUrl}/${this._prefix}/`);
     }
 
-    create(excercise: Activity): Observable<Activity> {
-        return this.http.post<Activity>(`${config.apiUrl}/${this._prefix}/`, excercise);
+    create(activity: Activity): Observable<Activity> {
+        return this.http.post<Activity>(`${config.apiUrl}/${this._prefix}/`, activity);
     }
 
     downloadFile(activity_id: string, file_id: string): Observable<Blob> {

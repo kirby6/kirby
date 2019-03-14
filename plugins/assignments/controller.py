@@ -96,6 +96,11 @@ def get_user_assignments(user_id=None):
         {
             '$unwind': '$user'
         },
+        {
+            '$project': {
+                'user.password': 0
+            }
+        },
     ]
     if user_id:
         if not isinstance(user_id, ObjectId):
@@ -107,55 +112,21 @@ def get_user_assignments(user_id=None):
 def get_by_id(assignment_id):
     if not isinstance(assignment_id, ObjectId):
         assignment_id = ObjectId(assignment_id)
-    return bson_to_json(next(
-        iter(
-            assignments.aggregate([{
-                '$match': {
+    return bson_to_json(
+        next(
+            iter(
+                assignments.aggregate([{
+                    '$match': {
                         '_id': assignment_id
-                        }
-            },
-                {
-                '$lookup': {
-                    'from': 'activities',
-                    'localField': 'activity_id',
-                    'foreignField': '_id',
-                    'as': 'activity'
-                }
-            }, {
-                '$unwind': '$activity'
-            }])), None))
-
-
-def get_user_assignments(user_id=None):
-    aggregation = [{
-        '$lookup': {
-            'from': 'activities',
-            'localField': 'activity_id',
-            'foreignField': '_id',
-            'as': 'activity'
-        }
-    }, {
-        '$unwind': '$activity'
-    },
-        {
-        '$lookup': {
-            'from': 'modules',
-            'localField': 'activity_id',
-            'foreignField': 'activities',
-            'as': 'modules'
-        }
-    },
-        {
-        '$graphLookup': {
-            'from': 'modules',
-            'startWith': '$modules._id',
-            'connectFromField': 'parent',
-            'connectToField': '_id',
-            'as': 'modules'
-        }
-    }]
-    if user_id:
-        if not isinstance(user_id, ObjectId):
-            user_id = ObjectId(user_id)
-        aggregation.append({'$match': {'user_id': user_id}})
-    return bson_to_json(list(assignments.aggregate(aggregation)))
+                    }
+                },
+                                       {
+                                           '$lookup': {
+                                               'from': 'activities',
+                                               'localField': 'activity_id',
+                                               'foreignField': '_id',
+                                               'as': 'activity'
+                                           }
+                                       }, {
+                                           '$unwind': '$activity'
+                                       }])), None))
