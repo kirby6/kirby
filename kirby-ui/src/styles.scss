@@ -264,3 +264,8 @@ $altTheme: mat-light-theme($theme-primary, $theme-accent, $theme-warn);
 .mat-menu-content:not(:empty) {
   padding: 0 !important;
 }
+
+// Custom classes
+.help-dialog .mat-dialog-container {
+    background: rgba(0,0,0,0.9);
+}
