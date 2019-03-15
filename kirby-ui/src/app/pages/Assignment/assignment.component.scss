@@ -1,17 +1,53 @@
 @import "./../../../color-scheme.scss";
 :host {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
+    .assignment {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: flex-start;
+	
+	$margin: 10px;
+	$descriptionHeight: 80px;
+	$descriptionMarginBottom: 20px;
+	
+	.static-content {
+	    margin: $margin;
+	    flex-grow: 1;
+	    display: flex;
+	    flex-direction: column;
+	    justify-content: space-around;
+	    
+	    .description {
+		height: $descriptionHeight;
+		margin-bottom: $descriptionMarginBottom;
+		
+		mat-card-content {
+		    request-help {
+			margin-right: 10px;
+		    }
+		}
+	    }
+	    
+	    comment-list {
+		height: 600px;
+	    }
+	}
+	
+	.submissions {
+	    margin: $margin;
+	    flex-grow: 1;
+	    display: flex;
+	    flex-direction: column;
+	    justify-content: space-around;
+
+	    .submission {
+		margin-bottom: $descriptionMarginBottom;
+		min-height: $descriptionHeight;
+	    }
+	}
+    }
 
     mat-card {
 	background: $background;
-	margin-bottom: 40px;
-
-	mat-card-content {
-	    request-help {
-		margin-right: 10px;
-	    }
-	}
     }
 }

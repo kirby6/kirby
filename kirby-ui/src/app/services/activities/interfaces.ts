@@ -3,6 +3,7 @@ export interface Activity {
     name: string;
     module: any;
     type: string;
+    submissions?: object;
     files?: File[];
 }
 

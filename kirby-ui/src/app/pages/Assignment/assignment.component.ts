@@ -34,7 +34,16 @@ export class AssignmentPageComponent {
     }
 
     openFilesMenu() {
-        this.bottomSheet.open(ActivityFileComponent, { data: { files: this.assignment.activity.files, activity: this.assignment.activity } });
+        this.bottomSheet.open(ActivityFileComponent, {
+            data: {
+                files: this.assignment.activity.files,
+                activity: this.assignment.activity
+            }
+        });
+    }
+
+    public getSubmissions() {
+        return Object.keys(this.assignment.activity.submissions);
     }
 
     public getCommentContext() {
