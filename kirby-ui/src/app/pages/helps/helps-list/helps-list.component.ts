@@ -1,8 +1,6 @@
-import { ActivatedRoute, Router } from '@angular/router';
-import { AssignmentsService } from './../../../services/assignments/index';
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { EventNotification } from 'src/app/components/event-list/interfaces';
-import { AuthenticationService } from 'src/app/services/authentication';
 import { NotificationsService } from 'src/app/services/notifications';
 import { HelpsService } from 'src/app/services/helps';
 import { Help } from 'src/app/services/helps/interfaces';
@@ -41,7 +39,7 @@ export class HelpsListComponent implements OnInit {
     private helpToEventNotification(help: Help): EventNotification {
         return {
             id: help.id,
-            name: `from ${help.sender.username} to ${help.receiving_group.name}`,
+            name: `מ${help.sender.firstname} ${help.sender.lastname} ל${help.receiving_group.name}`,
             description: help.message,
             isRead: help.is_read,
         }

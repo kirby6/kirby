@@ -11,4 +11,5 @@ export interface Help {
     is_closed?: boolean;
     is_read?: boolean;
     creation_time?: string;
+    context?: object;
 }

@@ -2,9 +2,9 @@
 :host {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
-
+    
     mat-card {
+	flex-shrink: 0;
 	background: $background;
 	display: flex;
 	flex-direction: column;
@@ -19,18 +19,20 @@
 	    
 	    mat-card-title {
 		margin: 0;
-
-		request-help {
-		    margin-right: 5px;
-		}
 	    }
 	}
-	
+
 	mat-card-content {
-	    display: grid;
-	    grid-template-columns: 25% 25% 25%;
-	    justify-content: center;
-	    grid-gap: 60px 50px;
+	    font-size: 30px;
 	}
+
+	mat-card-footer {
+	    margin: 1px;
+	    font-size: 14px;
+	}
+    }
+
+    comment-list {
+	height: 600px;
     }
 }

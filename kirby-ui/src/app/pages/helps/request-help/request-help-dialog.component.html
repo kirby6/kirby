@@ -1,0 +1,16 @@
+<h1 mat-dialog-title>בקשה לעזרה</h1>
+<div mat-dialog-content>
+  <mat-form-field>
+    <mat-label>הודעה</mat-label>
+    <textarea matInput
+	      [(ngModel)]="message"
+              cdkTextareaAutosize
+              #autosize="cdkTextareaAutosize"></textarea>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">ביטול</button>
+  <button mat-button [mat-dialog-close]="message" cdkFocusInitial [disabled]="!message">
+    בקש
+  </button>
+</div>

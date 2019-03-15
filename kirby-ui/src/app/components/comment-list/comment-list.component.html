@@ -1,0 +1,24 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>תגובות</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <mat-list>
+            <mat-list-item *ngFor="let comment of comments" [ngClass]="getCommentClass(comment)">
+                <div class="content">
+                    <p class="message">{{comment.message}}</p>
+                    <p class="author">
+		      {{comment.author.firstname || 'לא ידוע'}} {{comment.author.lastname}}
+		    </p>
+                </div>
+                <div class="date">{{comment.post_date.date}}</div>
+            </mat-list-item>
+        </mat-list>
+    </mat-card-content>
+    <mat-card-footer>
+	<textarea-form-card (onSubmit)="postComment($event)"
+			    [inputLabel]="'תגובה:'"
+			    [buttonLabel]="'הגב'">
+	</textarea-form-card>
+    </mat-card-footer>
+</mat-card>

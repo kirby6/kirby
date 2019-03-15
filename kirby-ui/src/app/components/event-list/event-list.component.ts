@@ -16,7 +16,7 @@ export class EventListComponent {
     @Output() public clicked: EventEmitter<EventNotification> = new EventEmitter();
 
     public get unreadCount(): number {
-        return this.events && this.events.length || 0;
+        return this.events && this.events.filter(event => !event.isRead).length || 0;
     }
     getClass(EventNotification: EventNotification) {
         return { read: !!EventNotification.isRead, unread: !EventNotification.isRead };
