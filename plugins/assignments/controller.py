@@ -2,6 +2,16 @@ from . import statuses
 from kirby.core.db import collection as assignments, bson_to_json
 from bson import ObjectId
 import pymongo
+from plugins.activities import prepare_submissions
+
+
+def _create_assignments_index():
+    index_name = 'user_activity_index'
+    if index_name not in assignments.index_information():
+        assignments.create_index([('user_id', pymongo.ASCENDING),
+                                  ('activity_id', pymongo.ASCENDING)],
+                                 unique=True,
+                                 name=index_name)
 
 
 def assign_to_user(user_id, activity_id):
@@ -9,18 +19,16 @@ def assign_to_user(user_id, activity_id):
         user_id = ObjectId(user_id)
     if not isinstance(activity_id, ObjectId):
         activity_id = ObjectId(activity_id)
+    submission = prepare_submissions(activity_id, user_id)
     assignment = {
         'user_id': user_id,
         'activity_id': activity_id,
         'status': statuses.OPENED,
-        'redoCount': 0
+        'redoCount': 0,
     }
-    index_name = 'user_activity_index'
-    if index_name not in assignments.index_information():
-        assignments.create_index([('user_id', pymongo.ASCENDING),
-                                  ('activity_id', pymongo.ASCENDING)],
-                                 unique=True,
-                                 name=index_name)
+    if submission:
+        assignment['submission'] = submission
+    _create_assignments_index()
     return bson_to_json(assignments.insert(assignment))
 
 
@@ -43,7 +51,7 @@ def update_status(assignment_id, status):
 
 def update_redo_count(assignment_id, new_redo_count):
     if new_redo_count < 0:
-        raise Exception('Invalid redo count, must be large than zero')
+        raise Exception('Invalid redo count, must be larger than zero')
     if not isinstance(assignment_id, ObjectId):
         assignment_id = ObjectId(assignment_id)
     return assignments.update_one({
@@ -96,6 +104,11 @@ def get_user_assignments(user_id=None):
         {
             '$unwind': '$user'
         },
+        {
+            '$project': {
+                'user.password': 0
+            }
+        },
     ]
     if user_id:
         if not isinstance(user_id, ObjectId):
@@ -107,55 +120,21 @@ def get_user_assignments(user_id=None):
 def get_by_id(assignment_id):
     if not isinstance(assignment_id, ObjectId):
         assignment_id = ObjectId(assignment_id)
-    return bson_to_json(next(
-        iter(
-            assignments.aggregate([{
-                '$match': {
+    return bson_to_json(
+        next(
+            iter(
+                assignments.aggregate([{
+                    '$match': {
                         '_id': assignment_id
-                        }
-            },
-                {
-                '$lookup': {
-                    'from': 'activities',
-                    'localField': 'activity_id',
-                    'foreignField': '_id',
-                    'as': 'activity'
-                }
-            }, {
-                '$unwind': '$activity'
-            }])), None))
-
-
-def get_user_assignments(user_id=None):
-    aggregation = [{
-        '$lookup': {
-            'from': 'activities',
-            'localField': 'activity_id',
-            'foreignField': '_id',
-            'as': 'activity'
-        }
-    }, {
-        '$unwind': '$activity'
-    },
-        {
-        '$lookup': {
-            'from': 'modules',
-            'localField': 'activity_id',
-            'foreignField': 'activities',
-            'as': 'modules'
-        }
-    },
-        {
-        '$graphLookup': {
-            'from': 'modules',
-            'startWith': '$modules._id',
-            'connectFromField': 'parent',
-            'connectToField': '_id',
-            'as': 'modules'
-        }
-    }]
-    if user_id:
-        if not isinstance(user_id, ObjectId):
-            user_id = ObjectId(user_id)
-        aggregation.append({'$match': {'user_id': user_id}})
-    return bson_to_json(list(assignments.aggregate(aggregation)))
+                    }
+                },
+                                       {
+                                           '$lookup': {
+                                               'from': 'activities',
+                                               'localField': 'activity_id',
+                                               'foreignField': '_id',
+                                               'as': 'activity'
+                                           }
+                                       }, {
+                                           '$unwind': '$activity'
+                                       }])), None))

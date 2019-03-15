@@ -1,11 +1,30 @@
-<mat-card *ngIf="assignment">
-  <mat-card-header>
-    <mat-card-title>{{assignment.activity.name}}</mat-card-title>
-    <br />
-    <mat-card-title>
-      <button mat-flat-button color="accent" (click)="openFilesMenu()">צפה בקבצים</button>
-      <request-help [context]="getHelpContext()"></request-help>
-    </mat-card-title>
-  </mat-card-header>
-</mat-card>
-<comment-list *ngIf="assignment" [context]="getCommentContext()"></comment-list>
+<div *ngIf="assignment" class="assignment">
+  <div class="static-content">
+    <mat-card class="description">
+      <mat-card-header>
+	<mat-card-title>{{assignment.activity.name}}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+	<button mat-flat-button color="accent" (click)="openFilesMenu()">צפה בקבצים</button>
+	<request-help [context]="getHelpContext()"></request-help>
+      </mat-card-content>
+    </mat-card>
+    
+    <comment-list *ngIf="assignment" [context]="getCommentContext()"></comment-list>
+  </div>
+  
+  <div class="submissions">
+    <mat-card class="submission"
+	      *ngFor="let submission of getSubmissions()">
+      <mat-card-header>
+	<mat-card-title>הגשה:</mat-card-title>
+      </mat-card-header>
+      <mat-card-content [ngSwitch]="submission">
+	<git-submission *ngSwitchCase="'git'"
+			[submission]="assignment.submission"></git-submission>
+	<file-submission *ngSwitchCase="'file'"
+			 [submission]="assignment.submission"></file-submission>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

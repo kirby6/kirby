@@ -1,4 +1,7 @@
-from bson import json_util, ObjectId
+import os
+import sys
+import importlib
+from bson import ObjectId
 
 from kirby.core.db import bson_to_json
 from .service import get_all_activities_from_db, add_files_to_filesystem, \
@@ -10,7 +13,7 @@ def get_all_activities():
     return bson_to_json(list(get_all_activities_from_db()))
 
 
-def create_activity(name, files=None, id=None):
+def create_activity(name, submissions=None, files=None, id=None):
     files = [{
         'data':
         file,
@@ -24,6 +27,8 @@ def create_activity(name, files=None, id=None):
     file_ids = add_files_to_filesystem(files)
     files = [get_metadata_by_id(file_id) for file_id in file_ids]
     activity = {'name': name, 'files': files}
+    if submissions:
+        activity['submissions'] = submissions
     if id:
         activity['_id'] = id
     return bson_to_json(insert_activity_to_db(activity))
@@ -51,3 +56,18 @@ def get_activity_file_by_id(activity_id, file_id):
     if not filter(lambda f: f['_id'] == file_id, activity['files']):
         return None
     return get_file_by_id(file_id)
+
+
+def prepare_submissions(activity_id, user_id):
+    activity = get_activity_by_id(activity_id)
+    result = {}
+    current_path = os.path.abspath(os.path.dirname(__file__))
+    sys.path.append(current_path)
+    for submission in os.listdir(os.path.join(current_path, 'submissions')):
+        submission = os.path.splitext(submission)[0]
+        module_path = '.' + submission
+        module = importlib.import_module(module_path, 'submissions')
+        result[submission] = module.prepare(
+            activity['submissions'][submission], user_id)
+    sys.path.remove(current_path)
+    return result

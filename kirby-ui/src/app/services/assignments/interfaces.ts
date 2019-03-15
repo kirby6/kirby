@@ -10,12 +10,13 @@ export interface Assignment {
     activity: Activity;
     modules: Module[];
     redo_count: number;
+    submission: object;
 }
 
 export enum AssignmentStatuses {
-    Opened='opened',
-    Submitted='submitted',
-    Redo='redo',
-    Done='done',
-    NotOpened='not-opened',
+    Opened = 'opened',
+    Submitted = 'submitted',
+    Redo = 'redo',
+    Done = 'done',
+    NotOpened = 'not-opened',
 }

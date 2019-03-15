@@ -13,8 +13,11 @@ def get_all_activities_route():
 
 @web_api.route('/', methods=['POST'])
 def create_activity_route():
-    return json.dumps(create_activity(
-        name=request.form['name'], files=request.files.values()))
+    return json.dumps(
+        create_activity(
+            name=request.form['name'],
+            submissions=request.form.get('submissions'),
+            files=request.files.values()))
 
 
 @web_api.route('/<string:activity_id>', methods=['PUT'])
