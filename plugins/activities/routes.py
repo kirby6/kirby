@@ -16,7 +16,7 @@ def create_activity_route():
     return json.dumps(
         create_activity(
             name=request.form['name'],
-            submission_type=request.form['submission_type'],
+            submissions=request.form.get('submissions'),
             files=request.files.values()))
 
 
