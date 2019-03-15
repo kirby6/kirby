@@ -1,3 +1,6 @@
+import os
+import sys
+import importlib
 from bson import ObjectId
 
 from kirby.core.db import bson_to_json
@@ -53,3 +56,18 @@ def get_activity_file_by_id(activity_id, file_id):
     if not filter(lambda f: f['_id'] == file_id, activity['files']):
         return None
     return get_file_by_id(file_id)
+
+
+def prepare_submissions(activity_id, user_id):
+    activity = get_activity_by_id(activity_id)
+    result = {}
+    current_path = os.path.abspath(os.path.dirname(__file__))
+    sys.path.append(current_path)
+    for submission in os.listdir(os.path.join(current_path, 'submissions')):
+        submission = os.path.splitext(submission)[0]
+        module_path = '.' + submission
+        module = importlib.import_module(module_path, 'submissions')
+        result[submission] = module.prepare(
+            activity['submissions'][submission], user_id)
+    sys.path.remove(current_path)
+    return result
