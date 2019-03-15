@@ -22,8 +22,8 @@
       <mat-card-content [ngSwitch]="submission">
 	<git-submission *ngSwitchCase="'git'"
 			[submission]="assignment.submission"></git-submission>
-	<!-- <file-submission *ngSwitchCase="'file'" -->
-	<!-- 		       [submission]="assignment.submission"></file-submission> -->
+	<file-submission *ngSwitchCase="'file'"
+			 [submission]="assignment.submission"></file-submission>
       </mat-card-content>
     </mat-card>
   </div>

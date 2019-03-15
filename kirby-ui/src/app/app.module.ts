@@ -43,6 +43,7 @@ import { AssignmentCellRenderer } from './pages/Assignments/assignments-matrix/c
 import { ActivityFileComponent } from './pages/Assignment/activity-file/activity-file.component';
 import { CommentListComponent } from './components/comment-list/comment-list.component';
 import { GitSubmissionComponent } from './pages/Assignment/submissions/git-submission/git-submission.component';
+import { FileSubmissionComponent } from './pages/Assignment/submissions/file-submission/file-submission.component';
 
 @NgModule({
     declarations: [
@@ -73,6 +74,7 @@ import { GitSubmissionComponent } from './pages/Assignment/submissions/git-submi
         RequestHelpComponent,
         RequestHelpDialogComponent,
         GitSubmissionComponent,
+        FileSubmissionComponent,
     ],
     entryComponents: [
         RequestHelpDialogComponent,
