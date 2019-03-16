@@ -13,6 +13,9 @@
           <mat-icon matListIcon>library_books</mat-icon>
           {{node.name}}
         </li>
+	<add-navigation-item *ngIf="isEditable"
+			     [label]="addNavigationItemLabel"
+			     (onAdd)="createNode($event, node.id)"></add-navigation-item>
       </mat-tree-node>
       <mat-nested-tree-node *matTreeNodeDef="let node; when: hasChild">
         <li>
