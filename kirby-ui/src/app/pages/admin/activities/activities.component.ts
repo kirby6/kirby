@@ -4,6 +4,7 @@ import { ModulesService } from 'src/app/services/modules';
 import { Module } from 'src/app/services/modules/interfaces';
 import { Component } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
+import { NotificationsService } from 'src/app/services/notifications';
 import { map, switchMap } from 'rxjs/operators';
 import * as _ from 'lodash';
 import { NavigationItem, NewNavigationItem } from 'src/app/components/navigation-list/interfaces';
@@ -18,11 +19,22 @@ export class ActivitiesPageComponent {
     private getModules$: Subject<NavigationItem> = new Subject();
 
     constructor(
+        private notificationsService: NotificationsService,
         private activitiesService: ActivitiesService,
         private modulesService: ModulesService,
     ) { }
 
     ngOnInit() {
+        this.updateModules();
+        this.notificationsService.getMessage<any>('module')
+            .subscribe((notification) => {
+                if (notification.msg === 'module created') {
+                    this.updateModules();
+                }
+            });
+    }
+
+    private updateModules() {
         this.getModules$
             .pipe(switchMap(() => this.getModules()))
             .subscribe((modules: NavigationItem[]) => {

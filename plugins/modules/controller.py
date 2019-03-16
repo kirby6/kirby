@@ -1,40 +1,44 @@
-from bson import json_util, ObjectId
+from bson import ObjectId
 
 from kirby.core.db import bson_to_json, collection as modules
+from kirby.core import websocket
 
 
 def get_all_modules():
     return bson_to_json(
-        list(modules.aggregate([
-            {
-                '$lookup': {
-                    'from': 'activities',
-                    'localField': 'activities',
-                    'foreignField': '_id',
-                    'as': 'activities'
-                }
-            },
-        ])))
+        list(
+            modules.aggregate([
+                {
+                    '$lookup': {
+                        'from': 'activities',
+                        'localField': 'activities',
+                        'foreignField': '_id',
+                        'as': 'activities'
+                    }
+                },
+            ])))
 
 
 def get_module_by_id(id):
     if not isinstance(id, ObjectId):
         id = ObjectId(id)
-    return bson_to_json(list(modules.aggregate([
-        {
-            '$match': {
-                '_id': id
-            }
-        },
-        {
-            '$lookup': {
-                'from': 'activities',
-                'localField': 'activities',
-                'foreignField': '_id',
-                'as': 'activities'
-            }
-        },
-    ])))[0]
+    return bson_to_json(
+        list(
+            modules.aggregate([
+                {
+                    '$match': {
+                        '_id': id
+                    }
+                },
+                {
+                    '$lookup': {
+                        'from': 'activities',
+                        'localField': 'activities',
+                        'foreignField': '_id',
+                        'as': 'activities'
+                    }
+                },
+            ])))[0]
 
 
 def create_module(name, parent=None):
@@ -43,7 +47,12 @@ def create_module(name, parent=None):
         if not isinstance(parent, ObjectId):
             parent = ObjectId(parent)
         module_to_add['parent'] = parent
-    return json_util.dumps(modules.insert_one(module_to_add).inserted_id)
+    result = bson_to_json(modules.insert_one(module_to_add).inserted_id)
+    websocket.emit('module', {
+        'msg': 'module created',
+        'id': result,
+    })
+    return result
 
 
 def add_activity(module_id, activity_id):
