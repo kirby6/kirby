@@ -8,7 +8,9 @@ def required_roles(*roles):
         @wraps(func)
         @jwt_required
         def check_roles(*args, **kwargs):
-            current_roles = list(map(lambda s: s.lower(), get_jwt_claims().get('roles', [])))
+            current_roles = list(
+                map(lambda s: s.lower(),
+                    get_jwt_claims().get('roles', [])))
             for role in roles:
                 if role.lower() not in current_roles:
                     return jsonify({"error": "Unauthorized"}), 403
