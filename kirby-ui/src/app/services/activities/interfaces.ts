@@ -1,7 +1,9 @@
+import { Module } from '../modules/interfaces';
+
 export interface Activity {
     id?: string;
     name: string;
-    module: any;
+    modules?: Module[];
     type: string;
     submissions?: object;
     files?: File[];

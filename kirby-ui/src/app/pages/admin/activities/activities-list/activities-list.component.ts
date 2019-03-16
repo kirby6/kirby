@@ -4,7 +4,10 @@ import { ModulesService } from 'src/app/services/modules';
 import { Component, OnInit } from '@angular/core';
 import { EventNotification } from 'src/app/components/event-list/interfaces';
 import { Activity } from 'src/app/services/activities/interfaces';
+import { Module } from 'src/app/services/modules/interfaces';
+import { zip } from 'rxjs';
 import { map } from 'rxjs/operators';
+import * as _ from 'lodash';
 
 @Component({
     selector: 'activities-list',
@@ -17,18 +20,22 @@ export class ActivitiesListComponent implements OnInit {
 
     constructor(
         private activitiesService: ActivitiesService,
+        private modulesService: ModulesService,
         private router: Router,
         private route: ActivatedRoute) { }
 
     ngOnInit() {
         this.route.paramMap.subscribe(params => {
             let moduleId: string = params.get('moduleId');
-
             this.activitiesService.getAll()
                 .pipe(
-                    map((activities: Activity[]) => activities),
-                    // .filter(a => a.modules.findIndex(module => module.id == moduleId))),
-                    map((activities: Activity[]) => activities.map(this.activityToEventNotification)),
+                    map((activities: Activity[]) => {
+                        if (moduleId) {
+                            activities = activities
+                                .filter(a => a.modules.map(m => m.id).includes(moduleId))
+                        }
+                        return activities.map(this.activityToEventNotification);
+                    }),
                 )
                 .subscribe((activities: EventNotification[]) => {
                     this.activities = activities;
