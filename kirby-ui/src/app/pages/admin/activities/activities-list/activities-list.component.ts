@@ -11,12 +11,12 @@ import * as _ from 'lodash';
 
 @Component({
     selector: 'activities-list',
-    template: `
-        <event-list title='תרגילים' [events]="activities" (clicked)="onActivitySelected($event)"></event-list>
-    `,
+    templateUrl: './activities-list.component.html',
+    styleUrls: ['./activities-list.component.scss']
 })
 export class ActivitiesListComponent implements OnInit {
-    public activities: EventNotification[] = [];
+    private activities: EventNotification[] = [];
+    public filteredActivities: EventNotification[] = [];
 
     constructor(
         private activitiesService: ActivitiesService,
@@ -39,8 +39,14 @@ export class ActivitiesListComponent implements OnInit {
                 )
                 .subscribe((activities: EventNotification[]) => {
                     this.activities = activities;
+                    this.filteredActivities = this.activities;
                 });
         });
+    }
+
+    public filterActivities(filterString: string) {
+        this.filteredActivities = this.activities
+            .filter(a => a.name.toLowerCase().includes(filterString.toLowerCase()));
     }
 
     private activityToEventNotification(activity: Activity): EventNotification {
