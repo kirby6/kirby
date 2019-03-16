@@ -31,9 +31,15 @@
           </div>
           <ul [class.example-tree-invisible]="!treeControl.isExpanded(node)">
             <ng-container matTreeNodeOutlet></ng-container>
+	    <add-navigation-item *ngIf="isEditable"
+				 [label]="addNavigationItemLabel"
+				 (onAdd)="createNode($event, node.id)"></add-navigation-item>
           </ul>
         </li>
       </mat-nested-tree-node>
     </mat-tree>
+    <add-navigation-item *ngIf="isEditable"
+			 [label]="addNavigationItemLabel"
+			 (onAdd)="createNode($event)"></add-navigation-item>
   </mat-card-content>
 </mat-card>

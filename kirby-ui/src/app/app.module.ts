@@ -46,6 +46,7 @@ import { ActivityFileComponent } from './pages/Assignment/activity-file/activity
 import { CommentListComponent } from './components/comment-list/comment-list.component';
 import { GitSubmissionComponent } from './pages/Assignment/submissions/git-submission/git-submission.component';
 import { FileSubmissionComponent } from './pages/Assignment/submissions/file-submission/file-submission.component';
+import { AddNavigationItem } from './components/navigation-list/add-navigation-item/add-navigation-item.component';
 
 @NgModule({
     declarations: [
@@ -79,6 +80,7 @@ import { FileSubmissionComponent } from './pages/Assignment/submissions/file-sub
         RequestHelpDialogComponent,
         GitSubmissionComponent,
         FileSubmissionComponent,
+        AddNavigationItem,
     ],
     entryComponents: [
         RequestHelpDialogComponent,

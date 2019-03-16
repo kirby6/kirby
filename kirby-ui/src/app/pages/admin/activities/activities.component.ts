@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import * as _ from 'lodash';
-import { NavigationItem } from 'src/app/components/navigation-list/interfaces';
+import { NavigationItem, NewNavigationItem } from 'src/app/components/navigation-list/interfaces';
 
 @Component({
     selector: 'activities',
@@ -72,5 +72,9 @@ export class ActivitiesPageComponent {
                     return this.createTree(modules);
                 })
             );
+    }
+
+    public createModule(module: NewNavigationItem) {
+        this.modulesService.create(module.name, module.parent).subscribe();
     }
 }

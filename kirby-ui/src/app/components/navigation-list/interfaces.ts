@@ -8,3 +8,8 @@ export interface NavigationItem {
 export interface NavigationTree {
     [parent: string]: NavigationItem[]
 }
+
+export interface NewNavigationItem {
+    name: string;
+    parent?: string;
+}
