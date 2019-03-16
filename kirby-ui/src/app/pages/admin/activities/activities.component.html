@@ -1,0 +1,7 @@
+<div class="container">
+  <navigation-list *ngIf="modules" [items]="modules" [routeNames]="['moduleActivities']"></navigation-list>
+  <div class="spacer"></div>
+  <div class="activities">
+    <router-outlet name="moduleActivities"></router-outlet>
+  </div>
+</div>

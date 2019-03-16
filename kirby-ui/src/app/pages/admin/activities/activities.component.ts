@@ -1,37 +1,35 @@
-﻿import { Module } from './../../services/modules/interfaces';
-import { Assignment } from './../../services/assignments/interfaces';
-import { AuthenticationService } from './../../services/authentication/index';
-import { AssignmentsService } from './../../services/assignments/index';
+import { ActivitiesService } from 'src/app/services/activities';
+import { Activity } from 'src/app/services/activities/interfaces';
+import { ModulesService } from 'src/app/services/modules';
+import { Module } from 'src/app/services/modules/interfaces';
 import { Component } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import * as _ from 'lodash';
 import { NavigationItem } from 'src/app/components/navigation-list/interfaces';
-import { Role } from 'src/app/services/authentication/interfaces';
 
 @Component({
-    templateUrl: './assignments.component.html',
-    styleUrls: ['./assignments.component.scss']
+    selector: 'activities',
+    templateUrl: './activities.component.html',
+    styleUrls: ['./activities.component.scss']
 })
-export class AssignmentsPageComponent {
-    public openedAssignments: NavigationItem[];
-    public RoleEnum = Role; //To allow using enums in template
-    private getAssignments$: Subject<NavigationItem> = new Subject();
+export class ActivitiesPageComponent {
+    public modules: NavigationItem[];
+    private getModules$: Subject<NavigationItem> = new Subject();
 
     constructor(
-        private assignmentsService: AssignmentsService,
-        private auth: AuthenticationService
+        private activitiesService: ActivitiesService,
+        private modulesService: ModulesService,
     ) { }
 
     ngOnInit() {
-        this.getAssignments$
-            .pipe(switchMap(() => this.getOpenedAssignments()))
-            .subscribe((openedAssignments: NavigationItem[]) => {
-                this.openedAssignments = openedAssignments;
+        this.getModules$
+            .pipe(switchMap(() => this.getModules()))
+            .subscribe((modules: NavigationItem[]) => {
+                this.modules = modules;
             });
-        this.getAssignments$.next();
+        this.getModules$.next();
     }
-
 
     private createTreeChildren(modules: any[], tree: any[], processed_modules: number) {
         if (processed_modules == modules.length) return;
@@ -66,14 +64,12 @@ export class AssignmentsPageComponent {
         return tree;
     }
 
-    private getOpenedAssignments(): Observable<any[]> {
-        return this.assignmentsService
-            .getByUserId(this.auth.currentUserValue.id)
+    private getModules(): Observable<any[]> {
+        return this.modulesService
+            .getAll()
             .pipe(
-                map((assignments: Assignment[]) => {
-                    let allModules = assignments.map((assignment) => assignment.modules);
-                    let flatAllModules = _.flatten(allModules);
-                    return this.createTree(flatAllModules);
+                map((modules: Module[]) => {
+                    return this.createTree(modules);
                 })
             );
     }

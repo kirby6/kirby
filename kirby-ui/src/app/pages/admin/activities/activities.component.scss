@@ -1,0 +1,21 @@
+@import "./../../../../color-scheme.scss";
+:host {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    
+    .container {
+	display: flex;
+	flex-direction: row;
+	.activities {
+	    overflow: auto;
+	    flex: 5;
+	}
+	.spacer {
+	    flex: 0.1;
+	}
+	navigation-list {
+	    flex: 2;
+	}
+    }
+}

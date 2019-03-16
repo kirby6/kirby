@@ -1,8 +1,10 @@
 ﻿<div class='container'>
-    <navigation-list *ngIf="openedAssignments" [items]="openedAssignments"></navigation-list>
-    <div class='spacer'></div>
-    <div class='assignments'>
-        <router-outlet *role='RoleEnum.STUDENT' name="moduleAssignments"></router-outlet>
-        <router-outlet *role='RoleEnum.ADMIN' name="moduleMatrix"></router-outlet>
-    </div>
-</div> 
+  <navigation-list *ngIf="openedAssignments"
+		   [items]="openedAssignments"
+		   [routeNames]="['moduleAssignments', 'moduleMatrix']"></navigation-list>
+  <div class='spacer'></div>
+  <div class='assignments'>
+    <router-outlet *role='RoleEnum.STUDENT' name="moduleAssignments"></router-outlet>
+    <router-outlet *role='RoleEnum.ADMIN' name="moduleMatrix"></router-outlet>
+  </div>
+</div>

@@ -13,6 +13,7 @@ export class NavigationListComponent {
     @Input() public set items(items: NavigationItem[]) {
         this.dataSource.data = items;
     }
+    @Input() public routeNames: string[];
 
     @Output() public onNavigate: EventEmitter<NavigationItem> = new EventEmitter<NavigationItem>();
 
@@ -23,5 +24,14 @@ export class NavigationListComponent {
 
     selectItem(navigationItem: NavigationItem): void {
         this.onNavigate.emit(navigationItem);
+    }
+
+    public getRouterLink(nodeId) {
+        let outlets = this.routeNames.reduce((outlets, route) => {
+            return { ...outlets, [route]: nodeId };
+        }, {});
+        return {
+            outlets: outlets
+        };
     }
 }
