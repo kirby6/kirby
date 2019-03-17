@@ -19,11 +19,11 @@ export class ModulesService {
         return this.http.get<Module>(`${config.apiUrl}/${this._prefix}/${id}`);
     }
 
-    create(name: string, parentId: string): Observable<Module> {
-        return this.http.post<Module>(`${config.apiUrl}/${this._prefix}/`, { name, parent: parentId });
+    create(name: string, parent?: string): Observable<string> {
+        return this.http.post<string>(`${config.apiUrl}/${this._prefix}/`, { name, parent });
     }
 
     addActivity(moduleId: string, activityId: string): Observable<Module> {
-        return this.http.post<Module>(`${config.apiUrl}/${this._prefix}/${moduleId}`, { activityId });
+        return this.http.post<Module>(`${config.apiUrl}/${this._prefix}/${moduleId}`, { activity_id: activityId });
     }
 }

@@ -1,0 +1,69 @@
+@import "./../../../../../color-scheme.scss";
+
+:host {
+    mat-card {
+	background: $background;
+	font-weight: 200;
+	
+	mat-card-header {
+	    display: flex;
+	    flex-direction: column;
+	    margin-bottom: 10px;
+	    
+	    .mat-card-header-text,
+	    mat-card-title {
+		margin: 0;
+	    }
+
+	    .activity-search-bar {
+		flex: 1;
+		input {
+		    font-weight: 300;
+		}
+	    }
+	}
+	
+	mat-card-content {
+	    .mat-list {
+		padding: 0;
+	    }
+	    
+	    mat-list-item {
+		cursor: pointer;
+		background: white;
+		&:hover {
+		    background: #eee;
+		}
+	    }
+	    .empty-list {
+		color: white;
+		text-align: center;
+		background: none;
+	    }
+	}
+
+	.mat-list .mat-list-item {
+	    color: black;
+	}
+	
+	.content {
+	    display: flex;
+	    flex-direction: column;
+	    
+	    .title {
+		font-size: 14px;
+		font-weight: 300;
+	    }
+	    
+	    .subtitle {
+		font-size: 11px;
+		color: #777;
+	    }
+	    
+	    .title,
+	    .subtitle {
+		margin: 0;
+	    }
+	}
+    }
+}

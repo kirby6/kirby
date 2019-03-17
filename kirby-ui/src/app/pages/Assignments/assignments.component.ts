@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import * as _ from 'lodash';
-import { NavigationItem } from './navigation-list/interfaces';
+import { NavigationItem } from 'src/app/components/navigation-list/interfaces';
 import { Role } from 'src/app/services/authentication/interfaces';
 
 @Component({

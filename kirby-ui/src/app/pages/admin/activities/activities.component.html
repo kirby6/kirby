@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="navigation">
+    <navigation-list *ngIf="modules"
+		     [items]="modules"
+		     [routeNames]="['moduleActivities', 'createActivity']"
+		     [isEditable]="true"
+		     [addNavigationItemLabel]="'שם:'"
+		     (onCreateNode)="createModule($event)"></navigation-list>
+    <mat-card class="add-activity">
+      <button mat-button (click)="displayActivityCreation()">
+	{{!isCreateActivity ? 'צור תרגיל חדש' : 'ביטול' }}
+      </button>
+    </mat-card>
+  </div>
+  <div class="spacer"></div>
+  <div class="activities">
+    <div *ngIf="!isCreateActivity">
+      <router-outlet name="moduleActivities"></router-outlet>
+    </div>
+    <div *ngIf="isCreateActivity">
+      <router-outlet name="createActivity"></router-outlet>
+    </div>
+  </div>
+</div>

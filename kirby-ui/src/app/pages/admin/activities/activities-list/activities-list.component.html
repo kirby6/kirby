@@ -1,0 +1,23 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>תרגילים</mat-card-title>
+	<mat-form-field class="activity-search-bar">
+	  <input matInput placeholder="חפש תרגיל:" (input)="filterActivities($event.target.value)">
+	</mat-form-field>
+    </mat-card-header>
+    <mat-card-content>
+        <mat-list *ngIf="activities.length > 0; else empty">
+          <mat-list-item *ngFor="let activity of filteredActivities"
+			 (click)="onActivitySelected(activity)">
+                <div class="content">
+                    <h3 class='title'>{{activity.name}}</h3>
+                </div>
+            </mat-list-item>
+        </mat-list>
+        <ng-template #empty>
+            <div class="empty-list">
+                📝 הרשימה ריקה
+            </div>
+        </ng-template>
+    </mat-card-content>
+</mat-card>

@@ -1,0 +1,15 @@
+:host {
+    .add-item-icon {
+	display: flex;
+	flex-direction: row;
+
+	mat-icon {
+	    cursor: pointer;
+	    user-select: none;
+	}
+    }
+
+    input {
+	font-weight: 300;
+    }
+}

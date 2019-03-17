@@ -15,6 +15,10 @@ export class HelpsService {
         return this.http.get<Help[]>(`${config.apiUrl}/${this._prefix}/`);
     }
 
+    getSent(): Observable<Help[]> {
+        return this.http.get<Help[]>(`${config.apiUrl}/${this._prefix}/sent`);
+    }
+
     get(id: string): Observable<Help> {
         return this.http.get<Help>(`${config.apiUrl}/${this._prefix}/${id}`);
     }

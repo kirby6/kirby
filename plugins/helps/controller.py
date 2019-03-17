@@ -69,3 +69,15 @@ def create_help(sender_id, receiving_group_id, message, context=None):
             'receiving_group_id': bson_to_json(receiving_group_id)
         })
     return result
+
+
+def get_by_sender(sender_id):
+    if not isinstance(sender_id, ObjectId):
+        sender_id = ObjectId(sender_id)
+    return bson_to_json(
+        list(
+            helps.aggregate([{
+                '$match': {
+                    'sender_id': sender_id
+                }
+            }] + aggregation)))
