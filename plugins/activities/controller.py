@@ -8,6 +8,8 @@ from .service import get_all_activities_from_db, add_files_to_filesystem, \
     get_metadata_by_id, insert_activity_to_db, delete_activity_from_db, \
     remove_files_from_filesystem, get_activity_by_id, get_file_by_id
 
+CURRENT_PATH = os.path.abspath(os.path.dirname(__file__))
+
 
 def get_all_activities():
     return bson_to_json(list(get_all_activities_from_db()))
@@ -58,16 +60,23 @@ def get_activity_file_by_id(activity_id, file_id):
     return get_file_by_id(file_id)
 
 
+def get_submissions():
+    submissions = []
+    for filename in os.listdir(os.path.join(CURRENT_PATH, 'submissions')):
+        submission, file_extension = os.path.splitext(filename)
+        if file_extension == '.py':
+            submissions.append(submission)
+    return submissions
+
+
 def prepare_submissions(activity_id, user_id):
     activity = get_activity_by_id(activity_id)
     result = {}
-    current_path = os.path.abspath(os.path.dirname(__file__))
-    sys.path.append(current_path)
-    for submission in os.listdir(os.path.join(current_path, 'submissions')):
-        submission = os.path.splitext(submission)[0]
+    sys.path.append(CURRENT_PATH)
+    for submission in get_submissions():
         module_path = '.' + submission
         module = importlib.import_module(module_path, 'submissions')
         result[submission] = module.prepare(
             activity['submissions'][submission], user_id)
-    sys.path.remove(current_path)
+    sys.path.remove(CURRENT_PATH)
     return result

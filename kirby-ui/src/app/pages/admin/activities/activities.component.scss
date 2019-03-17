@@ -7,13 +7,30 @@
     .container {
 	display: flex;
 	flex-direction: row;
-	.activities {
+	.activities-list {
 	    overflow: auto;
 	    flex: 5;
 	}
+
+	.navigation {
+	    display: flex;
+	    flex-direction: column;
+	    .add-activity {
+		margin-top: 20px;
+		display: flex;
+		justify-content: center;
+		background: $background;
+	    }
+	}
+	
+	.activities {
+	    flex: 5;
+	}
+
 	.spacer {
 	    flex: 0.1;
 	}
+
 	navigation-list {
 	    flex: 2;
 	}

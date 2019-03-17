@@ -13,6 +13,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { AssignmentsListComponent } from './pages/Assignments/assignments-list/assignments-list.component';
 import { ActivitiesListComponent } from './pages/admin/activities/activities-list/activities-list.component';
+import { CreateActivityComponent } from './pages/admin/activities/create-activity/create-activity.component';
 import { AssignmentsMatrixComponent } from './pages/Assignments/assignments-matrix/assignments-matrix.component';
 import { HelpsListComponent } from './pages/helps/helps-list/helps-list.component';
 import { HelpPageComponent } from './pages/help/help.component';
@@ -38,6 +39,8 @@ const routes: Routes = [
                 path: 'activities', component: ActivitiesPageComponent, children: [
                     { path: ':moduleId', component: ActivitiesListComponent, outlet: 'moduleActivities' },
                     { path: '', component: ActivitiesListComponent, outlet: 'moduleActivities' },
+                    { path: ':moduleId', component: CreateActivityComponent, outlet: 'createActivity' },
+                    { path: '', component: CreateActivityComponent, outlet: 'createActivity' },
                 ]
             },
             { path: 'assignment/:assignmentId', component: AssignmentPageComponent },

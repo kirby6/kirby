@@ -4,9 +4,14 @@ export interface Activity {
     id?: string;
     name: string;
     modules?: Module[];
-    type: string;
     submissions?: object;
     files?: File[];
+}
+
+export interface NewActivity {
+    name: string;
+    files?: FileList;
+    submissions?: string[];
 }
 
 export interface File {

@@ -17,6 +17,7 @@ import { NavigationItem, NewNavigationItem } from 'src/app/components/navigation
 export class ActivitiesPageComponent {
     public modules: NavigationItem[];
     private getModules$: Subject<NavigationItem> = new Subject();
+    public isCreateActivity: boolean;
 
     constructor(
         private notificationsService: NotificationsService,
@@ -88,5 +89,9 @@ export class ActivitiesPageComponent {
 
     public createModule(module: NewNavigationItem) {
         this.modulesService.create(module.name, module.parent).subscribe();
+    }
+
+    public displayActivityCreation() {
+        this.isCreateActivity = !this.isCreateActivity;
     }
 }

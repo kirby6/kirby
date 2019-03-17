@@ -18,8 +18,7 @@ export class NavigationListComponent {
     @Input() public isEditable: boolean;
     @Input() public addNavigationItemLabel: string;
 
-    @Output()
-    public onCreateNode: EventEmitter<NewNavigationItem> = new EventEmitter();
+    @Output() public onCreateNode: EventEmitter<NewNavigationItem> = new EventEmitter();
 
     @Output() public onNavigate: EventEmitter<NavigationItem> = new EventEmitter<NavigationItem>();
 
@@ -36,9 +35,7 @@ export class NavigationListComponent {
         let outlets = this.routeNames.reduce((outlets, route) => {
             return { ...outlets, [route]: nodeId };
         }, {});
-        return {
-            outlets: outlets
-        };
+        return { outlets };
     }
 
     public createNode(name: string, parent?: string) {
