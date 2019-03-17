@@ -1,3 +1,4 @@
+
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
@@ -6,6 +7,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TreeModule } from 'angular-tree-component';
 
 import { SocketIoModule } from 'ngx-socket-io';
+
+import { FormioModule, FormioAppConfig } from 'angular-formio';
+import {FormIOConfig} from './pages/Assignment/submissions/forms/forms-builder/formio-config';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -42,7 +48,11 @@ import { AgGridModule } from 'ag-grid-angular';
 import { AssignmentCellRenderer } from './pages/Assignments/assignments-matrix/custom-cells/assignments-cell.component';
 import { ActivityFileComponent } from './pages/Assignment/activity-file/activity-file.component';
 import { CommentListComponent } from './components/comment-list/comment-list.component';
-import { GitSubmissionComponent } from './pages/Assignment/submissions/git-submission.component';
+import { GitSubmissionComponent } from './pages/Assignment/submissions/bitbucket/git-submission.component';
+import { FormsSubmissionBuilderComponent } from './pages/Assignment/submissions/forms/forms-builder/forms-submission-builder.component';
+import { TestPageComponent } from './pages/test/test-page.component';
+import { CommonModule } from '@angular/common';
+import { FormsSubmissionRendererComponent } from './pages/Assignment/submissions/forms/forms-renderer/forms-submission-renderer.component';
 
 @NgModule({
     declarations: [
@@ -73,12 +83,16 @@ import { GitSubmissionComponent } from './pages/Assignment/submissions/git-submi
         RequestHelpComponent,
         RequestHelpDialogComponent,
         GitSubmissionComponent,
+        FormsSubmissionBuilderComponent,
+        FormsSubmissionRendererComponent,
+        TestPageComponent,
     ],
     entryComponents: [
         RequestHelpDialogComponent,
     ],
     imports: [
         BrowserModule,
+        CommonModule,
         FormsModule,
         AppRoutingModule,
         BrowserAnimationsModule,
@@ -89,11 +103,14 @@ import { GitSubmissionComponent } from './pages/Assignment/submissions/git-submi
         TruncateModule,
         SocketIoModule,
         AgGridModule.withComponents([AssignmentCellRenderer]),
+        FormioModule,
+        NgbModule,
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: CredentialsInterceptor, multi: true },
-        { provide: HTTP_INTERCEPTORS, useClass: TokenExpirationInterceptor, multi: true }
+        { provide: HTTP_INTERCEPTORS, useClass: TokenExpirationInterceptor, multi: true },
+        {provide: FormioAppConfig, useValue: FormIOConfig},
     ],
     bootstrap: [AppComponent]
 })

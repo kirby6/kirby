@@ -1,0 +1,13 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>צור</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <form-builder [form]="form" (change)="onChange($event)"></form-builder>
+    </mat-card-content>
+    <mat-card-footer>
+        <div class='controls'>
+            <button mat-button color="accent">שמור</button>
+        </div>
+    </mat-card-footer>
+</mat-card>

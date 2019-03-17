@@ -1,4 +1,39 @@
 /*
+  font awesome styles
+*/
+$fa-font-path: "../node_modules/font-awesome/fonts";
+@import "~font-awesome/scss/font-awesome.scss";
+
+/*
+  Bootstrap 4 styles
+*/
+@import "~bootstrap/dist/css/bootstrap.min.css";
+
+formio {
+  direction: ltr;
+}
+form-builder {
+  direction: ltr;
+  .formcomponents {
+    .form-builder-panel {
+      div {
+        max-height: 300px;
+        overflow: auto;
+      }
+    }
+  }
+}
+.component-settings {
+  padding-bottom: 0 !important;
+  direction: ltr;
+
+  .formio-dialog-content {
+    max-height: 500px;
+    overflow-y: auto;
+  }
+}
+
+/*
   angular-tree-component styles
 */
 @import "~angular-tree-component/dist/angular-tree-component.css";
@@ -16,13 +51,13 @@
   .ag-root {
     border: none;
 
-
-    .ag-cell{ 
+    .ag-cell {
       padding: 0;
       margin: 0;
     }
 
-    .ag-header-cell-text, .ag-header-group-text {
+    .ag-header-cell-text,
+    .ag-header-group-text {
       flex: 1;
     }
 
@@ -32,7 +67,7 @@
     }
     .ag-body-viewport {
       background: none;
-    } 
+    }
   }
 }
 
@@ -58,6 +93,10 @@ body {
 }
 input {
   font-weight: 200;
+}
+
+button, .mat-button {
+  outline: 0 !important;
 }
 
 /* angular material theme init*/
@@ -267,5 +306,10 @@ $altTheme: mat-light-theme($theme-primary, $theme-accent, $theme-warn);
 
 // Custom classes
 .help-dialog .mat-dialog-container {
-    background: rgba(0,0,0,0.9);
+  background: rgba(0, 0, 0, 0.9);
+}
+
+.mat-card {
+  background: white;
+  color: black;
 }

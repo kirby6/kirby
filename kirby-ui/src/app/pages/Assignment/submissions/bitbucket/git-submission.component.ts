@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { Assignment } from 'src/app/services/assignments/interfaces';
 
 @Component({
     selector: 'git-submission',
