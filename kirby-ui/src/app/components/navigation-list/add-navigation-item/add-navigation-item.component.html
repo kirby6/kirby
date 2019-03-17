@@ -1,0 +1,20 @@
+<li class="mat-tree-node">
+  <button mat-icon-button disabled></button>
+
+  <div *ngIf="!isButtonClicked" class="add-item-icon" (click)="clickButton()">
+    <mat-icon>
+      library_add
+    </mat-icon>
+  </div>
+
+  <div *ngIf="isButtonClicked" class="add-item-input">
+    <mat-form-field>
+      <input matInput
+	     placeholder="{{label}}"
+	     #itemInput
+	     [(ngModel)]="input"
+	     (blur)="inputLoseFocus()"
+	     (keyup)="inputKeyPress($event)">
+    </mat-form-field>
+  </div>
+</li>

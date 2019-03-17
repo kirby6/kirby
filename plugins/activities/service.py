@@ -2,6 +2,24 @@ from kirby.core import filesystem
 from kirby.core.db import collection as activities
 from bson import ObjectId
 
+aggregation = [{
+    '$lookup': {
+        'from': 'modules',
+        'localField': '_id',
+        'foreignField': 'activities',
+        'as': 'modules'
+    }
+},
+               {
+                   '$graphLookup': {
+                       'from': 'modules',
+                       'startWith': '$modules._id',
+                       'connectFromField': 'parent',
+                       'connectToField': '_id',
+                       'as': 'modules'
+                   }
+               }]
+
 
 def add_files_to_filesystem(files):
     file_ids = []
@@ -18,11 +36,15 @@ def remove_files_from_filesystem(files):
 def get_activity_by_id(activity_id):
     if not isinstance(activity_id, ObjectId):
         activity_id = ObjectId(activity_id)
-    return activities.find_one({'_id': activity_id})
+    return activities.aggregate([{
+        '$match': {
+            '_id': activity_id
+        }
+    }] + aggregation)
 
 
 def get_all_activities_from_db():
-    return activities.find()
+    return activities.aggregate(aggregation)
 
 
 def get_file_by_id(file_id):

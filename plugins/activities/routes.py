@@ -3,7 +3,7 @@ from flask import request, make_response
 
 from kirby.core import web_api
 from .controller import create_activity, get_all_activities, update_activity, \
-    delete_activity, get_activity_file_by_id
+    delete_activity, get_activity_file_by_id, get_submissions
 
 
 @web_api.route('/')
@@ -16,7 +16,7 @@ def create_activity_route():
     return json.dumps(
         create_activity(
             name=request.form['name'],
-            submissions=request.form.get('submissions'),
+            submissions=json.loads(request.form.get('submissions')),
             files=request.files.values()))
 
 
@@ -38,3 +38,8 @@ def get_activity_file_by_id_route(activity_id, file_id):
         get_activity_file_by_id(activity_id, file_id).read())
     response.mimetype = 'application/octet-stream'
     return response
+
+
+@web_api.route('/submissions')
+def get_available_submissions():
+    return json.dumps(get_submissions())

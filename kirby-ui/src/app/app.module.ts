@@ -20,6 +20,10 @@ import { CustomMaterialModule } from './app.material.module';
 import { PluginsManagementDirective } from './directives/plugins.management.directive';
 import { KAlertComponent } from './components/k-alert/k-alert.component';
 import { AdminGroupComponent } from './pages/admin/groups/groups.component';
+import { ActivitiesPageComponent } from './pages/admin/activities/activities.component';
+import { ActivitiesListComponent } from './pages/admin/activities/activities-list/activities-list.component';
+import { CreateActivityComponent } from './pages/admin/activities/create-activity/create-activity.component';
+import { GitSubmissionSettingsComponent } from './pages/admin/activities/create-activity/submission-settings/git-submission-settings/git-submission-settings.component';
 import { AdminPageComponent } from './pages/admin/admin.component';
 import { WebsitesPageComponent } from './pages/websites/websites.component';
 import { WebsiteCardComponent } from './components/website-card/website-card.component';
@@ -30,7 +34,7 @@ import { TextareaFormCardComponent } from './components/textarea-form-card/texta
 import { TruncateModule } from 'ng2-truncate';
 import { AssignmentsPageComponent } from './pages/Assignments/assignments.component';
 import { AssignmentPageComponent } from './pages/Assignment/assignment.component';
-import { NavigationListComponent } from './pages/Assignments/navigation-list/navigation-list.component';
+import { NavigationListComponent } from './components/navigation-list/navigation-list.component';
 import { AssignmentsListComponent } from './pages/Assignments/assignments-list/assignments-list.component';
 import { HelpsListComponent } from './pages/helps/helps-list/helps-list.component';
 import { HelpPageComponent } from './pages/help/help.component';
@@ -44,6 +48,7 @@ import { ActivityFileComponent } from './pages/Assignment/activity-file/activity
 import { CommentListComponent } from './components/comment-list/comment-list.component';
 import { GitSubmissionComponent } from './pages/Assignment/submissions/git-submission/git-submission.component';
 import { FileSubmissionComponent } from './pages/Assignment/submissions/file-submission/file-submission.component';
+import { AddNavigationItem } from './components/navigation-list/add-navigation-item/add-navigation-item.component';
 
 @NgModule({
     declarations: [
@@ -57,6 +62,8 @@ import { FileSubmissionComponent } from './pages/Assignment/submissions/file-sub
         RegisterComponent,
         AdminPageComponent,
         AdminGroupComponent,
+        ActivitiesPageComponent,
+        ActivitiesListComponent,
         WebsitesPageComponent,
         WebsiteCardComponent,
         ActivityFileComponent,
@@ -75,6 +82,9 @@ import { FileSubmissionComponent } from './pages/Assignment/submissions/file-sub
         RequestHelpDialogComponent,
         GitSubmissionComponent,
         FileSubmissionComponent,
+        AddNavigationItem,
+        CreateActivityComponent,
+        GitSubmissionSettingsComponent,
     ],
     entryComponents: [
         RequestHelpDialogComponent,
