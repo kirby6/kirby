@@ -8,10 +8,15 @@ export interface Activity {
     files?: File[];
 }
 
+export interface Submission {
+    name: string;
+    data?: object;
+}
+
 export interface NewActivity {
     name: string;
     files?: FileList;
-    submissions?: string[];
+    submissions?: Submission[];
 }
 
 export interface File {

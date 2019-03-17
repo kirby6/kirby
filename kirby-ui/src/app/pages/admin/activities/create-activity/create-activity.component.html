@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card class="main-form">
     <mat-card-header>
         <mat-card-title>צור תרגיל</mat-card-title>
     </mat-card-header>
@@ -31,3 +31,9 @@
       </form>
     </mat-card-content>
 </mat-card>
+
+<div class="submission-settings">
+  <git-submission-settings *ngIf="showSubmissionSettings('git')"
+			   (onChange)="addSubmissionData('git', $event)">
+  </git-submission-settings>
+</div>

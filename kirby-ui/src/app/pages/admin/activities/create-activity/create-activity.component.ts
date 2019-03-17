@@ -1,10 +1,16 @@
 import { ActivitiesService } from 'src/app/services/activities';
-import { NewActivity } from 'src/app/services/activities/interfaces';
+import { NewActivity, Submission } from 'src/app/services/activities/interfaces';
 import { ModulesService } from 'src/app/services/modules';
 import { Module } from 'src/app/services/modules/interfaces';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NotificationsService } from 'src/app/services/notifications';
 import { ActivatedRoute } from '@angular/router';
+
+interface SubmissionCheckbox extends Submission {
+    name: string;
+    isChecked: boolean;
+    data?: object;
+}
 
 @Component({
     templateUrl: './create-activity.component.html',
@@ -12,7 +18,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class CreateActivityComponent implements OnInit {
     public name: string;
-    public submissions: { name: string, isChecked: boolean }[];
+    public submissions: SubmissionCheckbox[] = [];
     public files: FileList;
 
     @ViewChild('form') private form;
@@ -45,7 +51,7 @@ export class CreateActivityComponent implements OnInit {
         let activity = {
             name: this.name,
             files: this.files,
-            submissions: this.submissions.filter(s => s.isChecked).map(s => s.name)
+            submissions: this.submissions.filter(s => s.isChecked)
         } as NewActivity;
         this.activitiesService.create(activity).subscribe((activityId) => {
             this.route.paramMap.subscribe(params => {
@@ -54,8 +60,19 @@ export class CreateActivityComponent implements OnInit {
                     this.modulesService.addActivity(moduleId, activityId).subscribe();
                 }
                 this.form.nativeElement.reset();
-                this.onCreate.emit('created');
             });
         });
+    }
+
+    public showSubmissionSettings(name: string) {
+        let submission = this.submissions.find(s => s.name == name);
+        return submission && submission.isChecked;
+    }
+
+    public addSubmissionData(submissionName: string, data: object) {
+        let submission = this.submissions.find(s => s.name == submissionName);
+        if (submission) {
+            submission.data = data;
+        }
     }
 }

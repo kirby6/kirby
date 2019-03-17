@@ -23,6 +23,7 @@ import { AdminGroupComponent } from './pages/admin/groups/groups.component';
 import { ActivitiesPageComponent } from './pages/admin/activities/activities.component';
 import { ActivitiesListComponent } from './pages/admin/activities/activities-list/activities-list.component';
 import { CreateActivityComponent } from './pages/admin/activities/create-activity/create-activity.component';
+import { GitSubmissionSettingsComponent } from './pages/admin/activities/create-activity/submission-settings/git-submission-settings/git-submission-settings.component';
 import { AdminPageComponent } from './pages/admin/admin.component';
 import { WebsitesPageComponent } from './pages/websites/websites.component';
 import { WebsiteCardComponent } from './components/website-card/website-card.component';
@@ -83,6 +84,7 @@ import { AddNavigationItem } from './components/navigation-list/add-navigation-i
         FileSubmissionComponent,
         AddNavigationItem,
         CreateActivityComponent,
+        GitSubmissionSettingsComponent,
     ],
     entryComponents: [
         RequestHelpDialogComponent,

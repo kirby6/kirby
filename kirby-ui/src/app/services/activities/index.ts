@@ -18,7 +18,11 @@ export class ActivitiesService {
     create(activity: NewActivity): Observable<string> {
         let formData = new FormData();
         formData.append('name', activity.name);
-        formData.append('submissions', JSON.stringify(activity.submissions));
+        let submissions = activity.submissions.reduce((total, submission) => {
+            total[submission.name] = submission.data;
+            return total;
+        }, {});
+        formData.append('submissions', JSON.stringify(submissions));
         if (activity.files) {
             for (let i = 0; i < activity.files.length; i++) {
                 formData.append(activity.files[i].name, activity.files[0], activity.files[0].name);

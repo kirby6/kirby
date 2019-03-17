@@ -15,6 +15,7 @@
 	.navigation {
 	    display: flex;
 	    flex-direction: column;
+	    justify-content: flex-start;
 	    .add-activity {
 		margin-top: 20px;
 		display: flex;
@@ -31,8 +32,5 @@
 	    flex: 0.1;
 	}
 
-	navigation-list {
-	    flex: 2;
-	}
     }
 }

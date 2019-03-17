@@ -1,10 +1,17 @@
 @import "./../../../../../color-scheme.scss";
 
 :host {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
     mat-card {
 	background: $background;
 	font-weight: 200;
+	margin-bottom: 20px;
+    }
 
+    .main-form {
 	mat-card-content {
 	    form {
 		display: flex;
