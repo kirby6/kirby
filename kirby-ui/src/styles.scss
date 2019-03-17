@@ -12,6 +12,7 @@ $fa-font-path: "../node_modules/font-awesome/fonts";
 formio {
   direction: ltr;
 }
+
 form-builder {
   direction: ltr;
   .formcomponents {
@@ -95,7 +96,8 @@ input {
   font-weight: 200;
 }
 
-button, .mat-button {
+button,
+.mat-button {
   outline: 0 !important;
 }
 
@@ -309,7 +311,6 @@ $altTheme: mat-light-theme($theme-primary, $theme-accent, $theme-warn);
   background: rgba(0, 0, 0, 0.9);
 }
 
-.mat-card {
-  background: white;
-  color: black;
+.mat-card-header {
+  text-align: right;
 }

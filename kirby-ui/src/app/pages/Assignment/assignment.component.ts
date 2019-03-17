@@ -43,7 +43,7 @@ export class AssignmentPageComponent {
     }
 
     public getSubmissions() {
-        return Object.keys(this.assignment.activity.submissions);
+        return Object.keys(this.assignment.activity.submissions || {});
     }
 
     public getCommentContext() {
