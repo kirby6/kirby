@@ -24,6 +24,6 @@ export class ModulesService {
     }
 
     addActivity(moduleId: string, activityId: string): Observable<Module> {
-        return this.http.post<Module>(`${config.apiUrl}/${this._prefix}/${moduleId}`, { activityId });
+        return this.http.post<Module>(`${config.apiUrl}/${this._prefix}/${moduleId}`, { activity_id: activityId });
     }
 }

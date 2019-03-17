@@ -5,7 +5,6 @@ import { Component, OnInit } from '@angular/core';
 import { EventNotification } from 'src/app/components/event-list/interfaces';
 import { Activity } from 'src/app/services/activities/interfaces';
 import { Module } from 'src/app/services/modules/interfaces';
-import { zip } from 'rxjs';
 import { map } from 'rxjs/operators';
 import * as _ from 'lodash';
 

@@ -11,7 +11,6 @@ import { ActivatedRoute } from '@angular/router';
     styleUrls: ['./create-activity.component.scss']
 })
 export class CreateActivityComponent implements OnInit {
-    private moduleId: string;
     public name: string;
     public submissions: { name: string, isChecked: boolean }[];
     public files: FileList;
@@ -43,15 +42,20 @@ export class CreateActivityComponent implements OnInit {
 
     public submit() {
         if (!this.name) return;
-        this.route.paramMap.subscribe(params => {
-            this.moduleId = params.get('moduleId');
-            let activity = {
-                name: this.name,
-                files: this.files,
-                submissions: this.submissions.filter(s => s.isChecked).map(s => s.name)
-            } as NewActivity;
-            this.activitiesService.create(activity).subscribe()
-            this.form.nativeElement.reset();
+        let activity = {
+            name: this.name,
+            files: this.files,
+            submissions: this.submissions.filter(s => s.isChecked).map(s => s.name)
+        } as NewActivity;
+        this.activitiesService.create(activity).subscribe((activityId) => {
+            this.route.paramMap.subscribe(params => {
+                let moduleId = params.get('moduleId');
+                if (moduleId) {
+                    this.modulesService.addActivity(moduleId, activityId).subscribe();
+                }
+                this.form.nativeElement.reset();
+                this.onCreate.emit('created');
+            });
         });
     }
 }
