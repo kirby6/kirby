@@ -1,9 +1,12 @@
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { EventNotification } from 'src/app/components/event-list/interfaces';
 import { NotificationsService } from 'src/app/services/notifications';
 import { HelpsService } from 'src/app/services/helps';
 import { Help } from 'src/app/services/helps/interfaces';
+import { AuthenticationService } from './../../../services/authentication';
+import { Role } from './../../../services/authentication/interfaces';
 
 @Component({
     selector: 'helps-list',
@@ -18,6 +21,7 @@ export class HelpsListComponent implements OnInit {
         private notificationsService: NotificationsService,
         private helpsService: HelpsService,
         private router: Router,
+        private auth: AuthenticationService,
     ) { }
 
     ngOnInit() {
@@ -31,7 +35,13 @@ export class HelpsListComponent implements OnInit {
     }
 
     private updateHelps() {
-        this.helpsService.getAll().subscribe((helps) => {
+        let helpsObs: Observable<Help[]>;
+        if (this.auth.currentUserValue.roles.includes(Role.ADMIN)) {
+            helpsObs = this.helpsService.getAll();
+        } else {
+            helpsObs = this.helpsService.getSent();
+        }
+        helpsObs.subscribe((helps) => {
             this.helps = helps.map(this.helpToEventNotification);
         });
     }
