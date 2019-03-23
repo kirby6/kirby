@@ -14,6 +14,7 @@ import { AssignmentsListComponent } from './pages/Assignments/assignments-list/a
 import { AssignmentsMatrixComponent } from './pages/Assignments/assignments-matrix/assignments-matrix.component';
 import { HelpsListComponent } from './pages/helps/helps-list/helps-list.component';
 import { HelpPageComponent } from './pages/help/help.component';
+import { TestPageComponent } from './pages/test/test.component';
 
 const routes: Routes = [
     {
@@ -35,6 +36,7 @@ const routes: Routes = [
             { path: 'assignment/:assignmentId', component: AssignmentPageComponent },
             { path: 'helps', component: HelpsListComponent },
             { path: 'help/:helpId', component: HelpPageComponent },
+            { path: 'test', component: TestPageComponent}
         ]
     },
     { path: 'login', component: LoginComponent },

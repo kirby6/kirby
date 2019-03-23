@@ -8,11 +8,6 @@ import { TreeModule } from 'angular-tree-component';
 
 import { SocketIoModule } from 'ngx-socket-io';
 
-import { FormioModule, FormioAppConfig } from 'angular-formio';
-import {FormIOConfig} from './pages/Assignment/submissions/forms/forms-builder/formio-config';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/login/login.component';
@@ -50,9 +45,12 @@ import { ActivityFileComponent } from './pages/Assignment/activity-file/activity
 import { CommentListComponent } from './components/comment-list/comment-list.component';
 import { GitSubmissionComponent } from './pages/Assignment/submissions/bitbucket/git-submission.component';
 import { FormsSubmissionBuilderComponent } from './pages/Assignment/submissions/forms/forms-builder/forms-submission-builder.component';
-import { TestPageComponent } from './pages/test/test-page.component';
 import { CommonModule } from '@angular/common';
 import { FormsSubmissionRendererComponent } from './pages/Assignment/submissions/forms/forms-renderer/forms-submission-renderer.component';
+import { TestPageComponent } from './pages/test/test.component';
+import { FormTextInputComponent } from './pages/Assignment/submissions/forms/components/text-input/form-text-input.component';
+import { FormTitleComponent } from './pages/Assignment/submissions/forms/components/title/form-title.component';
+import { FormRadioInputComponent } from './pages/Assignment/submissions/forms/components/radio-input/form-radio-input.component';
 
 @NgModule({
     declarations: [
@@ -85,6 +83,9 @@ import { FormsSubmissionRendererComponent } from './pages/Assignment/submissions
         GitSubmissionComponent,
         FormsSubmissionBuilderComponent,
         FormsSubmissionRendererComponent,
+        FormTitleComponent,
+        FormTextInputComponent,
+        FormRadioInputComponent,
         TestPageComponent,
     ],
     entryComponents: [
@@ -103,14 +104,11 @@ import { FormsSubmissionRendererComponent } from './pages/Assignment/submissions
         TruncateModule,
         SocketIoModule,
         AgGridModule.withComponents([AssignmentCellRenderer]),
-        FormioModule,
-        NgbModule,
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: CredentialsInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: TokenExpirationInterceptor, multi: true },
-        {provide: FormioAppConfig, useValue: FormIOConfig},
     ],
     bootstrap: [AppComponent]
 })

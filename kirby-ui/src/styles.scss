@@ -1,39 +1,4 @@
 /*
-  font awesome styles
-*/
-$fa-font-path: "../node_modules/font-awesome/fonts";
-@import "~font-awesome/scss/font-awesome.scss";
-
-/*
-  Bootstrap 4 styles
-*/
-@import "~bootstrap/dist/css/bootstrap.min.css";
-
-formio {
-  direction: ltr;
-}
-form-builder {
-  direction: ltr;
-  .formcomponents {
-    .form-builder-panel {
-      div {
-        max-height: 300px;
-        overflow: auto;
-      }
-    }
-  }
-}
-.component-settings {
-  padding-bottom: 0 !important;
-  direction: ltr;
-
-  .formio-dialog-content {
-    max-height: 500px;
-    overflow-y: auto;
-  }
-}
-
-/*
   angular-tree-component styles
 */
 @import "~angular-tree-component/dist/angular-tree-component.css";
@@ -86,16 +51,15 @@ body {
   margin: 0;
   padding: 0;
   direction: $direction;
-
-  input {
-    direction: $direction;
-  }
 }
 input {
   font-weight: 200;
+  outline: 0;
+  direction: $direction;
 }
 
-button, .mat-button {
+button,
+.mat-button {
   outline: 0 !important;
 }
 
@@ -279,6 +243,7 @@ $altTheme: mat-light-theme($theme-primary, $theme-accent, $theme-warn);
 }
 
 // Specific component overrides, pieces that are not in line with the general theming
+@import "./color-scheme.scss";
 
 // Handle buttons appropriately, with respect to line-height
 .mat-raised-button,
@@ -309,7 +274,16 @@ $altTheme: mat-light-theme($theme-primary, $theme-accent, $theme-warn);
   background: rgba(0, 0, 0, 0.9);
 }
 
-.mat-card {
-  background: white;
+.mat-radio-outer-circle {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+mat-card {
   color: black;
+  background: $background !important;
+
+  mat-card-content {
+    color: black;
+    background: white;
+  }
 }
