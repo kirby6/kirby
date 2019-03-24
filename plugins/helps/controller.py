@@ -88,7 +88,11 @@ def change_state(help_id, is_closed=None, is_read=None):
         help_id = ObjectId(help_id)
     new_state = {}
     if is_closed is not None:
-        new_state['is_closed'] = is_closed.lower() == 'true'
+        new_state['is_closed'] = is_closed
     if is_read is not None:
-        new_state['is_read'] = is_read.lower() == 'true'
+        new_state['is_read'] = is_read
     helps.update_one({'_id': help_id}, {'$set': new_state})
+    websocket.emit('help', {
+        'msg': 'state changed',
+        'id': bson_to_json(help_id),
+    })

@@ -32,4 +32,4 @@ def create_help_route():
 @web_api.route('/<string:help_id>', methods=['PATCH'])
 def change_state_route(help_id):
     change_state(help_id, **request.json)
-    return 'ok', 200
+    return json.dumps('ok'), 200
