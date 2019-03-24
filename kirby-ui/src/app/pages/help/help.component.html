@@ -1,13 +1,31 @@
 <mat-card *ngIf="help">
   <mat-card-header>
     <mat-card-title>בקשה לעזרה</mat-card-title>
+    <mat-icon *ngIf="!help.is_closed" class="todo">help_outline</mat-icon>
+    <mat-icon *ngIf="help.is_closed" class="done">done</mat-icon>
   </mat-card-header>
   <mat-card-content>
     {{help.message}}
   </mat-card-content>
   <mat-card-footer>
-    מ{{help.sender.firstname}} {{help.sender.lastname}}
-    ל{{help.receiving_group.name}}
+    <div class="text">
+      מ{{help.sender.firstname}} {{help.sender.lastname}}
+      ל{{help.receiving_group.name}}
+    </div>
+    <div class="action">
+      <button *ngIf="!help.is_closed"
+	      mat-raised-button
+	      color="accent"
+	      (click)="resolveHelp()">
+	סגור
+      </button>
+      <button *ngIf="help.is_closed"
+	      mat-raised-button
+	      color="accent"
+	      (click)="reopenHelp()">
+	פתח מחדש
+      </button>
+    </div>
   </mat-card-footer>
 </mat-card>
 

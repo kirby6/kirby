@@ -23,11 +23,21 @@ export class HelpPageComponent implements OnInit {
     ngOnInit() {
         this.route.paramMap.subscribe(params => {
             this.helpId = params.get('helpId');
-            this.getHelp()
-                .subscribe((help: Help) => {
-                    this.help = help;
+            this.updateHelp();
+            this.notificationsService.getMessage<any>('help')
+                .subscribe((notification) => {
+                    if (notification.msg === 'state changed' && notification.id === this.helpId) {
+                        this.updateHelp();
+                    }
                 });
         });
+    }
+
+    private updateHelp() {
+        this.getHelp()
+            .subscribe((help: Help) => {
+                this.help = help;
+            });
     }
 
     private getHelp(): Observable<Help> {
@@ -36,5 +46,13 @@ export class HelpPageComponent implements OnInit {
 
     public getCommentContext() {
         return { id: this.help.id, type: 'help' };
+    }
+
+    public resolveHelp() {
+        this.helpsService.changeState(this.helpId, { is_closed: true }).subscribe();
+    }
+
+    public reopenHelp() {
+        this.helpsService.changeState(this.helpId, { is_closed: false }).subscribe();
     }
 } 

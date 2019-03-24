@@ -26,4 +26,8 @@ export class HelpsService {
     create(help: Help): Observable<Help> {
         return this.http.post<Help>(`${config.apiUrl}/${this._prefix}/`, help);
     }
+
+    changeState(id: string, state: { is_read?: boolean, is_closed?: boolean }): Observable<void> {
+        return this.http.patch<void>(`${config.apiUrl}/${this._prefix}/${id}`, state);
+    }
 }
