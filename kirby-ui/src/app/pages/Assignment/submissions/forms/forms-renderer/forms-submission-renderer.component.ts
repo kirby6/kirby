@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormComponent, Title, TextInput, RadioInput, RadioOption } from '../interfaces';
 
 @Component({
@@ -7,34 +7,11 @@ import { FormComponent, Title, TextInput, RadioInput, RadioOption } from '../int
     styleUrls: ['./forms-submission-renderer.component.scss']
 })
 export class FormsSubmissionRendererComponent {
-    public components: FormComponent[] = [
-        {
-            type: 'title',
-            text: "איזה מספר??"
-        } as Title,
-        {
-            type: 'text',
-            question: "1. הכנס טקסט?",
-            placeholder: "אני טקסט"
-        } as TextInput,
-        {
-            type: 'radio',
-            question: "2. מה המספר הכי טוב בעולם??",
-            options: [
-                {
-                    label: "2"
-                },
-                {
-                    label: "6",
-                    selected: true
-                }
-            ]
-        } as RadioInput,
-        {
-            type: 'title',
-            text: "שאלה נוספת??"
-        } as Title,
-    ];
+    @Input() public components: FormComponent[];
+    
+    ngOnInit() {
+        console.log(this.components)
+    }
 
     onTextAnswered(component: TextInput, answer: string) {
         component.answer = answer;

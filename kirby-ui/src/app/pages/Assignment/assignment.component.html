@@ -19,9 +19,9 @@
         <mat-card-title>הגשה:</mat-card-title>
       </mat-card-header>
       <mat-card-content [ngSwitch]="submission">
-        <git-submission *ngSwitchCase="'git'" [submission]="assignment.submission"></git-submission>
-        <file-submission *ngSwitchCase="'file'" [submission]="assignment.submission"></file-submission>
-        <forms-builder *ngSwitchCase="'form'" (onSave)="saveForm($event)"></forms-builder>
+        <git-submission *ngSwitchCase="'git'" [data]="assignment.activity.submissions ['git']"></git-submission>
+        <file-submission *ngSwitchCase="'file'" [submission]="assignment.activity.submissions['file']"></file-submission>
+        <forms-renderer *ngSwitchCase="'form'" [components]="assignment.activity.submissions['form']"></forms-renderer>
       </mat-card-content>
     </mat-card>
   </div>

@@ -1,39 +1,35 @@
 <mat-card class="main-form">
-    <mat-card-header>
-        <mat-card-title>צור תרגיל</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <form #form>
-	<mat-form-field>
-	  <input name="name" matInput placeholder="שם" [(ngModel)]="name" required>
-	</mat-form-field>
-	<div class="file-input">
-	  <button mat-button (click)="fileInput.click()">בחר קבצים</button>
-	  <p>{{files ? files.length : 0}} קבצים</p>
-	  <input name="fileInput"
-		 #fileInput
-		 type="file"
-		 hidden
-		 multiple
-		 (change)="uploadFiles()"/>
-	</div>
-	<span class="pick-submissions-title">דרכי הגשה</span>
-	<div class="pick-submissions">
-	  <div *ngFor="let submission of submissions">
-	    <mat-checkbox name="{{submission.name}}Checkbox" [(ngModel)]="submission.isChecked">
-	      {{submission.name}}
-	    </mat-checkbox>
-	  </div>
-	</div>
-	<button mat-button class="submit-button" type="submit" (click)="submit()">
-	  צור
-	</button>
-      </form>
-    </mat-card-content>
+	<mat-card-header>
+		<mat-card-title>צור תרגיל</mat-card-title>
+	</mat-card-header>
+	<mat-card-content>
+		<form #form>
+			<mat-form-field>
+				<input name="name" matInput placeholder="שם" [(ngModel)]="name" required>
+			</mat-form-field>
+			<div class="file-input">
+				<button mat-button (click)="fileInput.click()">בחר קבצים</button>
+				<p>{{files ? files.length : 0}} קבצים</p>
+				<input name="fileInput" #fileInput type="file" hidden multiple (change)="uploadFiles()" />
+			</div>
+			<span class="pick-submissions-title">דרכי הגשה</span>
+			<div class="pick-submissions">
+				<div *ngFor="let submission of submissions">
+					<mat-checkbox name="{{submission.name}}Checkbox" [(ngModel)]="submission.isChecked">
+						{{submission.name}}
+					</mat-checkbox>
+				</div>
+			</div>
+			<button mat-button class="submit-button" type="submit" (click)="submit()">
+				צור
+			</button>
+		</form>
+	</mat-card-content>
 </mat-card>
 
 <div class="submission-settings">
-  <git-submission-settings *ngIf="showSubmissionSettings('git')"
-			   (onChange)="addSubmissionData('git', $event)">
-  </git-submission-settings>
+	<git-submission-settings *ngIf="showSubmissionSettings('git')" (onChange)="addSubmissionData('git', $event)">
+	</git-submission-settings>
+	<forms-builder *ngIf="showSubmissionSettings('form')" (onSave)="addSubmissionData('form', $event)">
+	</forms-builder>
 </div>

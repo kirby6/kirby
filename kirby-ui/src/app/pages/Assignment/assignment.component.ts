@@ -26,6 +26,7 @@ export class AssignmentPageComponent {
             this.getAssignment()
                 .subscribe((assignment: any) => {
                     this.assignment = assignment;
+                    console.log(assignment)
                 });
         });
     }
