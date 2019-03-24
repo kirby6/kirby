@@ -3,8 +3,27 @@ import { FormTitleDialog } from './../components/title/creation-dialog/form-titl
 import { Component } from '@angular/core';
 import { FormComponent, Title, TextInput, RadioInput } from '../interfaces';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatSnackBar, MatDialogRef } from '@angular/material';
 import { FormRadioInputDialog } from '../components/radio-input/creation-dialog/form-radio-input-dialog.component';
+
+@Component({
+    selector: 'delete-confirmation-dialog',
+    template: `
+    <div mat-dialog-content>
+      <p>אתה בטוח שאתה רוצה למחוק?</p>
+    </div>
+    <div mat-dialog-actions>
+      <button mat-button (click)="onNoClick()">לא</button>
+      <button mat-button [mat-dialog-close]="true" cdkFocusInitial>כן</button>
+    </div>
+    `
+  })
+  export class DeleteConfirmationDialog {
+    constructor(public dialogRef: MatDialogRef<DeleteConfirmationDialog>) {}
+    onNoClick(): void {
+      this.dialogRef.close();
+    }
+  }
 
 @Component({
     selector: 'forms-builder',
@@ -40,7 +59,7 @@ export class FormsSubmissionBuilderComponent {
             text: "שאלה נוספת??"
         } as Title,
     ];
-    constructor(public dialog: MatDialog) { }
+    constructor(public dialog: MatDialog, public snackBar: MatSnackBar) { }
 
 
     createTitle(text: string): Title {
@@ -102,6 +121,18 @@ export class FormsSubmissionBuilderComponent {
             if (result && result.question && result.options.length > 0) {
                 let options = result.options.map(o => o.label).filter(o => o);
                 this.components.push(this.createRadioInput(result.question, options));
+            }
+        });
+    }
+
+    deleteComponent(index: number) {
+        const dialogRef = this.dialog.open(DeleteConfirmationDialog, {
+            width: '250px'
+        });
+
+        dialogRef.afterClosed().subscribe((result: boolean) => {
+            if (result) {
+                this.components.splice(index, 1);
             }
         });
     }

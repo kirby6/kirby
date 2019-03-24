@@ -15,7 +15,7 @@
         </div>
         <div class='spacer'></div>
         <div cdkDropList class='container example-list' (cdkDropListDropped)="drop($event)">
-            <div class='example-box' *ngFor="let component of components;" cdkDrag>
+            <div class='component-box' *ngFor="let component of components;let i = index;" cdkDrag>
                 <div class='example-custom-placeholder' *cdkDragPlaceholder></div>
                 <div [ngSwitch]="component.type">
                     <div *ngSwitchCase="'title'">
@@ -27,6 +27,14 @@
                     <div *ngSwitchCase="'radio'">
                         <form-radio-component class='component' [component]="component"></form-radio-component>
                     </div>
+                </div>
+                <div class='controls'>
+                    <button mat-button color="warn">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                    <button mat-button color="warn" (click)="deleteComponent(i)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
                 </div>
             </div>
         </div>

@@ -47,7 +47,7 @@ import { AgGridModule } from 'ag-grid-angular';
 import { AssignmentCellRenderer } from './pages/Assignments/assignments-matrix/custom-cells/assignments-cell.component';
 import { ActivityFileComponent } from './pages/Assignment/activity-file/activity-file.component';
 import { CommentListComponent } from './components/comment-list/comment-list.component';
-import { FormsSubmissionBuilderComponent } from './pages/Assignment/submissions/forms/forms-builder/forms-submission-builder.component';
+import { FormsSubmissionBuilderComponent, DeleteConfirmationDialog } from './pages/Assignment/submissions/forms/forms-builder/forms-submission-builder.component';
 import { CommonModule } from '@angular/common';
 import { FormsSubmissionRendererComponent } from './pages/Assignment/submissions/forms/forms-renderer/forms-submission-renderer.component';
 import { GitSubmissionComponent } from './pages/Assignment/submissions/git-submission/git-submission.component';
@@ -105,6 +105,7 @@ import { FormRadioInputDialog } from './pages/Assignment/submissions/forms/compo
         FormTitleDialog,
         FormTextInputDialog,
         FormRadioInputDialog,
+        DeleteConfirmationDialog,
         TestPageComponent,
     ],
     entryComponents: [
@@ -112,6 +113,7 @@ import { FormRadioInputDialog } from './pages/Assignment/submissions/forms/compo
         FormTitleDialog,
         FormTextInputDialog,
         FormRadioInputDialog,
+        DeleteConfirmationDialog,
     ],
     imports: [
         BrowserModule,
