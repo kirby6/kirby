@@ -1,11 +1,18 @@
-
 mat-card {
-    background: none;
-    color: black;
-    mat-card-content {
-        padding: 10px;
-        max-height: 500px;
-        overflow-y: auto;
-        overflow-x: hidden;
+  background: none;
+  color: black;
+  mat-card-content {
+    padding: 10px;
+    max-height: 500px;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  mat-card-footer {
+    .controls {
+      .mat-button {
+        width: 100%;
+      }
     }
+  }
 }
