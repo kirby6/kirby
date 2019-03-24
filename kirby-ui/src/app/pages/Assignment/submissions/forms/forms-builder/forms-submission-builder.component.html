@@ -5,6 +5,7 @@
     <mat-card-content>
         <div class='sidebar form-components'>
             <div class='creator title-component'>
+                <h4>הוסף</h4>
                 <mat-chip-list class="mat-chip-list-stacked">
                     <mat-chip selected color="warn">כותרת</mat-chip>
                     <mat-chip selected color="warn">שאלה פתוחה</mat-chip>
@@ -13,17 +14,18 @@
             </div>
         </div>
         <div class='spacer'></div>
-        <div class='container'>
-            <div *ngFor="let component of components;">
+        <div cdkDropList class='container example-list' (cdkDropListDropped)="drop($event)">
+            <div class='example-box' *ngFor="let component of components;" cdkDrag>
+                <div class='example-custom-placeholder' *cdkDragPlaceholder></div>
                 <div [ngSwitch]="component.type">
                     <div *ngSwitchCase="'title'">
-                        <form-title-component [component]="component"></form-title-component>
+                        <form-title-component class='component' [component]="component"></form-title-component>
                     </div>
                     <div *ngSwitchCase="'text'">
-                        <form-text-component [component]="component"></form-text-component>
+                        <form-text-component class='component' [component]="component"></form-text-component>
                     </div>
                     <div *ngSwitchCase="'radio'">
-                        <form-radio-component [component]="component"></form-radio-component>
+                        <form-radio-component class='component' [component]="component"></form-radio-component>
                     </div>
                 </div>
             </div>

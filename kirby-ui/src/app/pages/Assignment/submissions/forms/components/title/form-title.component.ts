@@ -5,7 +5,12 @@ import { Component, Input } from '@angular/core';
     selector: 'form-title-component',
     template: `
         <h2 *ngIf='text'>{{text}}</h2>
-    `
+    `,
+    styles: [`
+        :host {
+            display: block;
+        }
+    `]
 })
 export class FormTitleComponent{
     text: string;

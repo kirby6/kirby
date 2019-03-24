@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormComponent, Title, TextInput, RadioInput } from '../interfaces';
+import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 
 @Component({
     selector: 'forms-builder',
@@ -54,5 +55,10 @@ export class FormsSubmissionBuilderComponent {
             question,
             options: options.map(o => ({ label: o, selected: false }))
         } as RadioInput;
+    }
+
+    drop(event: CdkDragDrop<string[]>) {
+        moveItemInArray(this.components, event.previousIndex, event.currentIndex);
+        console.log(this.components);
     }
 }
