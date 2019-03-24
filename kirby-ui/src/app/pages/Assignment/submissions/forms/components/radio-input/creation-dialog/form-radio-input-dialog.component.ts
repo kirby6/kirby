@@ -24,14 +24,10 @@ import { Inject, Component } from '@angular/core';
     `
 })
 export class FormRadioInputDialog {
+    public data: RadioInput = { question: "", options: [] } as RadioInput;
 
-    constructor(
-        public dialogRef: MatDialogRef<FormRadioInputDialog>,
-        @Inject(MAT_DIALOG_DATA) public data: RadioInput) { }
+    constructor(public dialogRef: MatDialogRef<FormRadioInputDialog>) { }
 
-    ngOnInit() {
-        this.data.options = this.data.options || [];
-    }
 
     onNoClick(): void {
         this.dialogRef.close();

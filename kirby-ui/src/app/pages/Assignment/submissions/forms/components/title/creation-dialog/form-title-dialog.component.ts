@@ -20,9 +20,8 @@ import { Inject, Component } from '@angular/core';
 })
 export class FormTitleDialog {
 
-    constructor(
-        public dialogRef: MatDialogRef<FormTitleDialog>,
-        @Inject(MAT_DIALOG_DATA) public data: Title) { }
+    data: Title = {text: ""} as Title;
+    constructor(public dialogRef: MatDialogRef<FormTitleDialog>) { }
 
     onNoClick(): void {
         this.dialogRef.close();

@@ -4,8 +4,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Inject, Component } from '@angular/core';
 
 @Component({
-    selector: 'form-text-input-dialog',
-    template: `
+  selector: 'form-text-input-dialog',
+  template: `
     <h1 mat-dialog-title>צור שאלה פתוחה</h1>
     <div mat-dialog-content> 
       <mat-form-field>
@@ -24,13 +24,12 @@ import { Inject, Component } from '@angular/core';
     `
 })
 export class FormTextInputDialog {
+  public data: TextInput = { question: "", placeholder: "" } as TextInput;
 
-    constructor(
-        public dialogRef: MatDialogRef<FormTextInputDialog>,
-        @Inject(MAT_DIALOG_DATA) public data: TextInput) { }
+  constructor(public dialogRef: MatDialogRef<FormTextInputDialog>) { }
 
-    onNoClick(): void {
-        this.dialogRef.close();
-    }
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
 
 }

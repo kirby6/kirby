@@ -70,8 +70,7 @@ export class FormsSubmissionBuilderComponent {
 
     openTitleCreationDialog() {
         const dialogRef = this.dialog.open(FormTitleDialog, {
-            width: '250px',
-            data: { text: "" }
+            width: '250px'
         });
 
         dialogRef.afterClosed().subscribe((result: Title) => {
@@ -83,8 +82,7 @@ export class FormsSubmissionBuilderComponent {
 
     openTextInputCreationDialog() {
         const dialogRef = this.dialog.open(FormTextInputDialog, {
-            width: '250px',
-            data: { text: "" }
+            width: '250px'
         });
 
         dialogRef.afterClosed().subscribe((result: TextInput) => {
@@ -96,20 +94,7 @@ export class FormsSubmissionBuilderComponent {
 
     openRadioInputCreationDialog() {
         const dialogRef = this.dialog.open(FormRadioInputDialog, {
-            width: '250px',
-            data: {
-                type: 'radio',
-                question: "2. מה המספר הכי טוב בעולם??",
-                options: [
-                    {
-                        label: "2"
-                    },
-                    {
-                        label: "6",
-                        selected: true
-                    }
-                ]
-            }
+            width: '250px'
         });
 
         dialogRef.afterClosed().subscribe((result: RadioInput) => {
