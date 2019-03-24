@@ -1,6 +1,6 @@
 import { FormTextInputDialog } from './../components/text-input/creation-dialog/form-text-input-dialog.component';
 import { FormTitleDialog } from './../components/title/creation-dialog/form-title-dialog.component';
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { FormComponent, Title, TextInput, RadioInput } from '../interfaces';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { MatDialog, MatSnackBar, MatDialogRef } from '@angular/material';
@@ -31,36 +31,24 @@ export class DeleteConfirmationDialog {
     styleUrls: ['./forms-submission-builder.component.scss']
 })
 export class FormsSubmissionBuilderComponent {
-    @Output() onSave: EventEmitter<FormComponent[]> = new EventEmitter();
+    @Output() onChange: EventEmitter<FormComponent[]> = new EventEmitter();
 
-    public components: FormComponent[] = [
-        {
-            type: 'title',
-            text: "איזה מספר??"
-        } as Title,
-        {
-            type: 'text',
-            question: "1. הכנס טקסט?",
-            placeholder: "אני טקסט"
-        } as TextInput,
-        {
-            type: 'radio',
-            question: "2. מה המספר הכי טוב בעולם??",
-            options: [
-                {
-                    label: "2"
-                },
-                {
-                    label: "6",
-                    selected: true
-                }
-            ]
-        } as RadioInput,
-        {
-            type: 'title',
-            text: "שאלה נוספת??"
-        } as Title,
-    ];
+    private _components: FormComponent[] = [];
+
+    @Input() public set components(c: FormComponent[]) {
+        this._components = c;
+        this.onChange.emit(c);
+    }
+
+    public get components(): FormComponent[] {
+        return new Proxy(this._components, {
+            set: (target, name, val) => {
+                target[name] = val;
+                this.onChange.emit(target);
+                return true;
+            }
+        });
+    }
     constructor(public dialog: MatDialog, public snackBar: MatSnackBar) { }
 
 
@@ -86,7 +74,6 @@ export class FormsSubmissionBuilderComponent {
 
     drop(event: CdkDragDrop<string[]>) {
         moveItemInArray(this.components, event.previousIndex, event.currentIndex);
-        console.log(this.components);
     }
 
     openTitleCreationDialog() {
@@ -136,9 +123,5 @@ export class FormsSubmissionBuilderComponent {
                 this.components.splice(index, 1);
             }
         });
-    }
-
-    save() {
-        this.onSave.emit(this.components);
     }
 }

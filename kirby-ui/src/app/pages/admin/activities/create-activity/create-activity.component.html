@@ -30,6 +30,6 @@
 <div class="submission-settings">
 	<git-submission-settings *ngIf="showSubmissionSettings('git')" (onChange)="addSubmissionData('git', $event)">
 	</git-submission-settings>
-	<forms-builder *ngIf="showSubmissionSettings('form')" (onSave)="addSubmissionData('form', $event)">
+	<forms-builder *ngIf="showSubmissionSettings('form')" (onChange)="addSubmissionData('form', $event)">
 	</forms-builder>
 </div>

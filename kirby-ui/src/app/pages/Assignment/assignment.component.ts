@@ -26,7 +26,6 @@ export class AssignmentPageComponent {
             this.getAssignment()
                 .subscribe((assignment: any) => {
                     this.assignment = assignment;
-                    console.log(assignment)
                 });
         });
     }
@@ -54,9 +53,5 @@ export class AssignmentPageComponent {
 
     public getHelpContext() {
         return { id: this.assignment.id, type: 'assignment' };
-    }
-
-    saveForm(components: FormComponent[]) {
-        console.log({save: components});
     }
 }

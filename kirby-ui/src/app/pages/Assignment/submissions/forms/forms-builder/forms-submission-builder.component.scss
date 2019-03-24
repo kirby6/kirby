@@ -1,6 +1,7 @@
 @import "./../../../../../../color-scheme";
 
 mat-card {
+  background: $background;
   mat-card-content {
     padding: 10px;
     display: flex;
@@ -10,7 +11,7 @@ mat-card {
 
     .sidebar {
       display: flex;
-      flex: 1;
+      flex: 1.1;
       border-left: 1px solid #ccc;
       mat-chip {
         color: white;
@@ -90,11 +91,6 @@ mat-card {
         min-height: 60px;
         transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
       }
-    }
-  }
-  mat-card-footer {
-    .controls {
-      padding: 10px;
     }
   }
 }

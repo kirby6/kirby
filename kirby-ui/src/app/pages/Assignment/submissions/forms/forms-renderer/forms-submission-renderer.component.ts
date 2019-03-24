@@ -9,10 +9,6 @@ import { FormComponent, Title, TextInput, RadioInput, RadioOption } from '../int
 export class FormsSubmissionRendererComponent {
     @Input() public components: FormComponent[];
     
-    ngOnInit() {
-        console.log(this.components)
-    }
-
     onTextAnswered(component: TextInput, answer: string) {
         component.answer = answer;
     }
