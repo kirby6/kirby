@@ -3,7 +3,31 @@
         <mat-card-title>צור</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-        <!-- <form-builder [form]="form" (change)="onChange($event)"></form-builder> -->
+        <div class='sidebar form-components'>
+            <div class='creator title-component'>
+                <mat-chip-list class="mat-chip-list-stacked">
+                    <mat-chip selected color="warn">כותרת</mat-chip>
+                    <mat-chip selected color="warn">שאלה פתוחה</mat-chip>
+                    <mat-chip selected color="warn">שאלה סגורה</mat-chip>
+                </mat-chip-list>
+            </div>
+        </div>
+        <div class='spacer'></div>
+        <div class='container'>
+            <div *ngFor="let component of components;">
+                <div [ngSwitch]="component.type">
+                    <div *ngSwitchCase="'title'">
+                        <form-title-component [component]="component"></form-title-component>
+                    </div>
+                    <div *ngSwitchCase="'text'">
+                        <form-text-component [component]="component"></form-text-component>
+                    </div>
+                    <div *ngSwitchCase="'radio'">
+                        <form-radio-component [component]="component"></form-radio-component>
+                    </div>
+                </div>
+            </div>
+        </div>
     </mat-card-content>
     <mat-card-footer>
         <div class='controls'>

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-    template: `<forms-renderer></forms-renderer>`
+    template: `<forms-builder></forms-builder>`
 })
 export class TestPageComponent {
     

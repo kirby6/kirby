@@ -1,6 +1,32 @@
+@import './../../../../../../color-scheme';
+
 mat-card {
     mat-card-content {
         padding: 10px;
+        display: flex;
+        flex-direction: row;
+        flex: 10;
+        justify-content: space-between;
+
+        .sidebar {
+            display: flex;
+            flex: 1;
+            border-left: 1px solid #ccc;
+            mat-chip {
+                color: white;
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+        }
+        .spacer {
+            flex: 0.1;
+        }
+        .container {
+            border: 2px dashed $active;
+            flex: 7;
+            padding: 10px;
+        }
     }
     mat-card-footer {
         .controls {
