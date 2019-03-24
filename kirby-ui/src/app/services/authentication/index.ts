@@ -5,14 +5,16 @@ import { map } from 'rxjs/operators';
 
 import { environment as config } from './../../../environments/environment';
 import { User } from '../users/interfaces';
+import { EncryptedLocaStorageService } from '../encrypted-local-storage';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
     private currentUserSubject: BehaviorSubject<User>;
     public currentUser: Observable<User>;
 
-    constructor(private http: HttpClient) {
-        this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
+    constructor(private http: HttpClient, private encryptedLocaStorageService: EncryptedLocaStorageService) {
+        // this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
+        this.currentUserSubject = new BehaviorSubject<User>(this.encryptedLocaStorageService.encryptedData.get('currentUser'));
         this.currentUser = this.currentUserSubject.asObservable();
     }
 
@@ -26,7 +28,8 @@ export class AuthenticationService {
                 // login successful if there's a jwt token in the response
                 if (user && user.token) {
                     // store user details and jwt token in local storage to keep user logged in between page refreshes
-                    localStorage.setItem('currentUser', JSON.stringify(user));
+                    this.encryptedLocaStorageService.encryptedData.set('currentUser', user);
+                    // localStorage.setItem('currentUser', JSON.stringify(user));
                     this.currentUserSubject.next(user);
                 }
 
@@ -36,7 +39,8 @@ export class AuthenticationService {
 
     logout() {
         // remove user from local storage to log user out
-        localStorage.removeItem('currentUser');
+        // localStorage.removeItem('currentUser');
+        this.encryptedLocaStorageService.encryptedData.remove('currentUser');
         this.currentUserSubject.next(null);
     }
 }
