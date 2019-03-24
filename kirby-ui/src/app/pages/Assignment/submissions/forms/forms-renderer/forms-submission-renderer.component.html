@@ -9,11 +9,11 @@
                     <form-title-component [component]="component"></form-title-component>
                 </div>
                 <div *ngSwitchCase="'text'">
-                    <form-text-component [component]="component" (onAnswered)="onTextAnswered($event)">
+                    <form-text-component [component]="component" (onAnswered)="onTextAnswered(component, $event)">
                     </form-text-component>
                 </div>
                 <div *ngSwitchCase="'radio'">
-                    <form-radio-component [component]="component" (onAnswered)="onTextAnswered($event)">
+                    <form-radio-component [component]="component" (onAnswered)="onRadioSelected(component, $event)">
                     </form-radio-component>
                 </div>
             </div>

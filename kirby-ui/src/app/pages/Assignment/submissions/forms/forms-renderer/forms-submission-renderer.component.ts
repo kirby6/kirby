@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormComponent, Title, TextInput, RadioInput } from '../interfaces';
+import { FormComponent, Title, TextInput, RadioInput, RadioOption } from '../interfaces';
 
 @Component({
     selector: 'forms-renderer',
@@ -29,10 +29,25 @@ export class FormsSubmissionRendererComponent {
                     selected: true
                 }
             ]
-        } as RadioInput
+        } as RadioInput,
+        {
+            type: 'title',
+            text: "שאלה נוספת??"
+        } as Title,
     ];
 
-    onTextAnswered(s) {
-        console.log(s);
+    onTextAnswered(component: TextInput, answer: string) {
+        component.answer = answer;
+    }
+
+    onRadioSelected(component: RadioInput, selectedOptionLabel: string) {
+        this._clearSelectedRadioOptions(component.options);
+        let selectedOptionRef = component.options.find(c => c.label === selectedOptionLabel) || {} as RadioOption;
+        selectedOptionRef.selected = true;
+    }
+
+    private _clearSelectedRadioOptions(options: RadioOption[]): RadioOption[] {
+        options.forEach(c => c.selected = false);
+        return options;
     }
 } 
