@@ -57,8 +57,11 @@ import { TestPageComponent } from './pages/test/test.component';
 import { FormTextInputComponent } from './pages/Assignment/submissions/forms/components/text-input/form-text-input.component';
 import { FormTitleComponent } from './pages/Assignment/submissions/forms/components/title/form-title.component';
 import { FormRadioInputComponent } from './pages/Assignment/submissions/forms/components/radio-input/form-radio-input.component';
+import { FormTitleDialog } from './pages/Assignment/submissions/forms/components/title/creation-dialog/form-title-dialog.component';
+import { FormTextInputDialog } from './pages/Assignment/submissions/forms/components/text-input/creation-dialog/form-text-input-dialog.component';
+import { FormRadioInputDialog } from './pages/Assignment/submissions/forms/components/radio-input/creation-dialog/form-radio-input-dialog.component';
 
-
+ 
 @NgModule({
     declarations: [
         AppComponent,
@@ -99,10 +102,16 @@ import { FormRadioInputComponent } from './pages/Assignment/submissions/forms/co
         FormTitleComponent,
         FormTextInputComponent,
         FormRadioInputComponent,
+        FormTitleDialog,
+        FormTextInputDialog,
+        FormRadioInputDialog,
         TestPageComponent,
     ],
     entryComponents: [
         RequestHelpDialogComponent,
+        FormTitleDialog,
+        FormTextInputDialog,
+        FormRadioInputDialog,
     ],
     imports: [
         BrowserModule,

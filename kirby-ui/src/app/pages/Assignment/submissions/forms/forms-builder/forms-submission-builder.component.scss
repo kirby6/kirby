@@ -26,6 +26,8 @@ mat-card {
             border: 2px dashed $active;
             flex: 7;
             padding: 10px;
+            max-height: 400px;
+            overflow-y: auto;
 
             .example-list {
                 width: 500px;

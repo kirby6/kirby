@@ -7,9 +7,9 @@
             <div class='creator title-component'>
                 <h4>הוסף</h4>
                 <mat-chip-list class="mat-chip-list-stacked">
-                    <mat-chip selected color="warn">כותרת</mat-chip>
-                    <mat-chip selected color="warn">שאלה פתוחה</mat-chip>
-                    <mat-chip selected color="warn">שאלה סגורה</mat-chip>
+                    <mat-chip selected color="warn" (click)="openTitleCreationDialog()">כותרת</mat-chip>
+                    <mat-chip selected color="warn" (click)="openTextInputCreationDialog()">שאלה פתוחה</mat-chip>
+                    <mat-chip selected color="warn" (click)="openRadioInputCreationDialog()">שאלה סגורה</mat-chip>
                 </mat-chip-list>
             </div>
         </div>

@@ -274,6 +274,15 @@ $altTheme: mat-light-theme($theme-primary, $theme-accent, $theme-warn);
   background: rgba(0, 0, 0, 0.9);
 }
 
+.mat-dialog-container {
+  background: white;
+  color: black;
+}
+
+.mat-form-field-ripple, .mat-form-field-underline {
+  background: $active !important;
+}
+
 .mat-card-header {
   text-align: right;
 }

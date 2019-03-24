@@ -1,6 +1,10 @@
+import { FormTextInputDialog } from './../components/text-input/creation-dialog/form-text-input-dialog.component';
+import { FormTitleDialog } from './../components/title/creation-dialog/form-title-dialog.component';
 import { Component } from '@angular/core';
 import { FormComponent, Title, TextInput, RadioInput } from '../interfaces';
-import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { MatDialog } from '@angular/material';
+import { FormRadioInputDialog } from '../components/radio-input/creation-dialog/form-radio-input-dialog.component';
 
 @Component({
     selector: 'forms-builder',
@@ -36,6 +40,8 @@ export class FormsSubmissionBuilderComponent {
             text: "שאלה נוספת??"
         } as Title,
     ];
+    constructor(public dialog: MatDialog) { }
+
 
     createTitle(text: string): Title {
         return { type: 'title', text } as Title;
@@ -60,5 +66,58 @@ export class FormsSubmissionBuilderComponent {
     drop(event: CdkDragDrop<string[]>) {
         moveItemInArray(this.components, event.previousIndex, event.currentIndex);
         console.log(this.components);
+    }
+
+    openTitleCreationDialog() {
+        const dialogRef = this.dialog.open(FormTitleDialog, {
+            width: '250px',
+            data: { text: "" }
+        });
+
+        dialogRef.afterClosed().subscribe((result: Title) => {
+            if (result && result.text) {
+                this.components.push(this.createTitle(result.text));
+            }
+        });
+    }
+
+    openTextInputCreationDialog() {
+        const dialogRef = this.dialog.open(FormTextInputDialog, {
+            width: '250px',
+            data: { text: "" }
+        });
+
+        dialogRef.afterClosed().subscribe((result: TextInput) => {
+            if (result && result.question) {
+                this.components.push(this.createTextInput(result.question, result.placeholder));
+            }
+        });
+    }
+
+    openRadioInputCreationDialog() {
+        const dialogRef = this.dialog.open(FormRadioInputDialog, {
+            width: '250px',
+            data: {
+                type: 'radio',
+                question: "2. מה המספר הכי טוב בעולם??",
+                options: [
+                    {
+                        label: "2"
+                    },
+                    {
+                        label: "6",
+                        selected: true
+                    }
+                ]
+            }
+        });
+
+        dialogRef.afterClosed().subscribe((result: RadioInput) => {
+            console.log(result);
+            if (result && result.question && result.options.length > 0) {
+                let options = result.options.map(o => o.label).filter(o => o);
+                this.components.push(this.createRadioInput(result.question, options));
+            }
+        });
     }
 }
