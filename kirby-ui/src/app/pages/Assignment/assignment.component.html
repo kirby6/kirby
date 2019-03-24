@@ -21,6 +21,7 @@
       <mat-card-content [ngSwitch]="submission">
         <git-submission *ngSwitchCase="'git'" [submission]="assignment.submission"></git-submission>
         <file-submission *ngSwitchCase="'file'" [submission]="assignment.submission"></file-submission>
+        <forms-builder *ngSwitchCase="'form'" (onSave)="saveForm($event)"></forms-builder>
       </mat-card-content>
     </mat-card>
   </div>

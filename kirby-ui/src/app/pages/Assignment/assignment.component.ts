@@ -1,3 +1,4 @@
+import { FormComponent } from './submissions/forms/interfaces';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Assignment } from './../../services/assignments/interfaces';
@@ -52,5 +53,9 @@ export class AssignmentPageComponent {
 
     public getHelpContext() {
         return { id: this.assignment.id, type: 'assignment' };
+    }
+
+    saveForm(components: FormComponent[]) {
+        console.log({save: components});
     }
 }

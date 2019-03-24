@@ -1,6 +1,6 @@
 import { FormTextInputDialog } from './../components/text-input/creation-dialog/form-text-input-dialog.component';
 import { FormTitleDialog } from './../components/title/creation-dialog/form-title-dialog.component';
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { FormComponent, Title, TextInput, RadioInput } from '../interfaces';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { MatDialog, MatSnackBar, MatDialogRef } from '@angular/material';
@@ -17,13 +17,13 @@ import { FormRadioInputDialog } from '../components/radio-input/creation-dialog/
       <button mat-button [mat-dialog-close]="true" cdkFocusInitial>כן</button>
     </div>
     `
-  })
-  export class DeleteConfirmationDialog {
-    constructor(public dialogRef: MatDialogRef<DeleteConfirmationDialog>) {}
+})
+export class DeleteConfirmationDialog {
+    constructor(public dialogRef: MatDialogRef<DeleteConfirmationDialog>) { }
     onNoClick(): void {
-      this.dialogRef.close();
+        this.dialogRef.close();
     }
-  }
+}
 
 @Component({
     selector: 'forms-builder',
@@ -31,6 +31,8 @@ import { FormRadioInputDialog } from '../components/radio-input/creation-dialog/
     styleUrls: ['./forms-submission-builder.component.scss']
 })
 export class FormsSubmissionBuilderComponent {
+    @Output() onSave: EventEmitter<FormComponent[]> = new EventEmitter();
+
     public components: FormComponent[] = [
         {
             type: 'title',
@@ -117,7 +119,6 @@ export class FormsSubmissionBuilderComponent {
         });
 
         dialogRef.afterClosed().subscribe((result: RadioInput) => {
-            console.log(result);
             if (result && result.question && result.options.length > 0) {
                 let options = result.options.map(o => o.label).filter(o => o);
                 this.components.push(this.createRadioInput(result.question, options));
@@ -135,5 +136,9 @@ export class FormsSubmissionBuilderComponent {
                 this.components.splice(index, 1);
             }
         });
+    }
+
+    save() {
+        this.onSave.emit(this.components);
     }
 }
