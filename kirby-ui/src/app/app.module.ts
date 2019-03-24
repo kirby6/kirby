@@ -8,11 +8,6 @@ import { TreeModule } from 'angular-tree-component';
 
 import { SocketIoModule } from 'ngx-socket-io';
 
-import { FormioModule, FormioAppConfig } from 'angular-formio';
-import {FormIOConfig} from './pages/Assignment/submissions/forms/forms-builder/formio-config';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/login/login.component';
@@ -58,6 +53,11 @@ import { FormsSubmissionRendererComponent } from './pages/Assignment/submissions
 import { GitSubmissionComponent } from './pages/Assignment/submissions/git-submission/git-submission.component';
 import { FileSubmissionComponent } from './pages/Assignment/submissions/file-submission/file-submission.component';
 import { AddNavigationItem } from './components/navigation-list/add-navigation-item/add-navigation-item.component';
+import { TestPageComponent } from './pages/test/test.component';
+import { FormTextInputComponent } from './pages/Assignment/submissions/forms/components/text-input/form-text-input.component';
+import { FormTitleComponent } from './pages/Assignment/submissions/forms/components/title/form-title.component';
+import { FormRadioInputComponent } from './pages/Assignment/submissions/forms/components/radio-input/form-radio-input.component';
+
 
 @NgModule({
     declarations: [
@@ -96,6 +96,10 @@ import { AddNavigationItem } from './components/navigation-list/add-navigation-i
         AddNavigationItem,
         CreateActivityComponent,
         GitSubmissionSettingsComponent,
+        FormTitleComponent,
+        FormTextInputComponent,
+        FormRadioInputComponent,
+        TestPageComponent,
     ],
     entryComponents: [
         RequestHelpDialogComponent,
@@ -113,14 +117,11 @@ import { AddNavigationItem } from './components/navigation-list/add-navigation-i
         TruncateModule,
         SocketIoModule,
         AgGridModule.withComponents([AssignmentCellRenderer]),
-        FormioModule,
-        NgbModule,
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: CredentialsInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: TokenExpirationInterceptor, multi: true },
-        {provide: FormioAppConfig, useValue: FormIOConfig},
     ],
     bootstrap: [AppComponent]
 })
