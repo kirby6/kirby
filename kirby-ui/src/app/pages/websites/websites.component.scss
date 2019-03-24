@@ -1,19 +1,17 @@
 @import "./../../../color-scheme.scss";
 
 :host {
-  background: $background;
   display: block;
   height: 80%;
 
-  h2 {
-    padding: 20px 20px 20px 20px;
-    color: white;
-  }
-
-  .card-list {
-    display: grid;
-    grid-template-columns: 25% 25% 25%;
-    justify-content: center;
-    grid-gap: 60px 50px;
+  mat-card {
+    background: $background;
+    mat-card-content {
+      background: none;
+      display: grid;
+      grid-template-columns: 25% 25% 25%;
+      justify-content: center;
+      grid-gap: 60px 50px;
+    }
   }
 }
