@@ -42,7 +42,8 @@ $direction: rtl;
   font-family: Heebo;
 }
 
-html, body {
+html,
+body {
   height: 100%;
 }
 body {
@@ -260,8 +261,10 @@ $altTheme: mat-light-theme($theme-primary, $theme-accent, $theme-warn);
   min-height: 2.5em;
 }
 
-.mat-menu-panel {
-  background: #6d6d6d;
+.mat-menu-panel,
+.mat-menu-item {
+  background: white;
+  color: black;
 }
 
 .mat-menu-content:not(:empty) {
@@ -269,12 +272,14 @@ $altTheme: mat-light-theme($theme-primary, $theme-accent, $theme-warn);
 }
 
 // Custom classes
-.mat-dialog-container, .mat-bottom-sheet-container {
+.mat-dialog-container,
+.mat-bottom-sheet-container {
   background: white;
   color: black;
 }
 
-.mat-form-field-ripple, .mat-form-field-underline {
+.mat-form-field-ripple,
+.mat-form-field-underline {
   background: $active !important;
 }
 
@@ -285,7 +290,10 @@ $altTheme: mat-light-theme($theme-primary, $theme-accent, $theme-warn);
   background: rgba(0, 0, 0, 0.7);
 }
 
-.mat-flat-button.mat-accent, .mat-raised-button.mat-accent, .mat-fab.mat-accent, .mat-mini-fab.mat-accent {
+.mat-flat-button.mat-accent,
+.mat-raised-button.mat-accent,
+.mat-fab.mat-accent,
+.mat-mini-fab.mat-accent {
   color: white;
 }
 
