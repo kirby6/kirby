@@ -1,11 +1,14 @@
 @import "./../../../../color-scheme.scss";
 
 :host {
-    mat-form-field {
-	width: 100%;
-	textarea {
-	    font-weight: 300;
-	    font-size: 16px;
+  mat-form-field {
+    width: 100%;
+	mat-label {
+		color: $active;
 	}
+	textarea {
+      font-weight: 300;
+      font-size: 16px;
     }
+  }
 }

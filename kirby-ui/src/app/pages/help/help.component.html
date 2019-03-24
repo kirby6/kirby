@@ -13,17 +13,11 @@
       ל{{help.receiving_group.name}}
     </div>
     <div class="action">
-      <button *ngIf="!help.is_closed"
-	      mat-raised-button
-	      color="accent"
-	      (click)="resolveHelp()">
-	סגור
+      <button *ngIf="!help.is_closed" mat-raised-button color="accent" (click)="resolveHelp()">
+        סגור
       </button>
-      <button *ngIf="help.is_closed"
-	      mat-raised-button
-	      color="accent"
-	      (click)="reopenHelp()">
-	פתח מחדש
+      <button *ngIf="help.is_closed" mat-raised-button color="accent" (click)="reopenHelp()">
+        פתח מחדש
       </button>
     </div>
   </mat-card-footer>
