@@ -2,7 +2,8 @@ import datetime
 from bson import ObjectId
 
 from kirby.core.db import collection as helps, bson_to_json
-from kirby.core import websocket
+from kirby.builtins.notifications import notify
+from kirby.builtins.groups import get_group_children
 
 aggregation = [{
     '$lookup': {
@@ -61,13 +62,12 @@ def create_help(sender_id, receiving_group_id, message, context=None):
     if context:
         help_object['context'] = context
     result = bson_to_json(helps.insert_one(help_object).inserted_id)
-    websocket.emit(
-        'help', {
-            'msg': 'help created',
-            'id': result,
-            'sender_id': bson_to_json(sender_id),
-            'receiving_group_id': bson_to_json(receiving_group_id)
-        })
+    notify({
+        'msg': 'help created',
+        'id': result,
+        'sender_id': bson_to_json(sender_id),
+        'receiving_group_id': bson_to_json(receiving_group_id)
+    }, *get_group_children(receiving_group_id))
     return result
 
 
@@ -92,7 +92,9 @@ def change_state(help_id, is_closed=None, is_read=None):
     if is_read is not None:
         new_state['is_read'] = is_read
     helps.update_one({'_id': help_id}, {'$set': new_state})
-    websocket.emit('help', {
-        'msg': 'state changed',
+    help_object = get_by_id(help_id)
+    notify({
+        'msg': 'help state changed',
         'id': bson_to_json(help_id),
-    })
+    }, help_object['sender_id'],
+           *get_group_children(help_object['receiving_group_id']))

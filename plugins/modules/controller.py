@@ -1,7 +1,7 @@
 from bson import ObjectId
 
 from kirby.core.db import bson_to_json, collection as modules
-from kirby.core import websocket
+from kirby.builtins.notifications import notify
 
 
 def get_all_modules():
@@ -48,7 +48,7 @@ def create_module(name, parent=None):
             parent = ObjectId(parent)
         module_to_add['parent'] = parent
     result = bson_to_json(modules.insert_one(module_to_add).inserted_id)
-    websocket.emit('module', {
+    notify({
         'msg': 'module created',
         'id': result,
     })

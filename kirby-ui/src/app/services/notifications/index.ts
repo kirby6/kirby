@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
-
 import { Observable } from 'rxjs';
-
 import { AuthenticationService } from '../authentication';
 import { environment } from '../../../environments/environment';
+import { Notification } from './interfaces';
 
 class AuthorizedSocket extends Socket {
     constructor(token) {
@@ -37,7 +36,7 @@ export class NotificationsService {
         return this.socket.emit(this.defaultEventName, message);
     }
 
-    getMessage<T>(eventName?: string): Observable<T> {
-        return this.socket.fromEvent<T>(eventName || this.defaultEventName);
+    listen(): Observable<Notification> {
+        return this.socket.fromEvent<Notification>(this.defaultEventName);
     }
 }

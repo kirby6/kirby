@@ -24,9 +24,10 @@ export class HelpPageComponent implements OnInit {
         this.route.paramMap.subscribe(params => {
             this.helpId = params.get('helpId');
             this.updateHelp();
-            this.notificationsService.getMessage<any>('help')
+            this.notificationsService.listen()
                 .subscribe((notification) => {
-                    if (notification.msg === 'state changed' && notification.id === this.helpId) {
+                    if (notification.context.msg === 'help state changed' &&
+                        notification.context.id === this.helpId) {
                         this.updateHelp();
                     }
                 });
@@ -46,6 +47,10 @@ export class HelpPageComponent implements OnInit {
 
     public getCommentContext() {
         return { id: this.help.id, type: 'help' };
+    }
+
+    public getCommentReceivingUserIds() {
+        return [this.help.sender_id];
     }
 
     public resolveHelp() {

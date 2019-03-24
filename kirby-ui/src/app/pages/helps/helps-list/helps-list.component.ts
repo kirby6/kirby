@@ -26,9 +26,9 @@ export class HelpsListComponent implements OnInit {
 
     ngOnInit() {
         this.updateHelps();
-        this.notificationsService.getMessage<any>('help')
+        this.notificationsService.listen()
             .subscribe((notification) => {
-                if (notification.msg === 'help created') {
+                if (notification.context.msg === 'help created') {
                     this.updateHelps();
                 }
             });

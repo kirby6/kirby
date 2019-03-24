@@ -50,6 +50,10 @@ export class AssignmentPageComponent {
         return { id: this.assignment.id, type: 'assignment' };
     }
 
+    public getCommentReceivingUserIds() {
+        return [this.assignment.user_id];
+    }
+
     public getHelpContext() {
         return { id: this.assignment.id, type: 'assignment' };
     }

@@ -15,7 +15,8 @@ export class CommentsService {
         return this.http.put<Comment[]>(`${config.apiUrl}/${this._prefix}/`, context);
     }
 
-    post(comment: Comment): Observable<string> {
-        return this.http.post<string>(`${config.apiUrl}/${this._prefix}/`, comment);
+    post(comment: Comment, receivingUserIds: string[]): Observable<string> {
+        return this.http.post<string>(`${config.apiUrl}/${this._prefix}/`,
+            { ...comment, 'receiving_user_ids': receivingUserIds });
     }
 }

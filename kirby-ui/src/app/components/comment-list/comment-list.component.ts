@@ -15,6 +15,8 @@ export class CommentListComponent implements OnInit {
     public comments: Comment[] = [];
     @Input()
     public context: object;
+    @Input()
+    public receivingUserIds: string[];
 
     constructor(
         private notificationsService: NotificationsService,
@@ -24,9 +26,9 @@ export class CommentListComponent implements OnInit {
 
     ngOnInit() {
         this.updateComments();
-        this.notificationsService.getMessage<any>('comment')
+        this.notificationsService.listen()
             .subscribe((notification) => {
-                if (notification.msg === 'comment posted') {
+                if (notification.context.msg === 'comment posted') {
                     this.updateComments();
                 }
             });
@@ -43,7 +45,7 @@ export class CommentListComponent implements OnInit {
             context: this.context,
             message: message,
             author_id: this.auth.currentUserValue.id,
-        }).subscribe();
+        }, this.receivingUserIds).subscribe();
     }
 
     private sortByDateAsc(comments) {

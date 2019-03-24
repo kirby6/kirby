@@ -27,9 +27,9 @@ export class ActivitiesPageComponent {
 
     ngOnInit() {
         this.updateModules();
-        this.notificationsService.getMessage<any>('module')
+        this.notificationsService.listen()
             .subscribe((notification) => {
-                if (notification.msg === 'module created') {
+                if (notification.context.msg === 'module created') {
                     this.updateModules();
                 }
             });

@@ -10,7 +10,10 @@
       </mat-card-content>
     </mat-card>
     
-    <comment-list *ngIf="assignment" [context]="getCommentContext()"></comment-list>
+    <comment-list *ngIf="assignment"
+		  [context]="getCommentContext()"
+		  [receivingUserIds]="getCommentReceivingUserIds()">
+    </comment-list>
   </div>
   
   <div class="submissions">

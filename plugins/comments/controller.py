@@ -2,7 +2,7 @@ import datetime
 from bson import ObjectId
 
 from kirby.core.db import collection as comments, bson_to_json
-from kirby.core import websocket
+from kirby.builtins.notifications import notify
 
 aggregation = [{
     '$lookup': {
@@ -30,7 +30,7 @@ def get_by_context(context):
             }] + aggregation)))
 
 
-def post_comment(context, message, author_id):
+def post_comment(context, message, author_id, receiving_user_ids):
     if not isinstance(author_id, ObjectId):
         author_id = ObjectId(author_id)
     comment = {
@@ -41,10 +41,9 @@ def post_comment(context, message, author_id):
         'post_date': datetime.datetime.utcnow()
     }
     result = bson_to_json(comments.insert_one(comment).inserted_id)
-    websocket.emit(
-        'comment', {
-            'msg': 'comment posted',
-            'id': result,
-            'author_id': bson_to_json(author_id),
-        })
+    notify({
+        'msg': 'comment posted',
+        'id': result,
+        'author_id': bson_to_json(author_id),
+    }, *receiving_user_ids)
     return result

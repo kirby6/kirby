@@ -29,4 +29,7 @@
   </mat-card-footer>
 </mat-card>
 
-<comment-list *ngIf="help" [context]="getCommentContext()"></comment-list>
+<comment-list *ngIf="help"
+	      [context]="getCommentContext()"
+	      [receivingUserIds]="getCommentReceivingUserIds()">
+</comment-list>
