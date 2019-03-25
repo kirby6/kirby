@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { EventNotification } from 'src/app/components/event-list/interfaces';
 import { NotificationsService } from 'src/app/services/notifications';
 import { CommentsService } from 'src/app/services/comments';
@@ -17,6 +17,8 @@ export class CommentListComponent implements OnInit {
     public context: object;
     @Input()
     public receivingUserIds: string[];
+    @Output()
+    public onPost: EventEmitter<void> = new EventEmitter();
 
     constructor(
         private notificationsService: NotificationsService,
@@ -45,7 +47,9 @@ export class CommentListComponent implements OnInit {
             context: this.context,
             message: message,
             author_id: this.auth.currentUserValue.id,
-        }, this.receivingUserIds).subscribe();
+        }, this.receivingUserIds).subscribe((commentId) => {
+            this.onPost.emit();
+        });
     }
 
     private sortByDateAsc(comments) {

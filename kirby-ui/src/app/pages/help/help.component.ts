@@ -23,6 +23,7 @@ export class HelpPageComponent implements OnInit {
     ngOnInit() {
         this.route.paramMap.subscribe(params => {
             this.helpId = params.get('helpId');
+            this.changeIsRead(true);
             this.updateHelp();
             this.notificationsService.listen()
                 .subscribe((notification) => {
@@ -54,10 +55,18 @@ export class HelpPageComponent implements OnInit {
     }
 
     public resolveHelp() {
-        this.helpsService.changeState(this.helpId, { is_closed: true }).subscribe();
+        this.helpsService.changeState(this.helpId, { is_closed: true }).subscribe(() => {
+            this.changeIsRead(false);
+        });
     }
 
     public reopenHelp() {
-        this.helpsService.changeState(this.helpId, { is_closed: false }).subscribe();
+        this.helpsService.changeState(this.helpId, { is_closed: false }).subscribe(() => {
+            this.changeIsRead(false);
+        });
+    }
+
+    private changeIsRead(isRead: boolean) {
+        this.helpsService.changeState(this.helpId, { is_read: isRead }).subscribe();
     }
 } 

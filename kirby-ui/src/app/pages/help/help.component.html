@@ -31,5 +31,6 @@
 
 <comment-list *ngIf="help"
 	      [context]="getCommentContext()"
-	      [receivingUserIds]="getCommentReceivingUserIds()">
+	      [receivingUserIds]="getCommentReceivingUserIds()"
+	      (onPost)="changeIsRead(false)">
 </comment-list>
