@@ -37,7 +37,9 @@ export class RequestHelpComponent implements OnInit {
 
         dialogRef.afterClosed().subscribe(result => {
             this.help.message = result;
-            this.helpsService.create(this.help).subscribe();
+            if (result) {
+                this.helpsService.create(this.help).subscribe();
+            }
         });
     }
 }
